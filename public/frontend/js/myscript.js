@@ -30,3 +30,19 @@ function selectt(){
 		var style = document.getElementById('aa-prod-view-bottom').style.display = 'none';
 	}
 }
+function kiemTraKichThuoc(content){
+	var select=document.getElementsByName ('txtLHSize');
+	var sizeArr = new Array(select.length);
+	var unselect = false;
+	for(var i =0;i<select.length;i++){
+		sizeArr[i] = select[i].value;
+		if(select[i].value==='') unselect = true;
+	}
+	if(!unselect){
+		console.log(sizeArr);
+		window.location = "/thanh-toan/" + sizeArr;
+	}else{
+		alert("Please choose size!!!");
+	}
+
+}

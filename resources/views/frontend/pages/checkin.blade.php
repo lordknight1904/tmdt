@@ -148,13 +148,20 @@
                       <thead>
                         <tr>
                           <th>Sản phẩm</th>
+                          <th>Kích cỡ</th>
                           <th>Thành tiền</th>
                         </tr>
                       </thead>
+                      <script type="text/javascript">
+                      @foreach ($content as $item)
+                        console.log({!! $item !!})
+                      @endforeach
+                      </script>
                       <tbody>
                       @foreach ($content as $item)
                         <tr>
                           <td>{!! $item->name !!} <strong> x  {!! $item->qty !!}</strong></td>
+                          <td>{!! $item->size_id !!}</td>
                           <td>{!! number_format($item->price*$item->qty,0,",",".") !!} vnđ</td>
                         </tr>
                       @endforeach
@@ -162,6 +169,7 @@
                       <tfoot>
                         <tr>
                           <th>Tổng cộng</th>
+                          <th></th>
                           <td>{!! number_format($total,0,",",".") !!} vnđ</td>
                         </tr>
                         

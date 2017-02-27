@@ -63,6 +63,7 @@ Route::get('xoa-san-pham/{id}',['as'=>'xoasanpham','uses'=>'HomeController@delet
 Route::get('cap-nhat-san-pham/{id}/{qty}',['as'=>'capnhat','uses'=>'HomeController@updateProduct']);
 
 Route::get('thanh-toan',['as'=>'getThanhtoan','uses'=>'HomeController@getCheckin']);
+Route::get('thanh-toan/{url}','HomeController@getCheckin');
 
 Route::post('thanh-toan',['as'=>'postThanhtoan','uses'=>'HomeController@postCheckin']);
 
