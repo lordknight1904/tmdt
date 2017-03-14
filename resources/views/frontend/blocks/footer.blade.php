@@ -27,8 +27,7 @@
                   <div class="aa-footer-widget">
                     <h3>Trang liên quan</h3>
                     <ul class="aa-footer-nav">
-                      <li><a href="{!! url('khuyen-mai') !!}">Khuyến mãi</a></li>
-                      <li><a href="{!! url('mon-ngon') !!}">Món ngon</a></li>            
+                      <li><a href="{!! url('khuyen-mai') !!}">Khuyến mãi</a></li>                      
                       <li><a href="{!! url('tuyen-dung') !!}">Tuyển dụng</a></li>
                       <li><a href="{!! url('lien-he') !!}">Liên hệ</a></li>
                     </ul>
@@ -54,9 +53,9 @@
                   <div class="aa-footer-widget">
                     <h3>Liên hệ</h3>
                     <address>
-                      <p>Ninh Kiều-Cần Thơ</p>
+                      <p>Quận 9-TPHCM</p>
                       <p><span class="fa fa-phone"></span>0167.899.12.81</p>
-                      <p><span class="fa fa-envelope"></span>nongsancantho@gmail.com</p>
+                      <p><span class="fa fa-envelope"></span>info@shopquanaonhom10.com</p>
                     </address>
                     <!-- <div class="aa-footer-social">
                       <a href="#"><span class="fa fa-facebook"></span></a>
@@ -79,7 +78,7 @@
         <div class="row">
         <div class="col-md-12">
           <div class="aa-footer-bottom-area">
-            <p>Design by <a href="#">Ngô Anh Khoa</a></p>
+            <p>Copyright © 2017<a href="#">shopquanaonhom10.com</a></p>
             <div class="aa-footer-payment">
               <!-- <span class="fa fa-cc-mastercard"></span>
               <span class="fa fa-cc-visa"></span>

@@ -34,7 +34,7 @@
                   </select>
                 </form>
                 <form action="" class="aa-show-form">
-                  <label for="">Hiện thị</label>
+                  <label for="">Hiển thị</label>
                   <select name="">
                     <option value="1" selected="12">10</option>
                     <option value="2">20</option>
