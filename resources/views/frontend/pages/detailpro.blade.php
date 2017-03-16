@@ -64,7 +64,7 @@
                         ' {!!$sanpham->sanpham_url !!}')
               " 
               class="form-control">
-                <option value="" id="select">--Chọn Kích cỡ--</option>
+                <option value="0" id="select">--Chọn Kích cỡ--</option>
                 <?php Select_Function($size); ?>
                 <?php echo $size_id; ?>
               </select>

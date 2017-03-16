@@ -32,7 +32,7 @@
                     <li>
                       <figure>
                         <a class="aa-product-img" href="{!! url('san-pham',$item->sanpham_url) !!}"><img src="{!! asset('resources/upload/sanpham/'.$item->sanpham_anh) !!}"  style="max-width: 250px; max-height: 300px;"></a>
-                        <a class="aa-add-card-btn" href="{!! url('mua-hang',[$item->id,$item->sanpham_url]) !!}"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
+                        <a class="aa-add-card-btn" href="{!! url('mua-hang',[$item->id,$item->sanpham_url,0]) !!}"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
                         <figcaption>
                           <h4 class="aa-product-title"><a href="{!! url('san-pham',$item->sanpham_url) !!}">{!! $item->sanpham_ten !!}</a></h4>
                           <input type="hidden" name="txtqty" value="1" />

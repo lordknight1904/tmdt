@@ -21,11 +21,23 @@ class DonhangController extends Controller
 
     public function getEdit($id)
     {
+        $donhang = DB::table('donhang')->where('id',$id)->first();
+        var_dump($donhang->tinhtranghd_id);
     	$data = DB::table('tinhtranghd')->get();
 		foreach ($data as $key => $val) {
-			$tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
+            if($donhang->tinhtranghd_id == 4 && $val->id == 4) {
+                $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
+                break;
+            }
+            if($donhang->tinhtranghd_id == 3 && $val->id == 4) {
+                $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
+                break;
+            }
+            if($donhang->tinhtranghd_id == 1 && $val->id <= 2)
+             $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
+            if($donhang->tinhtranghd_id == 2 && $val->id > $donhang->tinhtranghd_id)
+             $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
 		}
-    	$donhang = DB::table('donhang')->where('id',$id)->first();
     	$khachhang = DB::table('khachhang')->where('id',$donhang->khachhang_id)->first();
     	$chitiet = DB::table('chitietdonhang')->where('donhang_id',$donhang->id)->get();
     	return view('backend.donhang.sua',compact('donhang','tinhtrang','khachhang','chitiet'));

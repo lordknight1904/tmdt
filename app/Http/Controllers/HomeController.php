@@ -196,12 +196,10 @@ class HomeController extends Controller
     public function cart()
     {
         $content = Cart::content();
-        var_dump($content);
         $total = Cart::total();
         $sizes =  array();
         $count = 0;
         foreach ($content as $c) {
-            var_dump($c);
             $sizes[$count] = DB::table('lohang')
             ->where('sanpham_id',$c->id)
             ->where('lohang_so_luong_hien_tai','>',$c->qty)

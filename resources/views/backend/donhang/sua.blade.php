@@ -54,7 +54,7 @@
                 <label for="input" >Tình trạng đơn hàng</label>
                 <div>
                     <select id="input" name="selStatus"  class="form-control">
-                            <option >--Chọn tình trạng đơn hàng--</option>
+                            <!-- <option >--Chọn tình trạng đơn hàng--</option> -->
                             <?php Select_Function($tinhtrang,$donhang->tinhtranghd_id); ?>
                     </select>
                 </div>
