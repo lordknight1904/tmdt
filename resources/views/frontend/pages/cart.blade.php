@@ -64,7 +64,7 @@
                               foreach ($sizes[$count] as $s) {
                                 $size[] = ['id' => $s->id, 'name'=> $s->name];
                               } 
-                              Select_Function($size); 
+                              Select_Function($size,$item->size_id); 
                               $size = [];
                               $count++; 
                             ?>

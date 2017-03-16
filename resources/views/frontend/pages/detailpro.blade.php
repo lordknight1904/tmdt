@@ -21,6 +21,7 @@
   <!-- / catg header banner section -->
   <!-- product category -->
 <section id="aa-product-details">
+    <?php $size_id = 0 ?> 
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -57,18 +58,22 @@
               </p>
             </div>
             <div class="aa-prod-size">
-              <select id="input" name="txtLHSize" onchange="selectt()" class="form-control">
+              <select id="input" name="txtLHSize" 
+              onchange="
+                selectt(' {!! $sanpham->id!!}',
+                        ' {!!$sanpham->sanpham_url !!}')
+              " 
+              class="form-control">
                 <option value="" id="select">--Chọn Kích cỡ--</option>
                 <?php Select_Function($size); ?>
+                <?php echo $size_id; ?>
               </select>
             </div>
-            
-            <div class="aa-prod-view-bottom" id="aa-prod-view-bottom" style="display:none">
-              <a class="aa-add-to-cart-btn" href="{!! url('mua-hang',[$sanpham->id,$sanpham->sanpham_url]) !!}"><span class="fa fa-shopping-cart">Mua hàng</a>
+            <div class="aa-prod-view-bottom" id="aa-prod-view-bottom">
+              <a class="aa-add-to-cart-btn" href="">
+              <span class="fa fa-shopping-cart">Mua hàng</a>
             </div>
-            <div class="fake-view-button" id="fake-view-button" style="display: block">
-              <a class="aa-add-to-cart-btn" ><span class="fa fa-shopping-cart">Mua hàng</a>
-            </div>
+
             </div>
           </div>
           

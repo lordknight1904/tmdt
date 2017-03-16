@@ -19,16 +19,13 @@ $(document).ready(function() {
 		});
 	});
 });
-function selectt(){
+function selectt($id,$url){
 	var select=document.getElementById('input').value;
-	console.log(select);	
-	if(select){
-		var style = document.getElementById('fake-view-button').style.display = 'none';
-		var style = document.getElementById('aa-prod-view-bottom').style.display = 'block';
-	}else{
-		var style = document.getElementById('fake-view-button').style.display = 'block';
-		var style = document.getElementById('aa-prod-view-bottom').style.display = 'none';
-	}
+	$size_id = select;
+	// $sanpham->id,$sanpham->sanpham_url
+	// $("#aa-add-to-cart-btn").context.URL.appendTo = "http://www.google.com.vn";
+	$(".aa-add-to-cart-btn").attr("href", "http://testvhost/mua-hang/"+$id.trim()+"/"+$url.trim()+"/"+select);
+	console.log($(".aa-add-to-cart-btn").attr("href"));
 }
 function kiemTraKichThuoc(content){
 	var select=document.getElementsByName ('txtLHSize');

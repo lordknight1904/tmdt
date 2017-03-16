@@ -76,7 +76,7 @@
                         </div>                                             
                         <!--  <img class="img1" src="images/slider/img-05.png" alt="" />   -->                              
                     </div>
-                </div>        -->
+                </div>       
             </div><!-- /.flexslider -->
         </div>
     </div>

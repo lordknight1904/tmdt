@@ -174,33 +174,34 @@ class HomeController extends Controller
         // print_r($loaisanpham);
     }
 
-    public function buyding(Request $request,$id)
+    public function buyding(Request $request,$id,$ten,$size_id)
     {
-        // print_r($id);
         $sanpham = DB::select('select * from sanpham where id = ?',[$id]);
-        // print_r($sanpham);
         if ($sanpham[0]->sanpham_khuyenmai == 1) {
             $muasanpham = DB::select('select sp.id,sp.sanpham_ten,lh.lohang_ky_hieu, lh.lohang_gia_ban_ra, sp.id, km.khuyenmai_phan_tram from sanpham as sp, lohang as lh, nhacungcap as ncc, sanphamkhuyenmai as spkm, khuyenmai as km  where km.khuyenmai_tinh_trang = 1 and sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?', [$id]);
             $giakm = $muasanpham[0]->lohang_gia_ban_ra - $muasanpham[0]->lohang_gia_ban_ra*$muasanpham[0]->khuyenmai_phan_tram*0.01;
-            print_r($giakm);
-            Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $giakm, 'size_id' =>'1'));
+            Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $giakm, 'size_id' =>$size_id));
         } else {
             $muasanpham = DB::select('select sp.id,sp.sanpham_ten,lh.lohang_ky_hieu, lh.lohang_gia_ban_ra from sanpham as sp, lohang as lh, nhacungcap as ncc  where ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?',[$id]);
             $gia = $muasanpham[0]->lohang_gia_ban_ra;
-            Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $gia, 'size_id' =>'1'));
+            $cart = Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $gia, 'size_id' =>$size_id));
         }
         $content = Cart::content();
-        // print_r($content);
+        foreach ($content as $c) {
+            Cart::updateS($c->rowid,$size_id);
+        }
         return redirect()->route('giohang');
     }
 
     public function cart()
     {
         $content = Cart::content();
+        var_dump($content);
         $total = Cart::total();
         $sizes =  array();
         $count = 0;
         foreach ($content as $c) {
+            var_dump($c);
             $sizes[$count] = DB::table('lohang')
             ->where('sanpham_id',$c->id)
             ->where('lohang_so_luong_hien_tai','>',$c->qty)
@@ -215,14 +216,14 @@ class HomeController extends Controller
         // $sizes = DB::table('size')->get();
         return view('frontend.pages.cart',compact('content','total','sizes'));
 
-        $content = Cart::content();
-        //print_r($content);
-        $total = Cart::total();
-        $sizes = DB::table('size')->get();
-        foreach ($sizes as $key => $val) {
-            $size[] = ['id' => $val->id, 'name'=> $val->size_ten];
-        }
-        return view('frontend.pages.cart',compact('content','total','size'));
+        // $content = Cart::content();
+        // //print_r($content);
+        // $total = Cart::total();
+        // $sizes = DB::table('size')->get();
+        // foreach ($sizes as $key => $val) {
+        //     $size[] = ['id' => $val->id, 'name'=> $val->size_ten];
+        // }
+        // return view('frontend.pages.cart',compact('content','total','size'));
     }
 
     public function deleteProduct($id)
