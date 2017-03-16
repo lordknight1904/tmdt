@@ -80,10 +80,10 @@
                   <ul class="aa-head-top-nav-right">
                     @if (Auth::check())
                     <li class="hidden-xs"><strong>{{ Auth::user()->name }}</strong></li>
-                    @if (Auth::user()->loainguoidung_id == 1)
-                    <li class="hidden-xs"><a href="{{ url('/admin/bang-dieu-khien') }}">Panel</a></li>
-                    @endif
-                    <li class="hidden-xs"><a href="{{ url('/logout') }}">Thoát</a></li>
+                      @if (Auth::user()->loainguoidung_id != 2)
+                        <li class="hidden-xs"><a href="{{ url('/admin/bang-dieu-khien') }}">Panel</a></li>
+                      @endif
+                      <li class="hidden-xs"><a href="{{ url('/logout') }}">Thoát</a></li>
                     @else
                     <li class="hidden-xs"><a href="{{ url('/register') }}">Đăng kí</a></li>
                     <li class="hidden-xs"><a href="{{ url('/login') }}">Đăng nhập</a></li>

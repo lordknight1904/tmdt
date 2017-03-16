@@ -7,7 +7,7 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="aa-support-single">
                 <span class="fa fa-truck"></span>
-                <h4>GIAO HÀNG MIỄN PHÍ</h4>
+                <h4>ĐA PHƯƠNG THỨC GIAO HÀNG</h4>
                 <!-- <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.</P> -->
               </div>
             </div>
@@ -15,7 +15,7 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="aa-support-single">
                 <span class="fa fa-clock-o"></span>
-                <h4>THANH TOÁN KHI NHẬN HÀNG</h4>
+                <h4>ĐA PHƯƠNG THỨC THANH TOÁN</h4>
                 <!-- <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.</P> -->
               </div>
             </div>

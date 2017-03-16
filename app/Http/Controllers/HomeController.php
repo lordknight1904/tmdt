@@ -84,24 +84,7 @@ class HomeController extends Controller
         $nhom = DB::table('nhom')->where('id',$loaisanpham->nhom_id)->first();
         return view('frontend.pages.cates',compact('sanpham','loaisanpham','nhom'));
     }
-
-    public function cook()
-    {
-        $monngon = DB::table('monngon')->paginate(9);
-        return view ('frontend.pages.cooks',compact('monngon'));
-    }
-
-    public function detailcook($url)
-    {
-        $monngon = DB::table('monngon')->where('monngon_url',$url)->first();
-        $id = DB::table('monngon')->select('id')->where('monngon_url',$url)->first();
-        $id = $id->id;
-        // print_r($i);
-        $nglieu = DB::table('nguyenlieu')->where('monngon_id',$id)->get();
-        // print_r($nglieu);
-        return view ('frontend.pages.detailcook',compact('monngon','nglieu'));
-    }
-
+    
     public function getContact()
     {
         return view ('frontend.pages.contact');
@@ -298,6 +281,7 @@ class HomeController extends Controller
             $detail = new Chitietdonhang;
             $detail->sanpham_id = $item->id;
             $detail->donhang_id = $donhang->id;
+            $detail->size_id = $item->size_id;
             $detail->chitietdonhang_so_luong = $item->qty;
             $detail->chitietdonhang_thanh_tien = $item->price*$item->qty;
             $detail->save();
@@ -317,8 +301,9 @@ class HomeController extends Controller
             ];
             // SMS
         // print_r($donhang);
+        
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
-            $message->from('nongsancantho@gmail.com', 'ADMIN');
+            $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
         
             $message->to($donhang['khachhang_email'], 'a');
         
@@ -326,9 +311,9 @@ class HomeController extends Controller
         });
 
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
-            $message->from('nongsancantho@gmail.com', 'ADMIN');
+            $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
         
-            $message->to('nongsancantho@gmail.com', 'KHÁCH HÀNG');
+            $message->to('lordknight1904@gmail.com', 'KHÁCH HÀNG');
         
             $message->subject('Hóa đơn mua hàng tại Cửa hàng Nông sản sạch CT!!!');
         });

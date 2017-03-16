@@ -29,7 +29,7 @@
            </div>
            <!-- contact map -->
            <div class="aa-contact-map">
-       <iframe src="https://www.google.com/maps/d/u/0/embed?mid=13vrwduCnaUSQawxXWjxneOgI-dU" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.5181704446904!2d106.78493111435118!3d10.848137392272886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752772b245dff1%3A0xb838977f3d419d!2zSOG7jWMgVmnhu4duIEPDtG5nIE5naOG7hyBCxrB1IENow61uaCBWaeG7hW4gVGjDtG5nIEPGoSBT4bufIDI!5e0!3m2!1sen!2s!4v1488367028705" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
            </div>
            <!-- Contact address -->
            <div class="aa-contact-address">
@@ -61,11 +61,11 @@
                <div class="col-md-4">
                  <div class="aa-contact-address-right" style="font: tahoma, sans-serif;">
                    <address>
-                     <h4 style="font:24px tahoma, sans-serif; color:red;"><b><i>Nông sản sạch Cần Thơ</i></b></h4>
+                     <h4 style="font:24px tahoma, sans-serif; color:red;"><b><i>Shop quần áo nhóm 10</i></b></h4>
                      <p>Chất lượng là hàng đầu</p>
-                     <p><span class="fa fa-home"></span>Ninh Kiều-Cần Thơ</p>
-                     <p><span class="fa fa-phone"></span>0167.899.12.81</p>
-                     <p><span class="fa fa-envelope"></span>Email: nongsancantho@gmail.com</p>
+                     <p><span class="fa fa-home"></span>Quận 9-Hồ Chí Minh</p>
+                     <p><span class="fa fa-phone"></span>01219187548</p>
+                     <p><span class="fa fa-envelope"></span>Email: lordknight1904@gmail.com</p>
                    </address>
                  </div>
                </div>

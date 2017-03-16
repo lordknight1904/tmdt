@@ -4,7 +4,7 @@
         Đơn hàng
     </h3>
 @stop
-@section('content')                 
+@section('content')              
 <div class="panel panel-default">
 <div class="panel-heading">
     <b><i>Danh sách đơn hàng</i></b>
@@ -12,7 +12,6 @@
 <!-- /.panel-heading -->
 <div class="panel-body">
     <div class="dataTable_wrapper">
-
     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
         <thead>
             <tr align="center">

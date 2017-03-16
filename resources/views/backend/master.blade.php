@@ -60,9 +60,11 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+                        @if (Auth::user()->loainguoidung_id == 1)
                         <li>
                             <a href="{!! URL('admin/bang-dieu-khien')!!}"><i class="fa fa-dashboard fa-fw"></i>Tổng quan</a>
                         </li>
+                        @endif
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-tasks"></i> Quản lý Sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -72,36 +74,42 @@
                                 <li>
                                     <a href="{!! URL::route('admin.loaisanpham.list') !!}">Loại sản phẩm</a>
                                 </li>
-                                <li>
-                                    <a href="{!! URL::route('admin.nhom.list') !!}">Nhóm mặt hàng</a>
-                                </li>
-                                <li>
-                                    <a href="{!! URL::route('admin.donvitinh.list') !!}">Đơn vị tính</a>
-                                </li>
-                                <li>
-                                    <a href="{!! URL::route('admin.size.list') !!}">Kích thước</a>
-                                </li>
-                                <li>
-                                    <a href="{!! URL::route('admin.nhacungcap.list') !!}">Nhà cung cấp</a>
-                                </li>
+                                @if (Auth::user()->loainguoidung_id == 1)
+                                    <li>
+                                        <a href="{!! URL::route('admin.nhom.list') !!}">Nhóm mặt hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="{!! URL::route('admin.donvitinh.list') !!}">Đơn vị tính</a>
+                                    </li>
+                                    <li>
+                                        <a href="{!! URL::route('admin.size.list') !!}">Kích thước</a>
+                                    </li>
+                                    <li>
+                                        <a href="{!! URL::route('admin.nhacungcap.list') !!}">Nhà cung cấp</a>
+                                    </li>
+                                @endif
                                 <li>
                                     <a href="{!! URL::route('admin.lohang.list') !!}">Lô hàng</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <!-- <li>
-                            <a href="{!! URL::route('admin.nhanvien.list') !!}"><i class="fa fa-users"></i>Người dùng</a>
-                        </li> -->
+                        @if (Auth::user()->loainguoidung_id == 1)
+                            <li>
+                                <a href="{!! URL::route('admin.nhanvien.list') !!}"><i class="fa fa-users"></i>Nhân Viên</a>
+                            </li>
+                        @endif
                         <li>
                             <a href="{!! URL::route('admin.khachhang.list') !!}"><i class="fa fa-users"></i>Khách hàng</a>
                         </li>
                         <li>
                             <a href="{!! URL::route('admin.donhang.list') !!}"><i class="fa fa-file-text"></i>Đơn đặt hàng</a>
                         </li>
+                        @if (Auth::user()->loainguoidung_id == 1)
                         <li>
                             <a href="{!! URL::route('admin.binhluan.list') !!}"><i class="fa fa-comments-o"></i> Bình luận khách hàng</a>
                         </li>
+                        @endif
                         <li>
                             <a href="{!! URL::route('admin.quangcao.list') !!}"><i class="fa-share-alt-square"></i>Quảng cáo</a>
                         </li>

@@ -27,7 +27,7 @@
                   <div class="aa-footer-widget">
                     <h3>Trang liên quan</h3>
                     <ul class="aa-footer-nav">
-                      <li><a href="{!! url('khuyen-mai') !!}">Khuyến mãi</a></li>                      
+                      <li><a href="{!! url('khuyen-mai') !!}">Khuyến mãi</a></li>    
                       <li><a href="{!! url('tuyen-dung') !!}">Tuyển dụng</a></li>
                       <li><a href="{!! url('lien-he') !!}">Liên hệ</a></li>
                     </ul>
@@ -36,16 +36,6 @@
               </div>
               <div class="col-md-3 col-sm-6">
                 <div class="aa-footer-widget">
-                  <!-- <div class="aa-footer-widget">
-                    <h3>Useful Links</h3>
-                    <ul class="aa-footer-nav">
-                      <li><a href="#">Site Map</a></li>
-                      <li><a href="#">Search</a></li>
-                      <li><a href="#">Advanced Search</a></li>
-                      <li><a href="#">Suppliers</a></li>
-                      <li><a href="#">FAQ</a></li>
-                    </ul>
-                  </div> -->
                 </div>
               </div>
               <div class="col-md-4 col-sm-6">
@@ -55,14 +45,8 @@
                     <address>
                       <p>Quận 9-TPHCM</p>
                       <p><span class="fa fa-phone"></span>0167.899.12.81</p>
-                      <p><span class="fa fa-envelope"></span>info@shopquanaonhom10.com</p>
+                      <p><span class="fa fa-envelope"></span>lordknight1904@gmail.com</p>
                     </address>
-                    <!-- <div class="aa-footer-social">
-                      <a href="#"><span class="fa fa-facebook"></span></a>
-                      <a href="#"><span class="fa fa-twitter"></span></a>
-                      <a href="#"><span class="fa fa-google-plus"></span></a>
-                      <a href="#"><span class="fa fa-youtube"></span></a>
-                    </div> -->
                   </div>
                 </div>
               </div>
@@ -78,7 +62,7 @@
         <div class="row">
         <div class="col-md-12">
           <div class="aa-footer-bottom-area">
-            <p>Copyright © 2017<a href="#">shopquanaonhom10.com</a></p>
+            <p>Copyright © 2017<a href="#"> Ngô Anh Khoa</a></p>
             <div class="aa-footer-payment">
               <!-- <span class="fa fa-cc-mastercard"></span>
               <span class="fa fa-cc-visa"></span>

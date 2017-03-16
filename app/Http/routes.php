@@ -38,8 +38,6 @@ Route::get('nhom/{url}', 'HomeController@group');
 
 Route::get('loai-san-pham/{url}', 'HomeController@cates');
 
-Route::get('mon-ngon', 'HomeController@cook');
-
 Route::get('tuyen-dung', 'HomeController@career');
 
 Route::get('lien-he', 'HomeController@getContact');
@@ -49,8 +47,6 @@ Route::post('lien-he', 'HomeController@postContact');
 Route::get('khuyen-mai', 'HomeController@promotions');
 
 Route::get('khuyen-mai/{url}', 'HomeController@detailpromotions');
-
-Route::get('mon-ngon/{url}', 'HomeController@detailcook');
 
 Route::get('san-pham/{url}', 'HomeController@product');
 
@@ -145,6 +141,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'khachhang'], function() {
         Route::get('danhsach',['as'=>'admin.khachhang.list','uses'=>'KhachhangController@getList']);
+        Route::get('toEmployee/{id}',['as'=>'admin.khachhang.toEmployee','uses'=>'KhachhangController@toEmployee']);
         Route::get('them',['as'=>'admin.khachhang.getAdd','uses'=>'KhachhangController@getAdd']);
         Route::post('them',['as'=>'admin.khachhang.postAdd','uses'=>'KhachhangController@postAdd']);
         Route::get('xoa/{id}',['as'=>'admin.khachhang.getDelete','uses'=>'KhachhangController@getDelete']);
@@ -169,6 +166,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'nhanvien'], function() {
         Route::get('danhsach',['as'=>'admin.nhanvien.list','uses'=>'NhanvienController@getList']);
+        Route::get('toCustomer/{id}',['as'=>'admin.nhanvien.toCustomer','uses'=>'NhanvienController@toCustomer']);
         Route::get('them',['as'=>'admin.nhanvien.getAdd','uses'=>'NhanvienController@getAdd']);
         Route::post('them',['as'=>'admin.nhanvien.postAdd','uses'=>'NhanvienController@postAdd']);
         Route::get('xoa/{id}',['as'=>'admin.nhanvien.getDelete','uses'=>'NhanvienController@getDelete']);

@@ -21,8 +21,9 @@
                 <th class="col-lg-1">SĐT</th>
                 <th class="col-lg-2">Email</th>
                 <th class="col-lg-5">Địa chỉ</th>
-                <th></th>
-                <th></th>
+                <th>Quyền</th>
+                <th>Xóa</th>
+                <th>Lịch sử</th>
             </tr>
         </thead>
         <tbody>
@@ -33,8 +34,8 @@
                 <td>{!! $item->khachhang_sdt !!}</td>
                 <td>{!! $item->khachhang_email !!}</td>
                 <td>{!! $item->khachhang_dia_chi !!}</td>
-                <td class="center">
-                <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.khachhang.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a></td>
+                <td class="center"><a onclick="return confirmDel('Bạn có chắc muốn đưa người này thành nhân viên?')" href="{!! URL::route('admin.khachhang.toEmployee', $item->id ) !!}" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="left" title="NV"><i class="fa fa-edit"></i></a></td>
+                <td class="center"><a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.khachhang.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a></td>
                 <td class="center"><a href="{!! URL::route('admin.khachhang.getHistory', $item->id ) !!}" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Xem lịch sử mua hàng"><i class="fa fa-history"></i></a>
                 </td>
             </tr>

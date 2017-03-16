@@ -9,10 +9,17 @@ use DB;
 
 class KhachhangController extends Controller
 {
-
+    public function toEmployee($id)
+    {
+        $toEmployee = DB::table('users')->where('id',$id)->update(['loainguoidung_id'=>3]);
+        return redirect()->route('admin.khachhang.list')->with(['flash_level'=>'success','flash_message'=>'gán quyền cho nhân viên thành công!!!']);
+    }
     public function getList()
     {
-        $data = DB::table('khachhang')->get();
+        $data = DB::table('khachhang')
+                ->join('users','users.id','=','khachhang.user_id')
+                ->where('users.loainguoidung_id',2)
+                ->get();
     	return view('backend.khachhang.danhsach',compact('data'));
     }
 

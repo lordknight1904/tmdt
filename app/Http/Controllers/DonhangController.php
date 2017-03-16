@@ -15,8 +15,8 @@ class DonhangController extends Controller
 {
     public function getList()
     {
-    	$data = DB::table('donhang')->get();
-    	return view('backend.donhang.danhsach',compact('data'));
+        $data = DB::table('donhang')->get();
+        return view('backend.donhang.danhsach',compact('data'));
     }
 
     public function getEdit($id)
@@ -36,14 +36,6 @@ class DonhangController extends Controller
     	$donhang = DB::table('donhang')->where('id',$id)->first();
     	$status1 = $donhang->tinhtranghd_id;
     	$status2 = $request->selStatus;
-    	// $idSP = DB::table('chitietdonhang')->select('sanpham_id','chitietdonhang_so_luong')->where('donhang_id',$id)->get();
-    	// // print_r($idSP);
-    	// foreach ($idSP as $key => $val) {
-    	// 	$idLHM = Db::table('lohang')->where('sanpham_id',$val->sanpham_id)->max('id');
-    	// 	$lohang = DB::table('lohang')->where('id',$idLHM)->first();
-    	// 	print_r($lohang);
-    	// }
-
     	if ($status1 != $status2 && $status2 == 2) {
     		DB::table('donhang')->where('id',$id)
     			->update([
@@ -52,16 +44,17 @@ class DonhangController extends Controller
     		$idSP = DB::table('chitietdonhang')
     			->select('sanpham_id','chitietdonhang_so_luong')
     			->where('donhang_id',$id)->get();
-	    	foreach ($idSP as $key => $val) {
-	    		$idLHM = Db::table('lohang')->where('sanpham_id',$val->sanpham_id)->max('id');
-	    		$lohang = DB::table('lohang')->where('id',$idLHM)->first();
-	    		DB::table('lohang')
-	    			->where('id',$idLHM)
-	    			->update([
-	    				'lohang_so_luong_da_ban' => $lohang->lohang_so_luong_da_ban + $val->chitietdonhang_so_luong,
-	    				'lohang_so_luong_hien_tai' => $lohang->lohang_so_luong_hien_tai - $val->chitietdonhang_so_luong,
-	    				]);
-	    	}
+                
+	    	// foreach ($idSP as $key => $val) {
+	    	// 	$idLHM = Db::table('lohang')->where('sanpham_id',$val->sanpham_id)->max('id');
+	    	// 	$lohang = DB::table('lohang')->where('id',$idLHM)->first();
+	    	// 	DB::table('lohang')
+	    	// 		->where('id',$idLHM)
+	    	// 		->update([
+	    	// 			'lohang_so_luong_da_ban' => $lohang->lohang_so_luong_da_ban + $val->chitietdonhang_so_luong,
+	    	// 			'lohang_so_luong_hien_tai' => $lohang->lohang_so_luong_hien_tai - $val->chitietdonhang_so_luong,
+	    	// 			]);
+	    	// }
     	}elseif ($status1 != $status2 && $status2 == 3) {
     		DB::table('donhang')->where('id',$id)
     			->update([
