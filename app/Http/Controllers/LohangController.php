@@ -34,23 +34,29 @@ class LohangController extends Controller
         foreach ($vendors as $key => $val) {
             $vendor[] = ['id' => $val->id, 'name'=> $val->nhacungcap_ten];
         }
-    	return view('backend.lohang.them',compact('product','vendor'));
+        $sizes = DB::table('size')->get();
+        foreach ($sizes as $key => $val) {
+            $size[] = ['id' => $val->id, 'name'=> $val->size_ten];
+        }
+    	return view('backend.lohang.them',compact('product','vendor','size'));
     }
 
     public function postAdd(LohangAddRequest $request)
     {
     	$lohang = new Lohang;
         $lohang->lohang_ky_hieu = $request->txtLHSignt;
+        $lohang->lohang_so_luong_nhap = $request->txtLHQuant;
         $lohang->lohang_gia_mua_vao = $request->txtLHBuyPrice;
         $lohang->lohang_gia_ban_ra = $request->txtLHSalePrice;
-        $lohang->lohang_so_luong_nhap = $request->txtLHQuant;
+        $lohang->size_id = $request->txtLHSize;
         $lohang->lohang_so_luong_da_ban = 0;
         $lohang->lohang_so_luong_doi_tra = 0;
         $lohang->lohang_so_luong_hien_tai = $request->txtLHQuant;
-        $lohang->sanpham_id = $id;
+        $lohang->sanpham_id = $request->txtLHProduct;
         $lohang->size_id = $request->txtLHSize;
         $lohang->nhacungcap_id = $request->txtLHVendor;
-        return redirect()->route('admin.lohang.list')->with(['flash_level'=>'success','flash_message'=>'Thêm lô hàng thành công!!!']);
+        if($lohang->save())
+            return redirect()->route('admin.lohang.list')->with(['flash_level'=>'success','flash_message'=>'Thêm lô hàng thành công!!!']);
     }
 
     public function getEdit($id)

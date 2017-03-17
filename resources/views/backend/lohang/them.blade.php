@@ -28,42 +28,25 @@
                 </div>  
             </div>
         </div>
-
-        <!-- <div class="col-lg-6">
-            <div class="form-group">
-                <label>Hạn sử dụng</label>
-                <input class="form-control" name="txtLHShelf" value="{!! old('txtLHShelf') !!}" placeholder="Nhập số ngày.." />
-                <div>
-                    {!! $errors->first('txtLHShelf') !!}
-                </div>  
-            </div>
-        </div> -->
-        
         <div class="col-lg-6">
             <div class="form-group">
-                <label>Số lượng size S</label>
-                <input class="form-control" name="txtLHQuantS" value="{!! old('txtLHQuantS') !!}" placeholder="Số lượng size S..." />
+                <label>Số lượng</label>
+                <input class="form-control" name="txtLHQuant" value="{!! old('txtLHQuant') !!}" placeholder="Số lượng..." />
                 <div>
-                    {!! $errors->first('txtLHQuantS') !!}
+                    {!! $errors->first('txtLHQuant') !!}
                 </div> 
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label>Số lượng size M</label>
-                <input class="form-control" name="txtLHQuantM" value="{!! old('txtLHQuantM') !!}" placeholder="Số lượng size M..." />
+                <label>Kích cỡ</label>
                 <div>
-                    {!! $errors->first('txtLHQuantM') !!}
-                </div> 
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label>Số lượng size L</label>
-                <input class="form-control" name="txtLHQuantL" value="{!! old('txtLHQuantL') !!}" placeholder="Số lượng size L..." />
-                <div>
-                    {!! $errors->first('txtLHQuantL') !!}
-                </div> 
+                    <select id="input" name="txtLHSize"  class="form-control">
+                        <option value="">--Chọn Kích cỡ--</option>
+                        <?php Select_Function($size); ?>
+                    </select>
+                </div>
+                {!! $errors->first('txtLHSize') !!}
             </div>
         </div>
         <div class="col-lg-6">

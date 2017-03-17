@@ -188,7 +188,7 @@ class HomeController extends Controller
         }
         $content = Cart::content();
         foreach ($content as $c) {
-            Cart::updateS($c->rowid,$size_id);
+            //Cart::updateS($c->rowid,$size_id);
         }
         return redirect()->route('giohang');
     }
