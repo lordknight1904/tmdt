@@ -78,16 +78,50 @@
                         </div>
                       </div>
                     </div>
-                    <!-- Shipping Address -->
+
+
+
                     <div class="panel panel-default aa-checkout-billaddress">
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                            Thông tin tài khoản
+                          </a>
+                        </h4>
+                      </div>
+                      <?php 
+                        $user = DB::table('users')->where('id',Auth::user()->id)->first();
+                        // print_r($khachhang);
+                      ?>
+                      <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="aa-checkout-single-bill">
+                                <h4>Số tài khoản</h4>
+                                <input type="text" name="txtKHvisa" value="{{ $user->visa }}" placeholder="Số tài khoản" />
+                              </div>  
+                              <div class="aa-checkout-single-bill">
+                                <h4>CSC</h4>
+                                <input type="text" name="txtKHCSC" placeholder="CSC" />
+                              </div>                             
+                            </div>
+                          </div>                              
+                        </div>
+                      </div>
+                    </div>
+                    
+
+                    <!-- Shipping Address -->
+                    <div class="panel panel-default aa-checkout-billaddress">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
                             Thông tin nhận hàng
                           </a>
                         </h4>
                       </div>
-                      <div id="collapseFour" class="panel-collapse collapse">
+                      <div id="collapseFive" class="panel-collapse collapse">
                         <div class="panel-body">
                          <div class="row">
                             <div class="col-md-12">

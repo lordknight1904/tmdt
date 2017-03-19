@@ -118,6 +118,20 @@
                         </div>
                     </div>
 
+                    <div class="form-group{{ $errors->has('visa') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label">Số tài khoản</label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="visa" value="{{ old('visa') }}">
+
+                            @if ($errors->has('visa'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('visa') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group{{ $errors->has('txtadr') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label">Địa chỉ</label>
 

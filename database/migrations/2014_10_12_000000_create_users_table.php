@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->string('password', 200);
 			$table->integer('loainguoidung_id')->unsigned();
             $table->foreign('loainguoidung_id')->references('id')->on('loainguoidung')->onUpdate('cascade');
+			$table->string('visa',9);
 			$table->rememberToken();
 			$table->timestamps();
 		});

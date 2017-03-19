@@ -57,6 +57,7 @@ class AuthController extends Controller
             'email' =>'required|unique:users,email|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})^',
             'password' => 'required|min:3|confirmed',
             'password_confirmation' =>'required|same:password',
+            'visa'   =>'required|numeric|digits_between:9,9',
             'txtname' =>'required|unique:khachhang,khachhang_ten',
             'txtphone' =>'required',
             'txtadr' =>'required'
@@ -68,6 +69,9 @@ class AuthController extends Controller
             'txtname.unique'   =>'Dữ liệu này đã tồn tại!',
             'email.unique'  =>'Dữ liệu này đã tồn tại!',
             'email.regex'  =>'Email không đúng định dạng!',
+            'visa.min'  =>'Số tài khoản cần độ dài 9 số!',
+            'visa.max'  =>'Số tài khoản cần độ dài 9 số!',
+            'visa.numeric'  =>'Số tài khoản phải là chữ số!',
             'password_confirmation.same' =>'Mật khẩu không trùng khớp!'
         ];
 
@@ -86,10 +90,9 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'visa' => $data['visa'],
             'loainguoidung_id' => 2,
         ]);
-        // $id = DB::table('users')->select('id')->where('email',$data['email'])->first();
-        // print_r($id);
         Khachhang::create([
             'khachhang_ten' => $data['txtname'],
             'khachhang_email' => $data['email'],
@@ -119,15 +122,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-        $data = Auth::user()->loainguoidung_id;
-        if ($data == 2) {
-            Auth::logout();
-            return redirect('/');
-        } else {
-            Auth::logout();
-            return redirect('/');
-            // return redirect()->route('admin.login.getLogin');
-        }
+        Auth::logout();
+        return redirect('/');
     }
 
 }
