@@ -16,7 +16,7 @@ class CreateLohangTable extends Migration
             $table->increments('id');
             $table->string('lohang_ky_hieu',200);
             $table->decimal('lohang_gia_mua_vao',10,2);
-            $table->decimal('lohang_gia_ban_ra',10,2);
+            // $table->decimal('lohang_gia_ban_ra',10,2);
             $table->integer('lohang_so_luong_nhap');
             $table->integer('lohang_so_luong_da_ban');
             $table->integer('lohang_so_luong_hien_tai');

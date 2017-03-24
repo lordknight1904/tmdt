@@ -47,7 +47,6 @@ class LohangController extends Controller
         $lohang->lohang_ky_hieu = $request->txtLHSignt;
         $lohang->lohang_so_luong_nhap = $request->txtLHQuant;
         $lohang->lohang_gia_mua_vao = $request->txtLHBuyPrice;
-        $lohang->lohang_gia_ban_ra = $request->txtLHSalePrice;
         $lohang->size_id = $request->txtLHSize;
         $lohang->lohang_so_luong_da_ban = 0;
         $lohang->lohang_so_luong_doi_tra = 0;
@@ -81,7 +80,6 @@ class LohangController extends Controller
                            ->update([
                 'lohang_ky_hieu' => $request->txtLHSignt,
                 'lohang_gia_mua_vao' => $request->txtLHBuyPrice,
-                'lohang_gia_ban_ra' => $request->txtLHSalePrice,
                 'lohang_so_luong_nhap' => $request->txtLHQuant,
                 'lohang_so_luong_hien_tai' => ($request->txtLHQuant - $lohang->lohang_so_luong_da_ban + $lohang->lohang_so_luong_doi_tra),
                 'sanpham_id' => $request->txtLHProduct,
@@ -116,7 +114,6 @@ class LohangController extends Controller
         $lohang = new Lohang;
         $lohang->lohang_ky_hieu = $request->txtLHSignt;
         $lohang->lohang_gia_mua_vao = $request->txtLHBuyPrice;
-        $lohang->lohang_gia_ban_ra = $request->txtLHSalePrice;
         $lohang->lohang_so_luong_nhap = $request->txtLHQuant;
         $lohang->lohang_so_luong_da_ban = 0;
         $lohang->lohang_so_luong_doi_tra = 0;

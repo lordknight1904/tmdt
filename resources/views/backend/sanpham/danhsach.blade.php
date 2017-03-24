@@ -21,6 +21,7 @@
                 <th>Tên</th>
                 <th>Loại</th>
                 <th>ĐVT</th>
+                <th>Giá bán</th>
                 <th>Xóa</th>
                 <th>Sửa</th>
                 <th>Nhập hàng</th>
@@ -50,6 +51,9 @@
                     @else
                         {!! NULL !!}
                     @endif
+                </td>
+                <td>
+                    {!! $item->sanpham_gia !!}
                 </td>
                 <td class="center">
                 <a href="{!! URL::route('admin.sanpham.getDelete', $item->id ) !!}" onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a></td>

@@ -70,13 +70,15 @@ class SanphamController extends Controller
             base_path() . '/resources/upload/sanpham/', $filename
         );
     	$sanpham = new Sanpham;
-        $sanpham->sanpham_ky_hieu   = $request->txtSPSignt;
-        $sanpham->sanpham_ten           = $request->txtSPName;
-        $sanpham->sanpham_url           = Replace_TiengViet($request->txtSPName);
+        $sanpham->sanpham_ky_hieu = $request->txtSPSignt;
+        $sanpham->sanpham_ten  = $request->txtSPName;
+        $sanpham->sanpham_url  = Replace_TiengViet($request->txtSPName);
         $sanpham->sanpham_mo_ta = $request->txtSPIntro;
         $sanpham->sanpham_anh = $filename;
         $sanpham->loaisanpham_id = $request->txtSPCate;
         $sanpham->donvitinh_id = $request->txtSPUnit;
+        $sanpham->sanpham_gia = $request->txtSPPrice;
+        $sanpham->sanpham_soluong = 0;
        
         $sanpham->sanpham_khuyenmai = 0;
         $sanpham->save();

@@ -22,7 +22,6 @@
                 <th>Ngày</th>
                 <th>SL</th>
                 <th>Mua vào</th>
-                <th>Bán ra</th>
                 <th>Size</th>
                 <th>Xóa </th>
                 <th>Sửa</th>
@@ -51,7 +50,6 @@
                 <td>{!! date("d-m-Y",strtotime($ngaybd)) !!}</td>
                 <td>{!! $item->lohang_so_luong_nhap !!}</td>
                 <td>{!! number_format("$item->lohang_gia_mua_vao",0,",",".")  !!}vnđ</td>
-                <td>{!! number_format("$item->lohang_gia_ban_ra",0,",",".") !!}vnđ</td>
                 <td>{!! $item->size_ten !!}</td>
                 <td class="center">
                 <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.lohang.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a></td>

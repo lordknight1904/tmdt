@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Auth;
-use DB;
+use DB,Cart;
 class AuthController extends Controller
 {
     /*
@@ -123,6 +123,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
+        Cart::destroy();
         return redirect('/');
     }
 

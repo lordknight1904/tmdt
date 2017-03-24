@@ -195,7 +195,7 @@
                       @foreach ($content as $item)
                         <tr>
                           <td>{!! $item->name !!} <strong> x  {!! $item->qty !!}</strong></td>
-                          <td>{!! $item->size_id !!}</td>
+                          <td>{!! $sizes[$item->size_id-1]->size_ten !!}</td>
                           <td>{!! number_format($item->price*$item->qty,0,",",".") !!} vnđ</td>
                         </tr>
                       @endforeach

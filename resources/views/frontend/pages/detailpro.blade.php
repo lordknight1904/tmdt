@@ -47,7 +47,7 @@
             <div class="aa-price-block">
               <h3>
               Giá: 
-              <span class="aa-product-view-price">{!! number_format("$sanpham->lohang_gia_ban_ra",0,",",".") !!}vnđ</span>
+              <span class="aa-product-view-price">{!! number_format("$sanpham->sanpham_gia",0,",",".") !!}vnđ</span>
               <p class="aa-product-avilability">Đơn vị tính: <span>{!! $sanpham->donvitinh_ten !!}</span></p>
               </h3>
             </div>

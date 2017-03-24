@@ -48,7 +48,7 @@
                 {!! $errors->first('txtLHSize') !!}
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="form-group">
                 <label>Giá mua vào</label>
                 <input class="form-control" name="txtLHBuyPrice" value="{!! old('txtLHBuyPrice') !!}" placeholder="Giá mua vào..." />
@@ -57,7 +57,7 @@
                 </div>  
             </div>
         </div>
-        <div class="col-lg-6">
+        <!-- <div class="col-lg-6">
             <div class="form-group">
                 <label>Giá bán ra</label>
                 <input class="form-control" name="txtLHSalePrice" value="{!! old('txtLHSalePrice') !!}" placeholder="Giá bán ra..." />
@@ -65,7 +65,7 @@
                     {!! $errors->first('txtLHSalePrice') !!}
                 </div>  
             </div>
-        </div>
+        </div> -->
         <div class="col-lg-12">
             <div class="form-group">
                 <label for="input" >Sản phẩm</label>

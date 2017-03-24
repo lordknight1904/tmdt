@@ -41,9 +41,10 @@
     <table cellpadding="3px" style="border:thin solid;" >
       <thead>
         <tr>
-          <td style="border:thin solid;" width="50px"><strong>STT</strong></td>
+          <td style="border:thin solid;" width="20px"><strong>STT</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Tên sản phẩm</strong></td>
           <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
+          <td style="border:thin solid;" width="50px"><strong>Kích cỡ</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Thành tiền</strong></td>
         </tr>
@@ -60,6 +61,7 @@
                   ?>
               </td>
               <td style="border:thin blue solid;border-style:dashed;">{!! $val->chitietdonhang_so_luong !!}</td>
+              <td style="border:thin blue solid;border-style:dashed;">{!! $sizes[$val->size_id-1]->size_ten !!}</td>
               <td style="border:thin blue solid;border-style:dashed;">
               {!! number_format($val->chitietdonhang_thanh_tien/$val->chitietdonhang_so_luong,0,",",".") !!} vnđ 
               </td>

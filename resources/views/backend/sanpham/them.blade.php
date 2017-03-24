@@ -78,6 +78,17 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Giá bán ra</label>
+                    <input class="form-control" name="txtSPPrice" value="{!! old('txtSPPrice') !!}" placeholder="Giá bán" />
+                    <div>
+                        {!! $errors->first('txtSPPrice') !!}
+                    </div>  
+                </div>
+            </div>
+
             <div class="col-lg-12">
                 <div class="form-group">
                     <label>Hình ảnh </label>

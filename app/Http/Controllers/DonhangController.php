@@ -22,7 +22,6 @@ class DonhangController extends Controller
     public function getEdit($id)
     {
         $donhang = DB::table('donhang')->where('id',$id)->first();
-        var_dump($donhang->tinhtranghd_id);
     	$data = DB::table('tinhtranghd')->get();
 		foreach ($data as $key => $val) {
             if($donhang->tinhtranghd_id == 4 && $val->id == 4) {
@@ -184,8 +183,10 @@ class DonhangController extends Controller
         $donhang = DB::table('donhang')->where('id',$id)->first();
         $chitietdonhang = DB::table('chitietdonhang')->where('donhang_id',$id)->get();
         $khachhang = DB::table('khachhang')->where('id',$donhang->khachhang_id)->first();
+        $sizes = DB::table('size')->get();
+        //var_dump($sizes[0]);
         // print_r($khachhang);
-        $pdf = PDF::loadView('backend.donhang.hoadon',compact('donhang','chitietdonhang','khachhang'));
+        $pdf = PDF::loadView('backend.donhang.hoadon',compact('donhang','chitietdonhang','khachhang','sizes'));
         return $pdf->stream();
     }
 }

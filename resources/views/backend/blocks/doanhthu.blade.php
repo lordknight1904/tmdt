@@ -60,7 +60,7 @@
                                                 <th>STT</th>
                                                 <th>Ký hiệu</th>
                                                 <th>Sản phẩm</th>
-                                                <th>Đã bán</th>
+                                                <th>Đã nhập</th>
                                                 <th>Tổng tiền</th>
                                             </tr>
                                         </thead>

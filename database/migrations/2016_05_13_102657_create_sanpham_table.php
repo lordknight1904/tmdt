@@ -19,6 +19,8 @@ class CreateSanphamTable extends Migration
             $table->string('sanpham_ten');
             $table->string('sanpham_url');
             $table->string('sanpham_anh');
+            $table->decimal('sanpham_gia',10,2);
+            $table->integer('sanpham_soluong');
             $table->longText('sanpham_mo_ta');
             $table->integer('sanpham_luot_xem');
             $table->integer('sanpham_khuyenmai');

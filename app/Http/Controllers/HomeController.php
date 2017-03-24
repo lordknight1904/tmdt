@@ -31,7 +31,17 @@ class HomeController extends Controller
     {
         $data = DB::table('sanpham')
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
+            ->select(
+                DB::raw(
+                    'max(lohang.id) as lomoi'),
+                'sanpham.id',
+                'sanpham.sanpham_ten',
+                'sanpham.sanpham_url',
+                'sanpham.sanpham_khuyenmai',
+                'sanpham.sanpham_anh',
+                 'lohang.lohang_so_luong_nhap',
+                 'lohang.lohang_so_luong_hien_tai',
+                 'lohang.lohang_gia_ban_ra')
                 ->groupBy('sanpham.id')
             ->get();
         // $idLHM = Db::table('lohang')->where('sanpham_id',$val->sanpham_id)->max('id');
@@ -45,7 +55,15 @@ class HomeController extends Controller
         $loaisp =  DB::table('loaisanpham')->get();
         $sanpham = DB::table('sanpham')
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
+            ->select(
+                DB::raw('max(lohang.id) as lomoi'),
+                'sanpham.id','sanpham.sanpham_ten',
+                'sanpham.sanpham_url',
+                'sanpham.sanpham_khuyenmai',
+                'sanpham.sanpham_anh', 
+                'lohang.lohang_so_luong_nhap',
+                'lohang.lohang_so_luong_hien_tai',
+                'sanpham.sanpham_gia')
                 ->groupBy('sanpham.id')
                 ->orderBy('id','DESC')
             ->paginate(12);
@@ -64,7 +82,7 @@ class HomeController extends Controller
         $sanpham = DB::table('sanpham')
             ->whereIn('sanpham.loaisanpham_id',$ids)
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
+            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','sanpham.sanpham_gia')
             ->groupBy('sanpham.id')
             ->paginate(15);
         return view('frontend.pages.group',compact('sanpham','nhom'));
@@ -78,7 +96,7 @@ class HomeController extends Controller
         $sanpham = DB::table('sanpham')
             ->where('sanpham.loaisanpham_id',$i)
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
+            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','sanpham.sanpham_gia')
                 ->groupBy('sanpham.id')
             ->paginate(15);
         $nhom = DB::table('nhom')->where('id',$loaisanpham->nhom_id)->first();
@@ -151,7 +169,21 @@ class HomeController extends Controller
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
             ->join('donvitinh','sanpham.donvitinh_id', '=', 'donvitinh.id' )
             ->join('loaisanpham','sanpham.loaisanpham_id' , '=', 'loaisanpham.id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra','donvitinh.donvitinh_ten','loaisanpham.loaisanpham_ten','sanpham.loaisanpham_id','sanpham.sanpham_anh','sanpham.sanpham_mo_ta')
+            ->select(
+                DB::raw('max(lohang.id) as lomoi'),
+                'sanpham.id',
+                'sanpham.sanpham_ten',
+                'sanpham.sanpham_url',
+                'sanpham.sanpham_khuyenmai',
+                'sanpham.sanpham_anh', 
+                'lohang.lohang_so_luong_nhap',
+                'lohang.lohang_so_luong_hien_tai',
+                'sanpham.sanpham_gia',
+                'donvitinh.donvitinh_ten',
+                'loaisanpham.loaisanpham_ten',
+                'sanpham.loaisanpham_id',
+                'sanpham.sanpham_anh',
+                'sanpham.sanpham_mo_ta')
             ->groupBy('sanpham.id')
             ->first();
         $hinhsanpham = DB::table('hinhsanpham')->where('sanpham_id',$id)->get();
@@ -178,12 +210,24 @@ class HomeController extends Controller
     {
         $sanpham = DB::select('select * from sanpham where id = ?',[$id]);
         if ($sanpham[0]->sanpham_khuyenmai == 1) {
-            $muasanpham = DB::select('select sp.id,sp.sanpham_ten,lh.lohang_ky_hieu, lh.lohang_gia_ban_ra, sp.id, km.khuyenmai_phan_tram from sanpham as sp, lohang as lh, nhacungcap as ncc, sanphamkhuyenmai as spkm, khuyenmai as km  where km.khuyenmai_tinh_trang = 1 and sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?', [$id]);
-            $giakm = $muasanpham[0]->lohang_gia_ban_ra - $muasanpham[0]->lohang_gia_ban_ra*$muasanpham[0]->khuyenmai_phan_tram*0.01;
+            $muasanpham = DB::select('select sp.id,
+                sp.sanpham_ten,
+                lh.lohang_ky_hieu, 
+                sp.sanpham_gia , 
+                sp.id, 
+                km.khuyenmai_phan_tram 
+                from 
+                sanpham as sp,
+                lohang as lh,
+                nhacungcap as ncc,
+                sanphamkhuyenmai as spkm,
+                khuyenmai as km 
+                where km.khuyenmai_tinh_trang = 1 and sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?', [$id]);
+            $giakm = $muasanpham[0]->sanpham_gia - $muasanpham[0]->sanpham_gia*$muasanpham[0]->khuyenmai_phan_tram*0.01;
             Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $giakm, 'size_id' =>$size_id));
         } else {
-            $muasanpham = DB::select('select sp.id,sp.sanpham_ten,lh.lohang_ky_hieu, lh.lohang_gia_ban_ra from sanpham as sp, lohang as lh, nhacungcap as ncc  where ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?',[$id]);
-            $gia = $muasanpham[0]->lohang_gia_ban_ra;
+            $muasanpham = DB::select('select sp.id,sp.sanpham_ten,lh.lohang_ky_hieu, sp.sanpham_gia from sanpham as sp, lohang as lh, nhacungcap as ncc  where ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?',[$id]);
+            $gia = $muasanpham[0]->sanpham_gia;
             $cart = Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $gia, 'size_id' =>$size_id));
         }
         $content = Cart::content();
@@ -200,14 +244,30 @@ class HomeController extends Controller
         $sizes =  array();
         $count = 0;
         foreach ($content as $c) {
+            var_dump(
+                DB::table('lohang')
+                ->where('sanpham_id',$c->id)
+                ->join('size','size.id','=','lohang.size_id')
+                ->select(DB::raw('sum(lohang_so_luong_hien_tai) as total'),
+                         DB::raw('lohang.size_id as id'),
+                         DB::raw('size_ten as name')
+                        )
+                ->groupBy(DB::raw('size_id') )
+                ->having('total','>=',$c->qty)
+                ->get()
+                //->get()
+            );
+
             $sizes[$count] = DB::table('lohang')
-            ->where('sanpham_id',$c->id)
-            ->where('lohang_so_luong_hien_tai','>',$c->qty)
-            ->join('size','size.id','=','lohang.size_id')
-            ->groupBy('lohang.size_id')
-            //->select(DB::raw('sum(lohang.lohang_so_luong_hien_tai) as slcl'),'lohang.size_id as id','size_ten as name')
-            ->select(DB::raw("lohang.size_id as id,size_ten as name, lohang_so_luong_hien_tai as max"))
-            ->get();
+                ->where('sanpham_id',$c->id)
+                ->join('size','size.id','=','lohang.size_id')
+                ->select(DB::raw('sum(lohang_so_luong_hien_tai) as total'),
+                         DB::raw('lohang.size_id as id'),
+                         DB::raw('size_ten as name')
+                        )
+                ->groupBy(DB::raw('size_id') )
+                ->having('total','>=',$c->qty)
+                ->get();
             //$sizes[$count] = ['id' => $sizes[$count]['size_id'], 'name'=> $sizes[$count]['size_ten']];
             $count++;
         }
@@ -250,9 +310,10 @@ class HomeController extends Controller
             $count++;
         }
         $total = Cart::total();
+        $sizes = DB::table('size')->get();
         // echo "string";
         // print_r($total);
-        return view('frontend.pages.checkin',compact('content','total'));
+        return view('frontend.pages.checkin',compact('content','total','sizes'));
     }
 
     public function postCheckin(ThanhtoanRequest $request)
@@ -350,7 +411,7 @@ class HomeController extends Controller
             ->where('sanpham_ten','like',$keyword)
             ->orWhere('sanpham_url','like',$keyword)
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
-            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
+            ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','sanpham.sanpham_gia')
                 ->groupBy('sanpham.id')
             ->paginate(15);
         return view('frontend.pages.product',compact('sanpham'));

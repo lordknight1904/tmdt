@@ -18,7 +18,6 @@ class LohangAddRequest extends Request
             'txtLHSize' => 'required|integer',
             'txtLHQuant'  => 'required|integer',
             'txtLHBuyPrice'  => 'required',
-            'txtLHSalePrice' => 'required',
         ];
     }
 

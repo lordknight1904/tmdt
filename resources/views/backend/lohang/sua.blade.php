@@ -30,15 +30,6 @@
         </div>
         <div class="col-lg-6">
             <div class="form-group">
-                <label>Hạn sử dụng</label>
-                <input class="form-control" name="txtLHShelf" value="{!! $lohang->lohang_han_su_dung !!}" placeholder="Nhập số ngày.." />
-                <div>
-                    {!! $errors->first('txtLHShelf') !!}
-                </div>  
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
                 <label>Số lượng</label>
                 <input class="form-control" name="txtLHQuant" value="{!! $lohang->lohang_so_luong_nhap !!}" placeholder="Số lượng..." />
                 <div>
@@ -52,15 +43,6 @@
                 <input class="form-control" name="txtLHBuyPrice" value="{!! $lohang->lohang_gia_mua_vao !!}" placeholder="Giá mua vào..." />
                 <div>
                     {!! $errors->first('txtLHBuyPrice') !!}
-                </div>  
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <label>Giá bán ra</label>
-                <input class="form-control" name="txtLHSalePrice" value="{!! $lohang->lohang_gia_ban_ra !!}" placeholder="Giá bán ra..." />
-                <div>
-                    {!! $errors->first('txtLHSalePrice') !!}
                 </div>  
             </div>
         </div>
