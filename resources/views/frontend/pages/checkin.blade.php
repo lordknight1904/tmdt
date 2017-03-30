@@ -44,9 +44,8 @@
                       <input type="hidden" name="" value="{!! Auth::user()->id !!}" />
                       <?php 
                         $khachhang = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
-                        // print_r($khachhang);
                       ?>
-                      <input type="hidden" name="txtKHID" value="{!! $khachhang->id !!}" />
+                      <input type="hidden" name="txtKHID" value="{!! $khachhang->user_id !!}" />
                       <div id="collapseThree" class="panel-collapse collapse">
                         <div class="panel-body">
                           <div class="row">
@@ -99,11 +98,17 @@
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
                                 <h4>Số tài khoản</h4>
-                                <input type="text" name="txtKHvisa" value="{{ $user->visa }}" placeholder="Số tài khoản" />
+                                <input type="text" name="txtKHvisa" value="{{ $user->visa }}" placeholder="Số tài khoản" /> 
+                                <div>
+                                    {!! $errors->first('txtKHvisa') !!}
+                                </div>
                               </div>  
                               <div class="aa-checkout-single-bill">
                                 <h4>CSC</h4>
-                                <input type="text" name="txtKHCSC" placeholder="CSC" />
+                                <input type="text" name="txtKHCSC" placeholder="CSC" /> 
+                                <div>
+                                    {!! $errors->first('txtKHCSC') !!}
+                                </div>
                               </div>                             
                             </div>
                           </div>                              

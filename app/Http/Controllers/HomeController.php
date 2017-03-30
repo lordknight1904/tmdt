@@ -87,7 +87,57 @@ class HomeController extends Controller
             ->paginate(15);
         return view('frontend.pages.group',compact('sanpham','nhom'));
     }
-
+    public function donhanguser($id){
+        // var_dump(
+        //     DB::table('donhang')
+        //         ->where('khachhang_id',$id)
+        //         ->join('chitietdonhang','chitietdonhang.donhang_id','=','donhang.id')
+        //         ->join('tinhtranghd','donhang.tinhtranghd_id','=','tinhtranghd.id')
+        //         ->join('sanpham','chitietdonhang.sanpham_id','=','sanpham.id')
+        //         ->join('size','chitietdonhang.size_id','=','size.id')
+        //         ->join('donvitinh','sanpham.donvitinh_id','=','donvitinh.id')
+        //         ->select(
+        //             'donhang.donhang_nguoi_nhan',
+        //             'donhang.donhang_nguoi_nhan_email',
+        //             'donhang.donhang_nguoi_nhan_sdt',
+        //             'donhang.donhang_nguoi_nhan_dia_chi',
+        //             'donhang.donhang_ghi_chu',
+        //             'donhang.donhang_tong_tien',
+        //             'tinhtranghd.tinhtranghd_ten',
+        //             'chitietdonhang.chitietdonhang_so_luong',
+        //             'sanpham.sanpham_ten',
+        //             'sanpham.sanpham_anh',
+        //             'size.size_ten',
+        //             'donvitinh.donvitinh_ten'
+        //             )
+        //         ->groupBy('donhang.id')
+        //         ->get()
+        //     );
+        $info = DB::table('donhang')
+                ->where('khachhang_id',$id)
+                ->join('chitietdonhang','chitietdonhang.donhang_id','=','donhang.id')
+                ->join('tinhtranghd','donhang.tinhtranghd_id','=','tinhtranghd.id')
+                ->join('sanpham','chitietdonhang.sanpham_id','=','sanpham.id')
+                ->join('size','chitietdonhang.size_id','=','size.id')
+                ->join('donvitinh','sanpham.donvitinh_id','=','donvitinh.id')
+                ->select(
+                    'donhang.id',
+                    'donhang.donhang_nguoi_nhan',
+                    'donhang.donhang_nguoi_nhan_email',
+                    'donhang.donhang_nguoi_nhan_sdt',
+                    'donhang.donhang_nguoi_nhan_dia_chi',
+                    'donhang.donhang_ghi_chu',
+                    'donhang.donhang_tong_tien',
+                    'tinhtranghd.tinhtranghd_ten',
+                    'chitietdonhang.chitietdonhang_so_luong',
+                    'sanpham.sanpham_ten',
+                    'sanpham.sanpham_anh',
+                    'size.size_ten',
+                    'donvitinh.donvitinh_ten'
+                    )
+                ->get();
+        return view('frontend.pages.xemdonhang',compact('info'));
+    }
     public function cates($url)
     {
         $idLSP = DB::table('loaisanpham')->select('id')->where('loaisanpham_url',$url)->first();
@@ -232,7 +282,7 @@ class HomeController extends Controller
         }
         $content = Cart::content();
         foreach ($content as $c) {
-            //Cart::updateS($c->rowid,$size_id);
+            Cart::updateS($c->rowid,$size_id);
         }
         return redirect()->route('giohang');
     }
@@ -244,19 +294,19 @@ class HomeController extends Controller
         $sizes =  array();
         $count = 0;
         foreach ($content as $c) {
-            var_dump(
-                DB::table('lohang')
-                ->where('sanpham_id',$c->id)
-                ->join('size','size.id','=','lohang.size_id')
-                ->select(DB::raw('sum(lohang_so_luong_hien_tai) as total'),
-                         DB::raw('lohang.size_id as id'),
-                         DB::raw('size_ten as name')
-                        )
-                ->groupBy(DB::raw('size_id') )
-                ->having('total','>=',$c->qty)
-                ->get()
-                //->get()
-            );
+        //     var_dump(
+        //         DB::table('lohang')
+        //         ->where('sanpham_id',$c->id)
+        //         ->join('size','size.id','=','lohang.size_id')
+        //         ->select(DB::raw('sum(lohang_so_luong_hien_tai) as total'),
+        //                  DB::raw('lohang.size_id as id'),
+        //                  DB::raw('size_ten as name')
+        //                 )
+        //         ->groupBy(DB::raw('size_id') )
+        //         ->having('total','>=',$c->qty)
+        //         ->get()
+        //         //->get()
+        //     );
 
             $sizes[$count] = DB::table('lohang')
                 ->where('sanpham_id',$c->id)
@@ -267,21 +317,10 @@ class HomeController extends Controller
                         )
                 ->groupBy(DB::raw('size_id') )
                 ->having('total','>=',$c->qty)
-                ->get();
-            //$sizes[$count] = ['id' => $sizes[$count]['size_id'], 'name'=> $sizes[$count]['size_ten']];
+                ->get();        
             $count++;
         }
-        // $sizes = DB::table('size')->get();
         return view('frontend.pages.cart',compact('content','total','sizes'));
-
-        // $content = Cart::content();
-        // //print_r($content);
-        // $total = Cart::total();
-        // $sizes = DB::table('size')->get();
-        // foreach ($sizes as $key => $val) {
-        //     $size[] = ['id' => $val->id, 'name'=> $val->size_ten];
-        // }
-        // return view('frontend.pages.cart',compact('content','total','size'));
     }
 
     public function deleteProduct($id)
@@ -301,6 +340,11 @@ class HomeController extends Controller
     }
 
     public function getCheckin($url){
+        if(Cart::count()==0 || $url === null){
+            echo "<script>
+          alert('Giỏ hàng rỗng')";
+          return;
+        }
         $sizeArr = explode(',', $url);  
         $content = Cart::content();
         $count = 0;
@@ -320,7 +364,6 @@ class HomeController extends Controller
     {
         $content = Cart::content();
         $total = Cart::total();
-
         $donhang = new Donhang;
         $donhang->donhang_nguoi_nhan = $request->txtNNName;
         $donhang->donhang_nguoi_nhan_email = $request->txtNNEmail;
@@ -338,13 +381,33 @@ class HomeController extends Controller
         }
 
         foreach ($content as $item) {
-            $detail = new Chitietdonhang;
-            $detail->sanpham_id = $item->id;
-            $detail->donhang_id = $donhang->id;
-            $detail->size_id = $item->size_id;
-            $detail->chitietdonhang_so_luong = $item->qty;
-            $detail->chitietdonhang_thanh_tien = $item->price*$item->qty;
-            $detail->save();
+            $soluongmua = $item->qty;
+            $lohang = DB::table('lohang')->where('sanpham_id',$item->id)->get();
+            foreach ($lohang as $lh){
+                if($lh->lohang_so_luong_hien_tai < $soluongmua){
+                    $soluongmua = $soluongmua - $lh->lohang_so_luong_hien_tai;
+                    $detail = new Chitietdonhang;
+                    $detail->sanpham_id = $item->id;
+                    $detail->donhang_id = $donhang->id;
+                    $detail->size_id = $item->size_id;
+                    $detail->chitietdonhang_so_luong = $lh->lohang_so_luong_hien_tai;
+                    $detail->chitietdonhang_thanh_tien = $item->price*$lh->lohang_so_luong_hien_tai;
+                    $detail->lohang_id = $lh->id;
+                    $detail->save();
+                    DB::table('lohang')->where('id',$lh->id)->decrement('lohang_so_luong_hien_tai', $lh->lohang_so_luong_hien_tai);
+                }else{
+                    $detail = new Chitietdonhang;
+                    $detail->sanpham_id = $item->id;
+                    $detail->donhang_id = $donhang->id;
+                    $detail->size_id = $item->size_id;
+                    $detail->chitietdonhang_so_luong = $soluongmua;
+                    $detail->chitietdonhang_thanh_tien = $item->price*$soluongmua;
+                    $detail->lohang_id = $lh->id;
+                    $detail->save();
+                    DB::table('lohang')->where('id',$lh->id)->decrement('lohang_so_luong_hien_tai', $soluongmua);
+                }
+                if($soluongmua<=0) break;
+            }
         }
         $kh = DB::table('khachhang')->where('id', $request->txtKHID)->first();
         // print_r($kh);

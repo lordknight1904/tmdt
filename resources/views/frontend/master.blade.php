@@ -81,7 +81,12 @@
                     @if (Auth::check())
                     <li class="hidden-xs"><strong>{{ Auth::user()->name }}</strong></li>
                       @if (Auth::user()->loainguoidung_id != 2)
-                        <li class="hidden-xs"><a href="{{ url('/admin/bang-dieu-khien') }}">Panel</a></li>
+                        <li class="hidden-xs"><a href="{{ url('/admin/bang-dieu-khien') }}">Bảng đk</a></li>
+                      @else
+                        <?php 
+                          $kh = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
+                          ?>
+                        <li class="hidden-xs"><a href="{{ url('/donhanguser',[$kh->id]) }}">Đơn hàng</a></li>
                       @endif
                       <li class="hidden-xs"><a href="{{ url('/logout') }}">Thoát</a></li>
                     @else

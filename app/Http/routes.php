@@ -36,6 +36,8 @@ Route::get('/', 'HomeController@index');
 
 Route::get('nhom/{url}', 'HomeController@group');
 
+Route::get('donhanguser/{id}', 'HomeController@donhanguser');
+
 Route::get('loai-san-pham/{url}', 'HomeController@cates');
 
 Route::get('tuyen-dung', 'HomeController@career');

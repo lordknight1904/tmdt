@@ -25,12 +25,21 @@
     </div>
     <div class="panel-body">
         <div class="col-lg-7">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="form-group">
                 <label>Ký hiệu</label>
                 <input class="form-control" name="txtSPSignt" value="{!! $sanpham->sanpham_ky_hieu !!}" />
                 <div>
                     {!! $errors->first('txtSPSignt') !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Giá sản phẩm</label>
+                <input class="form-control" name="txtSPPrice" value="{!! $sanpham->sanpham_gia !!}" />
+                <div>
+                    {!! $errors->first('txtSPPrice') !!}
                 </div>
             </div>
         </div>

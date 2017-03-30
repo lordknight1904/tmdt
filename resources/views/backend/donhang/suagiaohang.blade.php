@@ -117,6 +117,7 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Sản phẩm</th>
+                                <th>Lô hàng</th>
                                 <th>Đơn giá</th>
                                 <th>Số lượng</th>
                                 <th>Thành tiền</th>
@@ -132,6 +133,9 @@
                                             $sp = DB::table('sanpham')->where('id',$val->sanpham_id)->first();
                                             print_r($sp->sanpham_ten);
                                         ?>
+                                    </td>
+                                    <td>
+                                    {!! $val->lohang_id !!} 
                                     </td>
                                     <td>
                                     {!! number_format($val->chitietdonhang_thanh_tien/$val->chitietdonhang_so_luong,0,",",".") !!} vnđ 

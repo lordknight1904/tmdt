@@ -22,7 +22,6 @@
                 <th>ĐVT</th>
                 <th>Lô hàng</th>
                 <th>Giá mua vào</th>
-                <th>Giá bán ra</th>
                 <th>Nhập vào</th>
                 <th>Đã bán</th>
                 <th>Hiện tại</th>
@@ -51,7 +50,6 @@
                 </td>
                 <td>{!! $item->lohang_ky_hieu !!}</td>
                 <td>{!! $item->lohang_gia_mua_vao !!}</td>
-                <td>{!! $item->lohang_gia_ban_ra !!}</td>
                 <td>{!! $item->lohang_so_luong_nhap !!}</td>
                 <td>{!! $item->lohang_so_luong_da_ban !!}</td>
                 <td>{!! $item->lohang_so_luong_hien_tai !!}</td>

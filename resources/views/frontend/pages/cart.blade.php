@@ -33,8 +33,8 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th></th>
-                        <th></th>
+                        <!-- <th></th> -->
+                        <th>Xóa</th>
                         <th>Ảnh</th>
                         <th>Sản phẩm</th>
                         <th>Giá</th>
@@ -51,7 +51,7 @@
                     @foreach ($content as $item)
                       <?php  $sanpham = DB::table('sanpham')->where('id',$item->id)->first(); ?>
                       <tr>
-                        <td><a class="updatecart edit" id="{!! $item['rowid'] !!}" href='#'><fa class=" fa fa-edit"></fa></a></td>
+                        <!-- <td><a class="updatecart edit" id="{!! $item['rowid'] !!}" href='#'><fa class=" fa fa-edit"></fa></a></td> -->
                         <td><a class="remove" href='{!! URL::route("xoasanpham", ["id" => $item["rowid"]] ) !!}'><fa class="fa fa-close"></fa></a></td>
                         <td><a href="{!! url('san-pham',$sanpham->sanpham_url) !!}"><img src="{!! asset('resources/upload/sanpham/'.$sanpham->sanpham_anh) !!}"  style="width: 45px; height: 50px;"></a></td>
                         <td><a class="aa-cart-title" href="{!! url('san-pham',$sanpham->sanpham_url) !!}">{!!  $item->name !!}</a></td>
@@ -59,14 +59,16 @@
                         <td><input class="qty aa-cart-quantity" type="number"  value="{!!  $item->qty !!}"></td>
                         <td>
                           <select id="input" name="txtLHSize"  class="form-control">
-                            <option value="">--Chọn Kích cỡ--</option>
                             <?php
-                              foreach ($sizes[$count] as $s) {
-                                $size[] = ['id' => $s->id, 'name'=> $s->name];
-                              } 
-                              Select_Function($size,$item->size_id); 
-                              $size = [];
-                              $count++; 
+                                $size= [];
+                                foreach ($sizes[$count] as $s) {
+                                  $size[] = ['id' => $s->id, 'name'=> $s->name];
+                                }
+                                if(count($size)<=0)
+                                  $size[] = ['id' => -1, 'name'=> 'hết hàng'];
+                                Select_Function($size,$item->size_id); 
+                                $size = [];
+                                $count++; 
                             ?>
                           </select>
                         </td>

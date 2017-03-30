@@ -28,18 +28,24 @@ function selectt($id,$url){
 	console.log($(".aa-add-to-cart-btn").attr("href"));
 }
 function kiemTraKichThuoc(content){
+	if(content.length == 0){
+		alert("Giỏ hàng rổng");
+		return;
+	}
 	var select=document.getElementsByName ('txtLHSize');
 	var sizeArr = new Array(select.length);
 	var unselect = false;
 	for(var i =0;i<select.length;i++){
 		sizeArr[i] = select[i].value;
 		if(select[i].value==='') unselect = true;
+		if(select[i].value == -1) {
+			alert("Kích cỡ sản phẩm bạn chọn đã hết hàng!!!");
+			return
+		}
 	}
 	if(!unselect){
-		console.log(sizeArr);
 		window.location = "/thanh-toan/" + sizeArr;
 	}else{
-		alert("Please choose size!!!");
+		alert("Xin hãy chọn kích cỡ!!!");
 	}
-
 }

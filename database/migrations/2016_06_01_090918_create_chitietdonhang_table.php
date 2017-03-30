@@ -17,6 +17,8 @@ class CreateChitietdonhangTable extends Migration
             $table->foreign('sanpham_id')->references('id')->on('sanpham')->onUpdate('cascade');
             $table->integer('donhang_id')->unsigned();
             $table->foreign('donhang_id')->references('id')->on('donhang')->onUpdate('cascade');
+            $table->integer('lohang_id')->unsigned();
+            $table->foreign('lohang_id')->references('id')->on('lohang')->onUpdate('cascade');
             $table->integer('size_id')->unsigned();
             $table->foreign('size_id')->references('id')->on('size')->onUpdate('cascade');
             $table->integer('chitietdonhang_so_luong');

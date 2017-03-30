@@ -163,6 +163,7 @@ class SanphamController extends Controller
         $sanpham->sanpham_ten       = Request::input('txtSPName');
         $sanpham->sanpham_url       = Replace_TiengViet(Request::input('txtSPName'));
         $sanpham->sanpham_mo_ta     = Request::input('txtSPIntro');
+        $sanpham->sanpham_gia       = Request::input('txtSPPrice');
         $sanpham->loaisanpham_id    = Request::input('txtSPCate');
         $sanpham->donvitinh_id      = Request::input('txtSPUnit');
        
