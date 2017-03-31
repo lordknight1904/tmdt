@@ -23,7 +23,8 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="{{ url('public/backend/bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
-
+<!-- jQuery -->
+    <script src="{{ url('public/backend/bower_components/jquery/dist/jquery.min.js') }}"></script>  
     <script src="{{ url('public/backend/js/ckeditor/ckeditor.js') }}"></script>
 </head>
 
@@ -114,13 +115,13 @@
                             <a href="{!! URL::route('admin.quangcao.list') !!}"><i class="fa-share-alt-square"></i>Quảng cáo</a>
                         </li>
                         <li>
-                            <a href="{!! URL::route('admin.tuyendung.list') !!}"><i class="fa fa-tags"></i>Tuyển dụng</a>
-                        </li>
-                        <li>
                             <a href="{!! URL::route('admin.khuyenmai.list') !!}"><i class="fa fa-bars"></i>Khuyến mãi</a>
                         </li>
                         <li>
                             <a href="{!! URL::route('admin.thongke.list') !!}"><i class="fa fa-cubes"></i>Kho hàng</a>
+                        </li>
+                        <li>
+                            <a href="{!! URL::route('admin.hotrokh.list') !!}"><i class="fa fa-tags"></i>Hỗ trợ khách hàng</a>
                         </li>
                     </ul>
                 </div>
@@ -157,8 +158,7 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="{{ url('public/backend/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url('public/backend/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>

@@ -22,7 +22,7 @@
                 <th>Loại</th>
                 <th>ĐVT</th>
                 <th>Giá bán</th>
-                <th>Xóa</th>
+                <th>STT</th>
                 <th>Sửa</th>
                 <th>Nhập hàng</th>
             </tr>
@@ -55,9 +55,16 @@
                 <td>
                     {!! $item->sanpham_gia !!}
                 </td>
-                <td class="center">
-                <a href="{!! URL::route('admin.sanpham.getDelete', $item->id ) !!}" onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a></td>
-                </td>
+                @if ($item->sanpham_da_xoa == 0)
+                    <td class="center">
+                        <a href="{!! URL::route('admin.sanpham.getDelete', $item->id ) !!}" onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a></td>
+                    </td>
+                @else
+                    <td class="center">
+                        <a href="{!! URL::route('admin.sanpham.getRestore', $item->id ) !!}" onclick="return confirmDel('Bạn có chắc muốn hồi phục dữ liệu này?')" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Hồi phục"><i class="fa fa-refresh  fa-fw"></i></a></td>
+                    </td>
+                @endif
+
                 <td class="center" > <a href="{!! URL::route('admin.sanpham.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a></td>
                 <td class="center">
                 <a href="{!! URL::route('admin.lohang.getNhaphang', [$item->id] ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Nhập hàng"><i class="fa fa-plus"></i></a>

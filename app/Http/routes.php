@@ -10,6 +10,8 @@ Route::controllers([
 ]);
 
 
+Route::post('/pusher', 'ChatController@postMessage');
+Route::post('/pusherAdmin', 'ChatController@registerToAdmin');
 // Authentication Routes...
 $this->get('login', 'Auth\AuthController@showLoginForm');
 $this->post('login', 'Auth\AuthController@login');
@@ -132,13 +134,14 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
         Route::post('sua/{id}',['as'=>'admin.nhacungcap.postEdit','uses'=>'NhacungcapController@postEdit']);
     });
 
-    Route::group(['prefix' => 'tuyendung'], function() {
-        Route::get('danhsach',['as'=>'admin.tuyendung.list','uses'=>'TuyendungController@getList']);
-        Route::get('them',['as'=>'admin.tuyendung.getAdd','uses'=>'TuyendungController@getAdd']);
-        Route::post('them',['as'=>'admin.tuyendung.postAdd','uses'=>'TuyendungController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.tuyendung.getDelete','uses'=>'TuyendungController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.tuyendung.getEdit','uses'=>'TuyendungController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.tuyendung.postEdit','uses'=>'TuyendungController@postEdit']);
+    Route::group(['prefix' => 'hotrokh'], function() {
+        Route::get('/chat/{userId}', 'HoTroKHController@chat');
+        Route::get('danhsach',['as'=>'admin.hotrokh.list','uses'=>'HoTroKHController@getList']);
+        Route::get('them',['as'=>'admin.hotrokh.getAdd','uses'=>'HoTroKHController@getAdd']);
+        Route::post('them',['as'=>'admin.hotrokh.postAdd','uses'=>'HoTroKHController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.hotrokh.getDelete','uses'=>'HoTroKHController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.hotrokh.getEdit','uses'=>'HoTroKHController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.hotrokh.postEdit','uses'=>'HoTroKHController@postEdit']);
     });
 
     Route::group(['prefix' => 'khachhang'], function() {
@@ -177,6 +180,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     });
 
     Route::group(['prefix' => 'sanpham'], function() {
+        Route::get('themlai/{id}',['as'=>'admin.sanpham.getRestore','uses'=>'SanphamController@getRestore']);
         Route::get('danhsach',['as'=>'admin.sanpham.list','uses'=>'SanphamController@getList']);
         Route::get('them',['as'=>'admin.sanpham.getAdd','uses'=>'SanphamController@getAdd']);
         Route::post('them',['as'=>'admin.sanpham.postAdd','uses'=>'SanphamController@postAdd']);

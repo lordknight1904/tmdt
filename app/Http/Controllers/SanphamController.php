@@ -19,7 +19,7 @@ class SanphamController extends Controller
     public function getList()
     {
         $data1 = DB::table('sanpham')
-            
+            //->where('sanpham_da_xoa','=',0)
             ->get();
             // print_r($data1);
         foreach ($data1 as $item) {
@@ -32,13 +32,13 @@ class SanphamController extends Controller
                 // $data3 = DB::table('khuyenmai')->where('id',$data2->khuyenmai_id)->first();
                 if ($data3->khuyenmai_tinh_trang == 0) {
                     $u = DB::table('sanpham')
-                        ->where('id',$item->id)
+                        //->where([['id',$id],['sanpham_da_xoa',0]])
                         ->update(['sanpham_khuyenmai' => 0 ]);
                     }
 
                 else{
                     $u = DB::table('sanpham')
-                        ->where('id',$item->id)
+                        //->where([['id',$id],['sanpham_da_xoa',0]])
                         ->update(['sanpham_khuyenmai' => 1 ]);
                 }
                 // print_r($u);
@@ -46,6 +46,7 @@ class SanphamController extends Controller
             }   
         }
         $data = DB::table('sanpham')
+            //->where('sanpham_da_xoa',0)
             ->orderBy('id','DESC')->get();
     	return view('backend.sanpham.danhsach',compact('data'));
     }
@@ -116,29 +117,33 @@ class SanphamController extends Controller
             }
         }
 
-        return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Thêm loại sản phẩm thành công!!!']);
+        return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Thêm sản phẩm thành công!!!']);
+    }
+    public function getRestore($id){
+        DB::table('sanpham')->where('id',$id)->update(['sanpham_da_xoa'=>0]);
+        return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Hồi phục sản phẩm thành công!!!']);
     }
 
     public function getDelete($id)
     {   
-        $binhluan = DB::table('binhluan')->where('sanpham_id',$id)->get();
-        foreach ($binhluan as $val) {
+     //    $binhluan = DB::table('binhluan')->where('sanpham_id',$id)->get();
+     //    foreach ($binhluan as $val) {
             
-            DB::table('binhluan')->where('sanpham_id',$id)->delete();
-        }
-        DB::table('lohang')->where('sanpham_id',$id)->delete();
-        $chitiet = DB::table('hinhsanpham')->where('sanpham_id',$id)->get();
-        foreach ($chitiet as $val) {
-            $image = 'resources/upload/chitietsanpham/'.$val->hinhsanpham_ten;
-            File::delete($image);
-            DB::table('hinhsanpham')->where('sanpham_id',$id)->delete();
-        }
-    	$sanpham = DB::table('sanpham')->where('id',$id)->first();
-        $img = 'resources/upload/sanpham/'.$sanpham->sanpham_anh;
-        File::delete($img);
-        DB::table('sanpham')->where('id',$id)->delete();
-
-        return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Xóa loại sản phẩm thành công!!!']);
+     //        DB::table('binhluan')->where('sanpham_id',$id)->delete();
+     //    }
+     //    DB::table('lohang')->where('sanpham_id',$id)->delete();
+     //    $chitiet = DB::table('hinhsanpham')->where('sanpham_id',$id)->get();
+     //    foreach ($chitiet as $val) {
+     //        $image = 'resources/upload/chitietsanpham/'.$val->hinhsanpham_ten;
+     //        File::delete($image);
+     //        DB::table('hinhsanpham')->where('sanpham_id',$id)->delete();
+     //    }
+    	// $sanpham = DB::table('sanpham')->where('id',$id)->first();
+     //    $img = 'resources/upload/sanpham/'.$sanpham->sanpham_anh;
+     //    File::delete($img);
+     //    DB::table('sanpham')->where('id',$id)->delete();
+        DB::table('sanpham')->where('id',$id)->update(['sanpham_da_xoa'=>1]);
+        return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Xóa sản phẩm thành công!!!']);
     }
 
     public function getEdit($id)
@@ -151,7 +156,7 @@ class SanphamController extends Controller
         foreach ($cates as $key => $val) {
             $cate[] = ['id' => $val->id, 'name'=> $val->loaisanpham_ten];
         }
-        $sanpham = DB::table('sanpham')->where('id',$id)->first();
+        $sanpham = DB::table('sanpham')->where([['id',$id],['sanpham_da_xoa',0]])->first();
         $images = DB::table('hinhsanpham')->where('sanpham_id',$id)->get();
         return view('backend.sanpham.sua',compact('cate','unit','sanpham','id','images'));
     }

@@ -121,7 +121,7 @@ class ThongkeController extends Controller
     	$title = 'Sản phẩm bán chạy';
 	    $data = DB::table('lohang')
 	   			->select(
-	   				'sanpham_id','lohang_gia_ban_ra','lohang_gia_mua_vao','lohang_ky_hieu',
+	   				'sanpham_id','lohang_gia_mua_vao','lohang_ky_hieu',
 	   				DB::raw('SUM(lohang_so_luong_nhap) as nhap'),
 	   				DB::raw('SUM(lohang_so_luong_da_ban) as ban'),
 	   				DB::raw('SUM(lohang_so_luong_hien_tai) as ton')

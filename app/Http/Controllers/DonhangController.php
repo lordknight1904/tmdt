@@ -16,7 +16,6 @@ class DonhangController extends Controller
     public function getList()
     {
         $data = DB::table('donhang')->get();
-        var_dump($data);
         return view('backend.donhang.danhsach',compact('data'));
     }
 
@@ -29,13 +28,13 @@ class DonhangController extends Controller
                 $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
                 break;
             }
-            if($donhang->tinhtranghd_id == 3 && $val->id == 4) {
+            if($donhang->tinhtranghd_id == 3 && $val->id == 3) {
                 $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
                 break;
             }
             if($donhang->tinhtranghd_id == 1 && $val->id <= 2)
              $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
-            if($donhang->tinhtranghd_id == 2 && $val->id > $donhang->tinhtranghd_id)
+            if($donhang->tinhtranghd_id == 2 && $val->id >= $donhang->tinhtranghd_id)
              $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
 		}
     	$khachhang = DB::table('khachhang')->where('id',$donhang->khachhang_id)->first();

@@ -45,7 +45,7 @@
                       <?php 
                         $khachhang = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
                       ?>
-                      <input type="hidden" name="txtKHID" value="{!! $khachhang->user_id !!}" />
+                      <input type="hidden" name="txtKHID" value="{!! $khachhang->id !!}" />
                       <div id="collapseThree" class="panel-collapse collapse">
                         <div class="panel-body">
                           <div class="row">

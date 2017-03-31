@@ -49,3 +49,11 @@ function kiemTraKichThuoc(content){
 		alert("Xin hãy chọn kích cỡ!!!");
 	}
 }
+function animation(){
+	if(document.getElementById("chatShow").className === "chatShow transform"){
+		console.log('abc');
+		document.getElementById("chatShow").className = "chatHide transform";
+	}else{
+		document.getElementById("chatShow").className = "chatShow transform";
+	}
+}

@@ -79,7 +79,7 @@
 <!-- / Support section -->
 <!-- Latest Blog -->
 
-<!-- @include('frontend.blocks.news') -->
+@include('frontend.blocks.news')
 
 <!-- / Latest Blog -->
 <!-- Footer -->

@@ -29,7 +29,7 @@
                 <!-- start single product item -->
                 @foreach ($sanpham as $item)
                 <?php 
-                  $sanphamkhuyenmai = DB::select('select * from sanpham as sp, sanphamkhuyenmai as spkm, khuyenmai as km where sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and sp.sanpham_khuyenmai = 1 and km.khuyenmai_tinh_trang = 1');
+                  $sanphamkhuyenmai = DB::select('select * from sanpham as sp, sanphamkhuyenmai as spkm, khuyenmai as km where sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and sp.sanpham_khuyenmai = 1 and km.khuyenmai_tinh_trang = 1 and sp.sanpham_da_xoa = 0');
                 ?>
                 <li>
                   <figure>
@@ -44,7 +44,7 @@
                     <span class="aa-badge aa-sold-out" >Khuyến mãi!</span>
                     <span class="aa-product-price">
                      <?php 
-                        $tylegia = DB::select('select khuyenmai_phan_tram from sanpham as sp, sanphamkhuyenmai as spkm, khuyenmai as km where sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and sp.sanpham_khuyenmai = 1 and km.khuyenmai_tinh_trang = 1 ');
+                        $tylegia = DB::select('select khuyenmai_phan_tram from sanpham as sp, sanphamkhuyenmai as spkm, khuyenmai as km where sp.id = spkm.sanpham_id and spkm.khuyenmai_id = km.id and sp.sanpham_khuyenmai = 1 and km.khuyenmai_tinh_trang = 1 and sp.sanpham_da_xoa = 0');
                        $giakm = ($item->sanpham_gia - ($tylegia[0]->khuyenmai_phan_tram*$item->sanpham_gia * 0.01));
                        $tyle = $tylegia[0]->khuyenmai_phan_tram*0.01;
                       ?> 

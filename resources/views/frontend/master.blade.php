@@ -13,6 +13,8 @@
   <link href="{{ url('public/frontend/slide_1/css/style.css') }}" rel="stylesheet">
   <link href="{{ url('public/frontend/slide_1/css/responsive.css') }}" rel="stylesheet">
 
+  <!-- chat css -->
+  <link href="{{ url('public/frontend/css/chat.css') }}" rel="stylesheet">
   <!-- Font awesome -->
   <link href="{{ url('public/frontend/css/font-awesome.css') }}" rel="stylesheet">
   <!-- Bootstrap -->
@@ -39,20 +41,14 @@
   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <link href="{{ url('public/frontend/magiczoomplus/magiczoomplus.css') }}" rel="stylesheet">
   <script src="{{ url('public/frontend/magiczoomplus/magiczoomplus.js') }}"></script>
+  
+  <!-- chat component -->
 </head>
-<body> 
- <!-- wpf loader Two -->
-    <!-- <div id="wpf-loader-two">          
-      <div class="wpf-loader-two-inner">
-        <span>Đang tải</span>
-      </div>
-    </div>  -->
-    <!-- / wpf loader Two -->       
+<body>      
     <!-- SCROLL TOP BUTTON -->
     <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
     <!-- END SCROLL TOP BUTTON -->
 
-    <!-- Start header section -->
     <header id="aa-header">
       <!-- start header top  -->
       <div class="aa-header-top">
@@ -104,7 +100,7 @@
 
       <div class="aa-header-bottom">
         <div class="container">
-          <div class="row">
+          <div class="row" style="position: relative;">
             <div class="col-md-12">
               <div class="aa-header-bottom-area">
                 <!-- Support section -->
@@ -142,13 +138,12 @@
                 
               </div>
             </div>
+
           </div>
         </div>
       </div>
       <!-- / header bottom  -->
     </header>
-    <!-- / header section -->
-    <!-- menu -->
     <section id="menu">
       <div class="container">
         <div class="row">  
@@ -171,12 +166,7 @@
         </div>       
       </div>
     </section>
-
-    <!-- / menu -->
-    <!-- Content pages -->
-
     @yield('content')
-
     <!-- / Content pages -->
 
     <!-- / product category -->
@@ -203,8 +193,7 @@
 
     <!-- My scripts -->
     <script src="{{ url('public/frontend/js/myscript.js') }}"></script> 
-
-
+    
 
     <!-- slide_1 -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -212,6 +201,8 @@
     <script src="{{ url('public/frontend/slide_1/js/jquery.nivo.slider.pack.js') }}"></script>
     <script src="{{ url('public/frontend/slide_1/js/owl.carousel.min.js') }}"></script>
     <script src="{{ url('public/frontend/slide_1/js/main.js') }}"></script>
+    
+              @include('frontend.blocks.chat')
     
     <script type="text/javascript">
       /* Main Slideshow */

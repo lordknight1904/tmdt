@@ -54,7 +54,9 @@ class HomeController extends Controller
     {
         $loaisp =  DB::table('loaisanpham')->get();
         $sanpham = DB::table('sanpham')
+            ->where('sanpham_da_xoa',0)
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
+            ->where('lohang_so_luong_hien_tai','>',0)
             ->select(
                 DB::raw('max(lohang.id) as lomoi'),
                 'sanpham.id','sanpham.sanpham_ten',
@@ -80,8 +82,10 @@ class HomeController extends Controller
         }
         $nhom = DB::table('nhom')->where('id',$i)->first();
         $sanpham = DB::table('sanpham')
+            ->where('sanpham_da_xoa',0)
             ->whereIn('sanpham.loaisanpham_id',$ids)
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
+            ->where('lohang_so_luong_hien_tai','>',0)
             ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','sanpham.sanpham_gia')
             ->groupBy('sanpham.id')
             ->paginate(15);
@@ -144,8 +148,9 @@ class HomeController extends Controller
         $i = $idLSP->id;
         $loaisanpham = DB::table('loaisanpham')->where('id',$i)->first();
         $sanpham = DB::table('sanpham')
-            ->where('sanpham.loaisanpham_id',$i)
+            ->where([['sanpham.loaisanpham_id',$i],['sanpham_da_xoa',0]])
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
+            ->where('lohang_so_luong_hien_tai','>',0)
             ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','sanpham.sanpham_gia')
                 ->groupBy('sanpham.id')
             ->paginate(15);
@@ -252,7 +257,12 @@ class HomeController extends Controller
         foreach ($sizes as $key => $val) {
             $size[] = ['id' => $val->size_id, 'name'=> $val->size_ten];
         }
-        return view('frontend.pages.detailpro',compact('sanpham','hinhsanpham','loaisanpham','nhom','binhluan','size'));
+        if(sizeof($sizes)==0){
+            echo "<script>
+                alert('Xin vui lòng thứ lỗi, mặt hàng nãy đã hết hàng!');
+                window.location = document.referrer;</script>";
+        }else
+            return view('frontend.pages.detailpro',compact('sanpham','hinhsanpham','loaisanpham','nhom','binhluan','size'));
         // print_r($loaisanpham);
     }
 
@@ -260,7 +270,8 @@ class HomeController extends Controller
     {
         $sanpham = DB::select('select * from sanpham where id = ?',[$id]);
         if ($sanpham[0]->sanpham_khuyenmai == 1) {
-            $muasanpham = DB::select('select sp.id,
+            $muasanpham = DB::select('
+                select sp.id,
                 sp.sanpham_ten,
                 lh.lohang_ky_hieu, 
                 sp.sanpham_gia , 
@@ -276,7 +287,18 @@ class HomeController extends Controller
             $giakm = $muasanpham[0]->sanpham_gia - $muasanpham[0]->sanpham_gia*$muasanpham[0]->khuyenmai_phan_tram*0.01;
             Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $giakm, 'size_id' =>$size_id));
         } else {
-            $muasanpham = DB::select('select sp.id,sp.sanpham_ten,lh.lohang_ky_hieu, sp.sanpham_gia from sanpham as sp, lohang as lh, nhacungcap as ncc  where ncc.id = lh.nhacungcap_id and lh.sanpham_id = sp.id and sp.id = ?',[$id]);
+            $muasanpham = DB::select('
+                select sp.id,
+                sp.sanpham_ten,
+                lh.lohang_ky_hieu,
+                sp.sanpham_gia,
+                sp.id
+                from sanpham as sp,
+                lohang as lh,
+                nhacungcap as ncc
+                where ncc.id = lh.nhacungcap_id 
+                    and lh.sanpham_id = sp.id 
+                    and sp.id = ?',[$id]);
             $gia = $muasanpham[0]->sanpham_gia;
             $cart = Cart::add(array( 'id' => $muasanpham[0]->id, 'name' => $muasanpham[0]->sanpham_ten, 'qty' => 1, 'price' => $gia, 'size_id' =>$size_id));
         }
@@ -294,6 +316,7 @@ class HomeController extends Controller
         $sizes =  array();
         $count = 0;
         foreach ($content as $c) {
+        var_dump($c);
         //     var_dump(
         //         DB::table('lohang')
         //         ->where('sanpham_id',$c->id)
@@ -345,11 +368,10 @@ class HomeController extends Controller
           alert('Giỏ hàng rỗng')";
           return;
         }
-        $sizeArr = explode(',', $url);  
+        $sizeArr = explode(',', $url); 
         $content = Cart::content();
         $count = 0;
         foreach ($content as $c) {
-            //var_dump($c->rowid);
             Cart::updateS($c->rowid,$sizeArr[$count]);
             $count++;
         }
@@ -381,8 +403,9 @@ class HomeController extends Controller
         }
 
         foreach ($content as $item) {
+            //var_dump($item);
             $soluongmua = $item->qty;
-            $lohang = DB::table('lohang')->where('sanpham_id',$item->id)->get();
+            $lohang = DB::table('lohang')->where([['sanpham_id',$item->id],['size_id','=',$item->size_id]])->get();
             foreach ($lohang as $lh){
                 if($lh->lohang_so_luong_hien_tai < $soluongmua){
                     $soluongmua = $soluongmua - $lh->lohang_so_luong_hien_tai;
@@ -405,12 +428,14 @@ class HomeController extends Controller
                     $detail->lohang_id = $lh->id;
                     $detail->save();
                     DB::table('lohang')->where('id',$lh->id)->decrement('lohang_so_luong_hien_tai', $soluongmua);
+                    $soluongmua = 0;
                 }
                 if($soluongmua<=0) break;
             }
         }
+
         $kh = DB::table('khachhang')->where('id', $request->txtKHID)->first();
-        // print_r($kh);
+        var_dump($request->txtKHID);
         $donhang = [
             'id'=> $donhang->id,
             'donhang_nguoi_nhan'=> $request->txtNNName,
@@ -420,17 +445,14 @@ class HomeController extends Controller
             'donhang_ghi_chu' => $request->txtNNNote,
             'donhang_tong_tien' => $total,
             'khachhang_id' => $request->txtKHID,
-            'khachhang_email'=>$kh->khachhang_email,
-            ];
-            // SMS
-        // print_r($donhang);
+            'khachhang_email'=>$kh->khachhang_email];
         
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
             $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
         
             $message->to($donhang['khachhang_email'], 'a');
         
-            $message->subject('Hóa đơn mua hàng tại Cửa hàng Nông sản sạch CT!!!');
+            $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
         });
 
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
@@ -438,7 +460,7 @@ class HomeController extends Controller
         
             $message->to('lordknight1904@gmail.com', 'KHÁCH HÀNG');
         
-            $message->subject('Hóa đơn mua hàng tại Cửa hàng Nông sản sạch CT!!!');
+            $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
         });
 
         Cart::destroy();

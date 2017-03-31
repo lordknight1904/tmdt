@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function isOwner(){
+        return ($this->loainguoidung_id == 1);
+    }
+    public function isAdmin(){
+        return ($this->loainguoidung_id == 3);
+    }
+    public function isUser(){
+        return ($this->loainguoidung_id == 2);
+    }
 }

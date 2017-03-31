@@ -12,7 +12,10 @@ use DB;
 use Input,File;
 
 class QuangcaoController extends Controller
-{
+{   
+    public function __contruct(){
+        $this->middleware('owner');
+    }
     public function getList()
     {
     	$data = DB::table('quangcao')->get();
