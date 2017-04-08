@@ -24,6 +24,10 @@ class LoaisanphamController extends Controller
 
 	public function getAdd() {
 		$data = DB::table('nhom')->get();
+		if(sizeof($data)==0){
+            return redirect()->route('admin.loaisanpham.list')
+                    ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu chứa nhóm sản phẩm trống !!!']);
+        }
 		foreach ($data as $key => $val) {
 			$nhom[] = ['id' => $val->id, 'name'=> $val->nhom_ten];
 		}
@@ -50,9 +54,13 @@ class LoaisanphamController extends Controller
 	public function getDelete($id)
 	{
 		$loaisanpham = DB::table('loaisanpham')->where('id',$id)->first();
-        $img = 'resources/upload/loaisanpham/'.$loaisanpham->loaisanpham_anh;
-        File::delete($img);
-		DB::table('loaisanpham')->where('id',$id)->delete();
+		foreach ($loaisanpham as $loaisp) {
+			DB::table('sanpham')->where('id',$loaisp->id)->update(['sanpham_da_xoa'=>1]);
+		}
+		DB::table('loaisanpham')->where('id',$id)->update(['loaisanpham_da_xoa'=>1]);
+  //       $img = 'resources/upload/loaisanpham/'.$loaisanpham->loaisanpham_anh;
+  //       File::delete($img);
+		// DB::table('loaisanpham')->where('id',$id)->delete();
         return redirect()->route('admin.loaisanpham.list')->with(['flash_level'=>'success','flash_message'=>'Xóa loại sản phẩm thành công!!!']);
 	}
 

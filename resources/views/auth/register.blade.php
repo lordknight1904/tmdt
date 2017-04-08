@@ -31,7 +31,7 @@
                 <div class="aa-myaccount-login">
                     <h4>Thông tin tài khoản</h4>
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Tài khoản</label>
+                            <label class="col-md-4 control-label">Tài khoản</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="name" value="{{ old('name') }}">

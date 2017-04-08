@@ -26,15 +26,30 @@ class LohangController extends Controller
 
     public function getAdd()
     {
+
         $products = DB::table('sanpham')->get();
+        if(sizeof($products)==0){
+            return redirect()->route('admin.lohang.list')
+                    ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu chứa sản phẩm trống !!!']);
+        }
         foreach ($products as $key => $val) {
             $product[] = ['id' => $val->id, 'name'=> $val->sanpham_ten];
         }
+
         $vendors = DB::table('nhacungcap')->get();
+        if(sizeof($vendors)==0){
+            return redirect()->route('admin.lohang.list')
+                    ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu chứa nhà cung cấp trống !!!']);
+        }
         foreach ($vendors as $key => $val) {
             $vendor[] = ['id' => $val->id, 'name'=> $val->nhacungcap_ten];
         }
+
         $sizes = DB::table('size')->get();
+        if(sizeof($sizes)==0){
+            return redirect()->route('admin.lohang.list')
+                    ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu chứa kích thước trống !!!']);
+        }
         foreach ($sizes as $key => $val) {
             $size[] = ['id' => $val->id, 'name'=> $val->size_ten];
         }

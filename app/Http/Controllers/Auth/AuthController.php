@@ -54,7 +54,8 @@ class AuthController extends Controller
     {
         $rules = [
             'name' =>'required|unique:users,name',
-            'email' =>'required|unique:users,email|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})^',
+            //'email' =>'required|unique:users,email|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})^',
+            'email' =>'required|unique:users,email|email',
             'password' => 'required|min:3|confirmed',
             'password_confirmation' =>'required|same:password',
             'visa'   =>'required|numeric|digits_between:9,9',
@@ -68,11 +69,13 @@ class AuthController extends Controller
             'name.unique'   =>'Dữ liệu này đã tồn tại!',
             'txtname.unique'   =>'Dữ liệu này đã tồn tại!',
             'email.unique'  =>'Dữ liệu này đã tồn tại!',
+            'email.email'  =>'Email không đúng định dạng!',
             'email.regex'  =>'Email không đúng định dạng!',
             'visa.min'  =>'Số tài khoản cần độ dài 9 số!',
             'visa.max'  =>'Số tài khoản cần độ dài 9 số!',
             'visa.numeric'  =>'Số tài khoản phải là chữ số!',
-            'password_confirmation.same' =>'Mật khẩu không trùng khớp!'
+            'password_confirmation.same' =>'Mật khẩu không trùng khớp!',
+            'password.confirmed' =>'Mật khẩu không trùng khớp!'
         ];
 
         return Validator::make($data,$rules,$messages);

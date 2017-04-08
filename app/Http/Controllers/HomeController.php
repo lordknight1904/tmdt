@@ -76,7 +76,7 @@ class HomeController extends Controller
     {
         $id = DB::table('nhom')->select('id')->where('nhom_url',$url)->first();
         $i = $id->id;
-        $id = DB::table('loaisanpham')->select('id')->where('nhom_id',$i)->get();
+        $id = DB::table('loaisanpham')->select('id')->where([['nhom_id',$i],['loaisanpham_da_xoa',0]])->get();
         foreach ($id as $key => $val) {
             $ids[] = $val->id;
         }
@@ -316,21 +316,6 @@ class HomeController extends Controller
         $sizes =  array();
         $count = 0;
         foreach ($content as $c) {
-        var_dump($c);
-        //     var_dump(
-        //         DB::table('lohang')
-        //         ->where('sanpham_id',$c->id)
-        //         ->join('size','size.id','=','lohang.size_id')
-        //         ->select(DB::raw('sum(lohang_so_luong_hien_tai) as total'),
-        //                  DB::raw('lohang.size_id as id'),
-        //                  DB::raw('size_ten as name')
-        //                 )
-        //         ->groupBy(DB::raw('size_id') )
-        //         ->having('total','>=',$c->qty)
-        //         ->get()
-        //         //->get()
-        //     );
-
             $sizes[$count] = DB::table('lohang')
                 ->where('sanpham_id',$c->id)
                 ->join('size','size.id','=','lohang.size_id')

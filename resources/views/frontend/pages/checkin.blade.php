@@ -1,3 +1,7 @@
+<?php
+  require_once('nusoap/nusoap.php');
+  $client = new SoapClient("http://tuyetnhi.somee.com/thanhtoan.asmx?WSDL");
+?>
 @extends('frontend.master')
 @section('content')
   <!-- catg header banner section -->
@@ -22,12 +26,12 @@
      <div class="row">
        <div class="col-md-12">
         <div class="checkout-area">
-          <form action="{!! route('getThanhtoan') !!}" method="POST">
+          <form id="form-checkin" action="{!! route('getThanhtoan') !!}" method="POST">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
             <div class="row">
                   <div class="panel-body">
-                       
-                    <input type="submit" value="Hoàn tất mua hàng" class="aa-browse-btn">
+                    <input type="submit" id="check-in-btn" onclick="submit_check_in()" value="Hoàn tất mua hàng" class="aa-browse-btn">
+                   <!--  <input id="submit-btn" value="Hoàn tất mua hàng" class="aa-browse-btn"> -->
                   </div>
               <div class="col-md-8">
                 <div class="checkout-left">
@@ -225,6 +229,13 @@
      </div>
    </div>
  </section>
+ <script>
+  function submit_check_in(){
+    console.log("dashdoasdas");
+    document.getElementById("form-checkin").submit();
+  }
+
+</script>
  <!-- / Cart view section -->
  <!-- Footer -->
 @include('frontend.blocks.footer')

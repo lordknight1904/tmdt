@@ -54,10 +54,19 @@ class SanphamController extends Controller
     public function getAdd()
     {
         $units = DB::table('donvitinh')->get();
+        if(sizeof($units)==0){
+            return redirect()->route('admin.sanpham.list')
+                            ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu chứa đơn vị trống !!!']);
+        }
         foreach ($units as $key => $val) {
             $unit[] = ['id' => $val->id, 'name'=> $val->donvitinh_ten];
         }
+
         $cates = DB::table('loaisanpham')->get();
+        if(sizeof($units)==0){
+            return redirect()->route('admin.sanpham.list')
+                    ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu chứa loại sản phẩm trống !!!']);
+        }
         foreach ($cates as $key => $val) {
             $cate[] = ['id' => $val->id, 'name'=> $val->loaisanpham_ten];
         }

@@ -29,4 +29,19 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+    
+    protected function validator(array $data)
+    {
+        $rules = [
+            'email' =>'required|email',
+            'password' => 'required|min:3',
+        ];
+
+        $messages = [
+            'email.email'  =>'Email không đúng định dạng!',
+            'required'=> 'Vui lòng không để trống trường này!'
+        ];
+
+        return Validator::make($data,$rules,$messages);
+    }
 }

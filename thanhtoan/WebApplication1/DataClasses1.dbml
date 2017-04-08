@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="thanhtoanonline" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DUC;Initial Catalog=thanhtoanonline;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="thanhtoanonlineConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.THONGTINKH" Member="THONGTINKHs">
+    <Type Name="THONGTINKH">
+      <Column Name="STK" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CSC" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MATKHAU" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SODU" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TEN" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HO" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_laySoTaiKhoan" Method="sp_laySoTaiKhoan">
+    <Parameter Name="sotk" Type="System.Int32" DbType="Int" />
+    <Parameter Name="socsc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pass" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_laySoTaiKhoanResult">
+      <Column Name="SODU" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_updateTK" Method="sp_updateTK">
+    <Parameter Name="sodu" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

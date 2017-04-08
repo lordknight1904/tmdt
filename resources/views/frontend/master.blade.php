@@ -98,13 +98,12 @@
       </div>
       <!-- / header top  -->
 
-      <div class="aa-header-bottom">
+      <div class="aa-header-bottom" >
         <div class="container">
           <div class="row" style="position: relative;">
             <div class="col-md-12">
               <div class="aa-header-bottom-area">
                 <!-- Support section -->
-                @include('frontend.blocks.trans') 
                 <!-- start header bottom  -->
                 <!-- logo  -->
                 <div class="aa-logo">
@@ -202,7 +201,7 @@
     <script src="{{ url('public/frontend/slide_1/js/owl.carousel.min.js') }}"></script>
     <script src="{{ url('public/frontend/slide_1/js/main.js') }}"></script>
     
-              @include('frontend.blocks.chat')
+    @include('frontend.blocks.chat')
     
     <script type="text/javascript">
       /* Main Slideshow */
