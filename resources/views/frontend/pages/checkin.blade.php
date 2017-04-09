@@ -1,6 +1,6 @@
 <?php
-  require_once('nusoap/nusoap.php');
-  $client = new SoapClient("http://tuyetnhi.somee.com/thanhtoan.asmx?WSDL");
+  // require_once('nusoap/nusoap.php');
+  // $client = new SoapClient("http://tuyetnhi.somee.com/thanhtoan.asmx?WSDL");
 ?>
 @extends('frontend.master')
 @section('content')

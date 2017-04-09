@@ -420,7 +420,6 @@ class HomeController extends Controller
         }
 
         $kh = DB::table('khachhang')->where('id', $request->txtKHID)->first();
-        var_dump($request->txtKHID);
         $donhang = [
             'id'=> $donhang->id,
             'donhang_nguoi_nhan'=> $request->txtNNName,
@@ -434,17 +433,13 @@ class HomeController extends Controller
         
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
             $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
-        
             $message->to($donhang['khachhang_email'], 'a');
-        
             $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
         });
 
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
             $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
-        
             $message->to('lordknight1904@gmail.com', 'KHÁCH HÀNG');
-        
             $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
         });
 

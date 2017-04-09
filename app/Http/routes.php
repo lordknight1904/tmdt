@@ -9,23 +9,24 @@ Route::controllers([
  'password' => 'Auth\PasswordController',
 ]);
 
-
 Route::post('/pusher', 'ChatController@postMessage');
 Route::post('/pusherAdmin', 'ChatController@registerToAdmin');
-// Authentication Routes...
-$this->get('login', 'Auth\AuthController@showLoginForm');
-$this->post('login', 'Auth\AuthController@login');
-$this->get('logout', 'Auth\AuthController@logout');
 
-// Registration Routes...
-$this->get('register', 'Auth\AuthController@showRegistrationForm');
-$this->post('register', 'Auth\AuthController@register');
+Route::group(array('middleware' => 'HttpsProtocol'), function() {
+    // Authentication Routes...
+    $this->get('login', 'Auth\AuthController@showLoginForm');
+    $this->post('login', 'Auth\AuthController@login');
+    $this->get('logout', 'Auth\AuthController@logout');
 
-// Password Reset Routes...
-$this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-$this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
-$this->post('password/reset', 'Auth\PasswordController@reset');
+    // Registration Routes...
+    $this->get('register', 'Auth\AuthController@showRegistrationForm');
+    $this->post('register', 'Auth\AuthController@register');
 
+    // Password Reset Routes...
+    $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    $this->post('password/reset', 'Auth\PasswordController@reset');
+});
 Route::get('/admin', function () {
     return redirect('/admin/bang-dieu-khien');
 });
@@ -75,6 +76,9 @@ Route::post('ket-qua-tim-kiem',['as'=>'postTimkiem','uses'=>'HomeController@post
 // Route::post('khach-hang',['as'=>'postKhachhang','uses'=>'AuthController@postCustomer']);
 
 // Route Backend
+Route::group(['prefix' => 'sms'], function() {
+    Route::get('gui',['as'=>'admin.sms.send','uses'=>'SMSController@sendSMS']);
+});
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     Route::get('bang-dieu-khien', ['as'=>'admin.index','uses'=>'AdminController@index']);
     Route::group(['prefix' => 'loaisanpham'], function() {

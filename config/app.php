@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://testvhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -158,8 +158,8 @@ return [
         \Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Fx3costa\Laravelchartjs\Providers\ChartjsServiceProvider::class,
+        Aloha\Twilio\Support\Laravel\ServiceProvider::class,
 
-        Nexmo\Laravel\NexmoServiceProvider::class
     ],
 
     /*
@@ -207,6 +207,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => \Gloudemans\Shoppingcart\Facades\Cart::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Twilio' => Aloha\Twilio\Support\Laravel\Facade::class,
     ],
 
 ];
