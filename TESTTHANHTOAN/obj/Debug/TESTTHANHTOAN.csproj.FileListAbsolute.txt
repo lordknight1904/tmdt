@@ -1,9 +1,0 @@
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\bin\Debug\TESTTHANHTOAN.exe.config
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\bin\Debug\TESTTHANHTOAN.exe
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\bin\Debug\TESTTHANHTOAN.pdb
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\obj\Debug\TESTTHANHTOAN.csprojResolveAssemblyReference.cache
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\obj\Debug\TESTTHANHTOAN.Form1.resources
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\obj\Debug\TESTTHANHTOAN.Properties.Resources.resources
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\obj\Debug\TESTTHANHTOAN.csproj.GenerateResource.Cache
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\obj\Debug\TESTTHANHTOAN.exe
-C:\Users\ducng_000\Documents\Visual Studio 2015\Projects\WebSite2\TESTTHANHTOAN\obj\Debug\TESTTHANHTOAN.pdb
