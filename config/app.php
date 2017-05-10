@@ -159,7 +159,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Fx3costa\Laravelchartjs\Providers\ChartjsServiceProvider::class,
         Aloha\Twilio\Support\Laravel\ServiceProvider::class,
-
+        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
     ],
 
     /*
@@ -208,6 +208,7 @@ return [
         'Cart' => \Gloudemans\Shoppingcart\Facades\Cart::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Twilio' => Aloha\Twilio\Support\Laravel\Facade::class,
+        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
     ],
 
 ];

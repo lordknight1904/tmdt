@@ -50,17 +50,18 @@ class LoaisanphamController extends Controller
 		$loaisanpham->save();
 		return redirect()->route('admin.loaisanpham.list')->with(['flash_level'=>'success','flash_message'=>'Thêm loại sản phẩm thành công!!!']);
 	}
+    public function getRestore($id){
+        DB::table('loaisanpham')->where('id',$id)->update(['loaisanpham_da_xoa'=>0]);
+        return redirect()->route('admin.loaisanpham.list')->with(['flash_level'=>'success','flash_message'=>'Hồi phục loại sản phẩm thành công!!!']);
+    }
 
 	public function getDelete($id)
 	{
 		$loaisanpham = DB::table('loaisanpham')->where('id',$id)->first();
 		foreach ($loaisanpham as $loaisp) {
-			DB::table('sanpham')->where('id',$loaisp->id)->update(['sanpham_da_xoa'=>1]);
+			DB::table('sanpham')->where('loaisanpham_id',$id)->update(['sanpham_da_xoa'=>1]);
 		}
 		DB::table('loaisanpham')->where('id',$id)->update(['loaisanpham_da_xoa'=>1]);
-  //       $img = 'resources/upload/loaisanpham/'.$loaisanpham->loaisanpham_anh;
-  //       File::delete($img);
-		// DB::table('loaisanpham')->where('id',$id)->delete();
         return redirect()->route('admin.loaisanpham.list')->with(['flash_level'=>'success','flash_message'=>'Xóa loại sản phẩm thành công!!!']);
 	}
 

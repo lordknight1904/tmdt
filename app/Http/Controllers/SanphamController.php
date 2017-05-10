@@ -63,7 +63,7 @@ class SanphamController extends Controller
         }
 
         $cates = DB::table('loaisanpham')->get();
-        if(sizeof($units)==0){
+        if(sizeof($cates)==0){
             return redirect()->route('admin.sanpham.list')
                     ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu chứa loại sản phẩm trống !!!']);
         }
@@ -135,22 +135,6 @@ class SanphamController extends Controller
 
     public function getDelete($id)
     {   
-     //    $binhluan = DB::table('binhluan')->where('sanpham_id',$id)->get();
-     //    foreach ($binhluan as $val) {
-            
-     //        DB::table('binhluan')->where('sanpham_id',$id)->delete();
-     //    }
-     //    DB::table('lohang')->where('sanpham_id',$id)->delete();
-     //    $chitiet = DB::table('hinhsanpham')->where('sanpham_id',$id)->get();
-     //    foreach ($chitiet as $val) {
-     //        $image = 'resources/upload/chitietsanpham/'.$val->hinhsanpham_ten;
-     //        File::delete($image);
-     //        DB::table('hinhsanpham')->where('sanpham_id',$id)->delete();
-     //    }
-    	// $sanpham = DB::table('sanpham')->where('id',$id)->first();
-     //    $img = 'resources/upload/sanpham/'.$sanpham->sanpham_anh;
-     //    File::delete($img);
-     //    DB::table('sanpham')->where('id',$id)->delete();
         DB::table('sanpham')->where('id',$id)->update(['sanpham_da_xoa'=>1]);
         return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Xóa sản phẩm thành công!!!']);
     }

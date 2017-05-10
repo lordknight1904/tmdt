@@ -1,8 +1,9 @@
 @extends('frontend.master')
 @section('content')
+@include('frontend.blocks.menu_1')
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-   <img src="{!! url('public/images/contactpanel.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
+   <img src="{!! url('public/images/ContactUs.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
@@ -77,6 +78,6 @@
    </div>
  </section>
 <!-- Footer -->
-@include('frontend.blocks.footer')
+
 <!-- / Footer -->
 @stop

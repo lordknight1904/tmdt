@@ -33,7 +33,7 @@
                 <td>{!! $item->id !!}</td>
                 <td>{!! $item->name !!}</td>
                 <td>{!! $item->email !!}</td>
-                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
+                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Xóa</a></td>
                 <td class="center"><a onclick="return confirmDel('Bạn có chắc đây không phải là nhân viên?')" href="{!! URL::route('admin.nhanvien.toCustomer', $item->id ) !!}" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="left" title="NV"><i class="fa fa-edit"></i></a></td>
             </tr>
         @endforeach

@@ -16,7 +16,9 @@
         "nexmo/laravel": "1.0.0-beta3",
         "nexmo/client": "@beta",
         "pusher/pusher-php-server": "^2.6",
-        "aloha/twilio": "^3.0"
+        "aloha/twilio": "^3.0",
+        "guzzle/guzzle": "~3.0",
+        "greggilbert/recaptcha": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

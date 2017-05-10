@@ -43,7 +43,8 @@ h2 {
   color: #3fc35f;
 }
 #aa-header .aa-header-bottom .aa-header-bottom-area .aa-search-box button {
-  background-color: #3fc35f;  
+  background-color: /*#3fc35f;*/ #f5f5f5;
+
 }
 #aa-header .aa-header-bottom .aa-cartbox .aa-cart-link {
   color: #3fc35f;  
@@ -118,7 +119,8 @@ h2 {
   color: #3fc35f;
 }
 .aa-product-catg li .aa-product-price {
-  color: #3fc35f;  
+  /*color: #3fc35f;  */
+  color: #0E53A5;
 }
 .aa-product-catg li .aa-product-hvr-content a:hover, .aa-product-catg li .aa-product-hvr-content a:focus {
   color: #3fc35f;

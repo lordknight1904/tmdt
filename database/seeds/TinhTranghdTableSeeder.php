@@ -10,8 +10,13 @@ class TinhTranghdTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {DB::table('tinhtranghd')->insert([
-            'tinhtranghd_ten' => 'Chưa xác định',
+    {
+        DB::table('tinhtranghd')->insert([
+            'tinhtranghd_ten' => 'Chưa xác nhận',
+            'tinhtranghd_mo_ta' => '',
+        ]);
+        DB::table('tinhtranghd')->insert([
+            'tinhtranghd_ten' => 'Đang chờ xử lý',
             'tinhtranghd_mo_ta' => '',
         ]);
         DB::table('tinhtranghd')->insert([
@@ -24,6 +29,18 @@ class TinhTranghdTableSeeder extends Seeder
         ]);
         DB::table('tinhtranghd')->insert([
             'tinhtranghd_ten' => 'Đã thanh toán',
+            'tinhtranghd_mo_ta' => '',
+        ]);
+        DB::table('tinhtranghd')->insert([
+            'tinhtranghd_ten' => 'Đã đặt hàng',
+            'tinhtranghd_mo_ta' => '',
+        ]);
+        DB::table('tinhtranghd')->insert([
+            'tinhtranghd_ten' => 'Đang giao hàng (visa)',
+            'tinhtranghd_mo_ta' => '',
+        ]);
+        DB::table('tinhtranghd')->insert([
+            'tinhtranghd_ten' => 'Đã hoàn tất',
             'tinhtranghd_mo_ta' => '',
         ]);
     }

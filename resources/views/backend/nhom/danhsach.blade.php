@@ -21,7 +21,6 @@
                 <th>ID</th>
                 <th>Tên</th>
                 <th>Mô tả</th>
-                <th>Xóa</th>
                 <th>Sửa</th>
             </tr>
         </thead>
@@ -34,8 +33,6 @@
                 <td>{!! $item->id !!}</td>
                 <td>{!! $item->nhom_ten !!}</td>
                 <td>{!! $item->nhom_mo_ta !!}</td>
-                <td class="center">
-                <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.nhom.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
                 <td class="center"><a href="{!! URL::route('admin.nhom.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
                 </td>
             </tr>

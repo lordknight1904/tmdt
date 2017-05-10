@@ -1,6 +1,6 @@
 @extends('frontend.master')
 @section('content')
-
+@include('frontend.blocks.menu_1')
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
    <img src="{!! url('public/images/ooooo.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >

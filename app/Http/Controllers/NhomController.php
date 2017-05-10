@@ -72,12 +72,4 @@ class NhomController extends Controller
     	return redirect()->route('admin.nhom.list')->with(['flash_level'=>'success','flash_message'=>'Cập nhật nhóm thực phẩm thành công!!!']);
     }
 
-    public function getDelete($id)
-	{
-        $nhom = DB::table('nhom')->where('id',$id)->first();
-        $img = 'resources/upload/nhom/'.$nhom->nhom_anh;
-        File::delete($img);
-		DB::table('nhom')->where('id',$id)->delete();
-        return redirect()->route('admin.nhom.list')->with(['flash_level'=>'success','flash_message'=>'Xóa loại sản phẩm thành công!!!']);
-	}
 }

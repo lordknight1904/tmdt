@@ -31,7 +31,7 @@
              @foreach ($data as $item)
             <tr class="odd gradeX">
                     <?php 
-                        $ngaybd =  date("Y-m-d", strtotime("$item->created_at")); // Năm/Tháng/Ngày
+                        $ngaybd =  date("d-n-Y", strtotime("$item->created_at")); // Năm/Tháng/Ngày
                         
                         // strtotime(date("Y-m-d", $ngaybd,"+ "+$item->khuyenmai_thoi_gian +" days"));
                         //$ngaykt = date("Y-m-d",strtotime($ngaybd . "+ $item->lohang_han_su_dung  day"));

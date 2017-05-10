@@ -35,25 +35,6 @@ class ThongkeController extends Controller
 	   			->groupBy('sanpham_id')
 	   			->orderBy('ton', 'desc')
 	   			->get();
-	   	// $hethan = DB::table('lohang')
-	   	// 		->where('lohang_tinh_trang',1)
-	   	// 		->select(
-	   	// 			'sanpham_id',
-	   	// 			DB::raw('SUM(lohang_so_luong_da_ban) as ban'),
-	   	// 			DB::raw('SUM(lohang_so_luong_hien_tai) as ton')
-	   	// 			)
-	   	// 		->groupBy('sanpham_id')
-	   	// 		->get();
-	   	// $conhan = DB::table('lohang')
-	   	// 		->where('lohang_tinh_trang',0)
-	   	// 		->select(
-	   	// 			'sanpham_id',
-	   	// 			DB::raw('SUM(lohang_so_luong_da_ban) as ban'),
-	   	// 			DB::raw('SUM(lohang_so_luong_hien_tai) as ton')
-	   	// 			)
-	   	// 		->groupBy('sanpham_id')
-	   	// 		->get();		
-	   	// print_r($hethan);
     	return view('backend.thongke.tongquan',compact('sl','tonnhieu','bannhieu'));//,'hethan','conhan'));
     }
 

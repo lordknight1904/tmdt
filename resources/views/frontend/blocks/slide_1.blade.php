@@ -1,7 +1,9 @@
-<div class="container">
+
+<div class="aa-header-top" style="margin-top: 20px">
+    <!-- <div class="container"> -->
     <div class="row">
         <div class="col-md-12">
-            <div class="flexslider ma-nivoslider">
+            <div class="flexslider_1 ma-nivoslider">
                 <div class="ma-loading"></div>
 
                 <ul >
@@ -18,7 +20,7 @@
                                 <div class="timethai"></div>
                                 <div class="banner7-content slider-2">
                                     <div class="title-container">
-                                    <h1 class="title1">thời trang cao cấp</h1>
+                                        <h1 class="title1">thời trang cao cấp</h1>
                                         <h2 class="title2" >Chất liệu cao cấp - bền đẹp</h2>                                          
                                     </div>
                                     <div class="banner7-des">
@@ -29,10 +31,11 @@
                                     </div>                                             
                                     <!--  <img class="img1" src="images/slider/img-05.png" alt="" />   -->                              
                                 </div>
-                            </li>
-                            @endforeach  
-                        </div>            
-                    </ul>
+                            </div>
+                        </li>
+                        @endforeach  
+                    </div>            
+                </ul>
 
                 <!-- <div id="ma-inivoslider-banner7" class="slides">
                 <img src="{!! asset('public/images/slide_1/dong_phuc_nu.jpg') !!}" class="dn" alt="" title="#banner7-caption1"  />                           
@@ -75,9 +78,10 @@
                             </div>
                         </div>                                             
                         <!--  <img class="img1" src="images/slider/img-05.png" alt="" />   -->                              
-                    </div>
-                </div>       
-            </div><!-- /.flexslider -->
-        </div>
-    </div>
+                 <!--    </div>
+             </div>  -->      
+         </div><!-- /.flexslider -->
+         <!--     </div> -->
+     </div>
+ </div>
 </div>

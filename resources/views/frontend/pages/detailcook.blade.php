@@ -1,6 +1,6 @@
 @extends('frontend.master')
 @section('content')
-
+@include('frontend.blocks.menu_1')
   <!-- / product category -->
   <section id="aa-blog-archive">
     <div class="container">
@@ -74,6 +74,6 @@
     </div>
   </section>
   <!-- Footer -->
-@include('frontend.blocks.footer')
+
 <!-- / Footer -->
 @stop

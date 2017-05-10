@@ -21,7 +21,7 @@
                 <th>ID</th>
                 <th>Loại sản phẩm</th>
                 <th>Nhóm</th>
-                <th>Xóa</th>
+                <th>Xóa/Phục hồi</th>
                 <th>Sửa</th>
             </tr>
         </thead>
@@ -42,7 +42,13 @@
                     @endif
                 </td>
                 <td class="center">
-                <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.loaisanpham.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                @if ($item->loaisanpham_da_xoa == 0)
+                    <a onclick="return confirmDel('Bạn có chắc muốn xóa dữ liệu này?')" href="{!! URL::route('admin.loaisanpham.getDelete', $item->id ) !!}" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Xóa"><i class="fa fa-trash-o  fa-fw"></i></a>
+                @else
+                    <a href="{!! URL::route('admin.loaisanpham.getRestore', $item->id ) !!}" onclick="return confirmDel('Bạn có chắc muốn hồi phục dữ liệu này?')" type="button" class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Hồi phục"><i class="fa fa-refresh  fa-fw"></i></a>
+                @endif
+                </td>
+
                 <td class="center"><a href="{!! URL::route('admin.loaisanpham.getEdit', $item->id ) !!}" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Chỉnh sửa"><i class="fa fa-pencil fa-fw"></i></a>
                 </td>
             </tr>

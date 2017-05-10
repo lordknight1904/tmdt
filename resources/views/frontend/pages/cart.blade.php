@@ -1,8 +1,10 @@
 @extends('frontend.master')
 @section('content')
+@include('frontend.blocks.menu_1')
+  
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-   <img src="{!! url('public/images/cartpannel.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
+   <img src="{!! url('public/images/water.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
@@ -33,8 +35,8 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <!-- <th></th> -->
-                        <th>Xóa</th>
+                        <th></th>
+                        <th></th>
                         <th>Ảnh</th>
                         <th>Sản phẩm</th>
                         <th>Giá</th>
@@ -51,7 +53,7 @@
                     @foreach ($content as $item)
                       <?php  $sanpham = DB::table('sanpham')->where('id',$item->id)->first(); ?>
                       <tr>
-                        <!-- <td><a class="updatecart edit" id="{!! $item['rowid'] !!}" href='#'><fa class=" fa fa-edit"></fa></a></td> -->
+                        <td><a class="updatecart edit" id="{!! $item['rowid'] !!}" href='#'><fa class=" fa fa-edit"></fa></a></td>
                         <td><a class="remove" href='{!! URL::route("xoasanpham", ["id" => $item["rowid"]] ) !!}'><fa class="fa fa-close"></fa></a></td>
                         <td><a href="{!! url('san-pham',$sanpham->sanpham_url) !!}"><img src="{!! asset('resources/upload/sanpham/'.$sanpham->sanpham_anh) !!}"  style="width: 45px; height: 50px;"></a></td>
                         <td><a class="aa-cart-title" href="{!! url('san-pham',$sanpham->sanpham_url) !!}">{!!  $item->name !!}</a></td>
@@ -59,16 +61,14 @@
                         <td><input class="qty aa-cart-quantity" type="number"  value="{!!  $item->qty !!}"></td>
                         <td>
                           <select id="input" name="txtLHSize"  class="form-control">
+                            <option value="">--Chọn Kích cỡ--</option>
                             <?php
-                                $size= [];
-                                foreach ($sizes[$count] as $s) {
-                                  $size[] = ['id' => $s->id, 'name'=> $s->name];
-                                }
-                                if(count($size)<=0)
-                                  $size[] = ['id' => -1, 'name'=> 'hết hàng'];
-                                Select_Function($size,$item->size_id); 
-                                $size = [];
-                                $count++; 
+                              foreach ($sizes[$count] as $s) {
+                                $size[] = ['id' => $s->id, 'name'=> $s->name];
+                              } 
+                              Select_Function($size,$item->size_id); 
+                              $size = [];
+                              $count++; 
                             ?>
                           </select>
                         </td>
@@ -93,11 +93,11 @@
                  </tbody>
                </table>
                @if (Auth::check())
-                  <a href="{!! url('/') !!}" class="aa-cart-view-btn"> Mua tiếp</a>
-                  <a onClick='kiemTraKichThuoc({!! $content !!})' class="aa-cart-view-btn">Thanh Toán</a>
+                  <a href="{!! url('/') !!}" class="aa-cart-view-btn btn btn-default"> Mua tiếp</a>
+                  <a onClick='kiemTraKichThuoc({!! $content !!})' class="aa-cart-view-btn btn btn-default">Thanh Toán</a>
                @else
-                  <a href="{!! url('/') !!}" class="aa-cart-view-btn">Mua tiếp</a>
-                  <a href="{!! url('login') !!}" class="aa-cart-view-btn">Thanh Toán</a>
+                  <a href="{!! url('/') !!}" class="aa-cart-view-btn btn btn-default">Mua tiếp</a>
+                  <a href="{!! url('login') !!}" class="aa-cart-view-btn btn btn-default">Thanh Toán</a>
                @endif
                
              </div>
@@ -109,6 +109,5 @@
  </section>
  <!-- / Cart view section -->
  <!-- Footer -->
-@include('frontend.blocks.footer')
 <!-- / Footer -->
 @stop

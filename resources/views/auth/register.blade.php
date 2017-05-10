@@ -48,7 +48,7 @@
                                 <label class="col-md-4 control-label">E-Mail</label>
 
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                    <input  class="form-control" name="email" value="{{ old('email') }}">
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -145,6 +145,16 @@
                             @endif
                         </div>
                     </div>
+                </div>
+                </div>
+                <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                <div class="col-md-12 col-md-offset-4">
+                    {!! Recaptcha::render() !!}
+                    @if ($errors->has('g-recaptcha-response'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 </div>
                 <div class="form-group">

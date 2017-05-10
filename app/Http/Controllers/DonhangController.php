@@ -22,21 +22,26 @@ class DonhangController extends Controller
     public function getEdit($id)
     {
         $donhang = DB::table('donhang')->where('id',$id)->first();
-    	$data = DB::table('tinhtranghd')->get();
-		foreach ($data as $key => $val) {
-            if($donhang->tinhtranghd_id == 4 && $val->id == 4) {
-                $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
+    	$data = DB::table('tinhtranghd')->orderBy('id')->get();
+        switch ($donhang->tinhtranghd_id) {
+            case 2:
+                $tinhtrang[] = ['id' => $data[1]->id, 'name'=> $data[1]->tinhtranghd_ten];
+                $tinhtrang[] = ['id' => $data[2]->id, 'name'=> $data[2]->tinhtranghd_ten];
                 break;
-            }
-            if($donhang->tinhtranghd_id == 3 && $val->id == 3) {
-                $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
+            case 3:
+                $tinhtrang[] = ['id' => $data[2]->id, 'name'=> $data[2]->tinhtranghd_ten];
+                $tinhtrang[] = ['id' => $data[3]->id, 'name'=> $data[3]->tinhtranghd_ten];
+                $tinhtrang[] = ['id' => $data[4]->id, 'name'=> $data[4]->tinhtranghd_ten];
                 break;
-            }
-            if($donhang->tinhtranghd_id == 1 && $val->id <= 2)
-             $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
-            if($donhang->tinhtranghd_id == 2 && $val->id >= $donhang->tinhtranghd_id)
-             $tinhtrang[] = ['id' => $val->id, 'name'=> $val->tinhtranghd_ten];
-		}
+            case 1:
+            case 4:
+            case 5:
+                $tinhtrang[] = ['id' => $data[$donhang->tinhtranghd_id-1]->id, 'name'=> $data[$donhang->tinhtranghd_id-1]->tinhtranghd_ten];
+                break;
+            default:
+                $tinhtrang[] = [];
+                break;
+        }
     	$khachhang = DB::table('khachhang')->where('id',$donhang->khachhang_id)->first();
     	$chitiet = DB::table('chitietdonhang')->where('donhang_id',$donhang->id)->join('lohang','lohang_id','=','id')->get();
     	return view('backend.donhang.sua',compact('donhang','tinhtrang','khachhang','chitiet'));
@@ -49,19 +54,21 @@ class DonhangController extends Controller
     	$newStatus = $request->selStatus;
         if($oldStatus != $newStatus){
             switch ($newStatus) {
-                case 2:
+                case 3:
                     // khi giao hang
                     DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => $newStatus,]);
                     break;
-                case 3:
+                case 4:
                     // khi huy
                     DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => $newStatus,]);
-                    $chitiet = DB::table('chitietdonhang')->where('donhang_id',$id)->get();
-                    foreach ($chitiet as $key => $ct) {
-                        DB::table('lohang')->where('id',$ct->lohang_id)->increment('lohang_so_luong_doi_tra', $ct->chitietdonhang_so_luong);
+                    if($oldStatus!=1){
+                        $chitiet = DB::table('chitietdonhang')->where('donhang_id',$id)->get();
+                        foreach ($chitiet as $key => $ct) {
+                            DB::table('lohang')->where('id',$ct->lohang_id)->increment('lohang_so_luong_doi_tra', $ct->chitietdonhang_so_luong);
+                        }
                     }
                     break;
-                case 4:
+                case 5:
                     // khi thanh toan bang tien mat
                     DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => $newStatus,]);
                     $chitiet = DB::table('chitietdonhang')->where('donhang_id',$id)->get();
@@ -69,61 +76,16 @@ class DonhangController extends Controller
                         DB::table('lohang')->where('id',$ct->lohang_id)->increment('lohang_so_luong_da_ban', $ct->chitietdonhang_so_luong);
                     }
                     break;
+                case 7:
+                    // khi giao hang
+                    DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => $newStatus,]);
+                    break;
+                case 8:
+                    // khi giao hang
+                    DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => $newStatus,]);
+                    break;
             }
         }
-    	// if ($status1 != $status2 && $status2 == 2) {
-    	// 	DB::table('donhang')->where('id',$id)
-    	// 		->update([
-    	// 				'tinhtranghd_id' => $status2,
-    	// 			]);
-    	// 	$idSP = DB::table('chitietdonhang')
-    	// 		->select('sanpham_id','chitietdonhang_so_luong')
-    	// 		->where('donhang_id',$id)->get();
-    	// }elseif ($status1 != $status2 && $status2 == 3) {
-    	// 	DB::table('donhang')->where('id',$id)
-    	// 		->update([
-    	// 				'tinhtranghd_id' => $status2,
-    	// 			]);
-    	// 	$idSP = DB::table('chitietdonhang')
-    	// 		->select('sanpham_id','chitietdonhang_so_luong')
-    	// 		->where('donhang_id',$id)->get();
-	    // 	foreach ($idSP as $key => $val) {
-	    // 		$idLHM = Db::table('lohang')->where('sanpham_id',$val->sanpham_id)->max('id');
-	    // 		$lohang = DB::table('lohang')->where('id',$idLHM)->first();
-	    // 		DB::table('lohang')
-	    // 			->where('id',$idLHM)
-	    // 			->update([
-	    // 				'lohang_so_luong_doi_tra' => $lohang->lohang_so_luong_doi_tra + $val->chitietdonhang_so_luong,
-	    // 				'lohang_so_luong_hien_tai' => $lohang->lohang_so_luong_hien_tai + $val->chitietdonhang_so_luong,
-	    // 				'lohang_so_luong_da_ban' => $lohang->lohang_so_luong_da_ban - $val->chitietdonhang_so_luong,
-	    // 				]);
-	    // 	}
-    	// }elseif ($status1 != $status2 && $status2 == 4) {
-    	// 	DB::table('donhang')->where('id',$id)
-    	// 		->update([
-    	// 				'tinhtranghd_id' => $status2,
-    	// 			]);
-    	// 	$idSP = DB::table('chitietdonhang')
-    	// 		->select('sanpham_id','chitietdonhang_so_luong')
-    	// 		->where('donhang_id',$id)->get();
-	    // 	foreach ($idSP as $key => $val) {
-	    // 		$idLHM = Db::table('lohang')->where('sanpham_id',$val->sanpham_id)->max('id');
-	    // 		$lohang = DB::table('lohang')->where('id',$idLHM)->first();
-	    // 		DB::table('lohang')
-	    // 			->where('id',$idLHM)
-	    // 			->update([
-	    // 				'lohang_so_luong_da_ban' => $lohang->lohang_so_luong_da_ban + $val->chitietdonhang_so_luong,
-	    // 				'lohang_so_luong_hien_tai' => $lohang->lohang_so_luong_hien_tai - $val->chitietdonhang_so_luong,
-	    // 				]);
-	    // 	}
-    	// }
-    	// else {
-    	// 	DB::table('donhang')->where('id',$id)
-    	// 		->update([
-    	// 				'tinhtranghd_id' => $status2,
-    	// 			]);
-    	// }
-    	
     	return redirect()->route('admin.donhang.list')->with(['flash_level'=>'success','flash_message'=>'Chỉnh sửa thành công!!!']);
     	
     }

@@ -1,9 +1,5 @@
 <?php
 
-// Route::get('/', function () {
-//     return view('frontend.master');
-// });
-
 Route::controllers([
  'auth' => 'Auth\AuthController',
  'password' => 'Auth\PasswordController',
@@ -12,7 +8,7 @@ Route::controllers([
 Route::post('/pusher', 'ChatController@postMessage');
 Route::post('/pusherAdmin', 'ChatController@registerToAdmin');
 
-Route::group(array('middleware' => 'HttpsProtocol'), function() {
+// Route::group(array('middleware' => 'HttpsProtocol'), function() {
     // Authentication Routes...
     $this->get('login', 'Auth\AuthController@showLoginForm');
     $this->post('login', 'Auth\AuthController@login');
@@ -26,10 +22,10 @@ Route::group(array('middleware' => 'HttpsProtocol'), function() {
     $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
     $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
     $this->post('password/reset', 'Auth\PasswordController@reset');
-});
-Route::get('/admin', function () {
-    return redirect('/admin/bang-dieu-khien');
-});
+// });
+// Route::get('/admin', function () {
+//     return redirect('/admin/bang-dieu-khien');
+// });
 
 Route::get('/demo', 'HomeController@demo');
 
@@ -39,7 +35,9 @@ Route::get('/', 'HomeController@index');
 
 Route::get('nhom/{url}', 'HomeController@group');
 
-Route::get('donhanguser/{id}', 'HomeController@donhanguser');
+Route::get('danhsachdonhang/{id}',['as'=>'danhsachdonhang','uses'=>'HomeController@danhsachdonhang']);
+Route::get('thongtindonhang/{id}',['as'=>'thongtindonhang','uses'=>'HomeController@thongtindonhang']);
+Route::get('huydonhang/{id}/{userId}',['as'=>'huydonhang','uses'=>'HomeController@huydonhang']);
 
 Route::get('loai-san-pham/{url}', 'HomeController@cates');
 
@@ -58,10 +56,11 @@ Route::get('san-pham/{url}', 'HomeController@product');
 Route::get('mua-hang/{id}/{ten}/{size_id}',['as'=>'muahang','uses'=>'HomeController@buyding']);
 
 Route::get('gio-hang',['as'=>'giohang','uses'=>'HomeController@cart']);
+Route::get('cap-nhat-san-pham/{rowid}/{qty}',['as'=>'capnhatgiohang','uses'=>'HomeController@updateCart']);
 
 Route::get('xoa-san-pham/{id}',['as'=>'xoasanpham','uses'=>'HomeController@deleteProduct']);
 
-Route::get('cap-nhat-san-pham/{id}/{qty}',['as'=>'capnhat','uses'=>'HomeController@updateProduct']);
+//Route::get('cap-nhat-san-pham/{id}/{qty}',['as'=>'capnhat','uses'=>'HomeController@updateProduct']);
 
 Route::get('thanh-toan',['as'=>'getThanhtoan','uses'=>'HomeController@getCheckin']);
 Route::get('thanh-toan/{url}','HomeController@getCheckin');
@@ -75,6 +74,8 @@ Route::get('ket-qua-tim-kiem',['as'=>'getTimkiem','uses'=>'HomeController@getFin
 Route::post('ket-qua-tim-kiem',['as'=>'postTimkiem','uses'=>'HomeController@postFind']);
 // Route::post('khach-hang',['as'=>'postKhachhang','uses'=>'AuthController@postCustomer']);
 
+
+Route::get('/xacnhan/{md5}', 'HomeController@getValid');
 // Route Backend
 Route::group(['prefix' => 'sms'], function() {
     Route::get('gui',['as'=>'admin.sms.send','uses'=>'SMSController@sendSMS']);
@@ -88,18 +89,31 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
         Route::get('xoa/{id}',['as'=>'admin.loaisanpham.getDelete','uses'=>'LoaisanphamController@getDelete']);
         Route::get('sua/{id}',['as'=>'admin.loaisanpham.getEdit','uses'=>'LoaisanphamController@getEdit']);
         Route::post('sua/{id}',['as'=>'admin.loaisanpham.postEdit','uses'=>'LoaisanphamController@postEdit']);
+        Route::get('themlai/{id}',['as'=>'admin.loaisanpham.getRestore','uses'=>'LoaisanphamController@getRestore']);
     });
 
-    Route::group(['prefix' => 'nhom'], function() {
+    Route::group(['prefix' => 'nhom', 'middleware' => 'authAdmin'], function() {
         Route::get('danhsach',['as'=>'admin.nhom.list','uses'=>'NhomController@getList']);
         Route::get('them',['as'=>'admin.nhom.getAdd','uses'=>'NhomController@getAdd']);
         Route::post('them',['as'=>'admin.nhom.postAdd','uses'=>'NhomController@postAdd']);
         Route::get('xoa/{id}',['as'=>'admin.nhom.getDelete','uses'=>'NhomController@getDelete']);
         Route::get('sua/{id}',['as'=>'admin.nhom.getEdit','uses'=>'NhomController@getEdit']);
         Route::post('sua/{id}',['as'=>'admin.nhom.postEdit','uses'=>'NhomController@postEdit']);
+        Route::get('themlai/{id}',['as'=>'admin.nhom.getRestore','uses'=>'NhomController@getRestore']);
     });
 
-    Route::group(['prefix' => 'donvitinh'], function() {
+    Route::group(['prefix' => 'sanpham'], function() {
+        Route::get('themlai/{id}',['as'=>'admin.sanpham.getRestore','uses'=>'SanphamController@getRestore']);
+        Route::get('danhsach',['as'=>'admin.sanpham.list','uses'=>'SanphamController@getList']);
+        Route::get('them',['as'=>'admin.sanpham.getAdd','uses'=>'SanphamController@getAdd']);
+        Route::post('them',['as'=>'admin.sanpham.postAdd','uses'=>'SanphamController@postAdd']);
+        Route::get('xoa/{id}',['as'=>'admin.sanpham.getDelete','uses'=>'SanphamController@getDelete']);
+        Route::get('sua/{id}',['as'=>'admin.sanpham.getEdit','uses'=>'SanphamController@getEdit']);
+        Route::post('sua/{id}',['as'=>'admin.sanpham.postEdit','uses'=>'SanphamController@postEdit']);
+        Route::get('xoahinh/{id}',['as'=>'admin.sanpham.delImage','uses'=>'SanphamController@delImage']);
+    });
+
+    Route::group(['prefix' => 'donvitinh', 'middleware' => 'authAdmin'], function() {
         Route::get('danhsach',['as'=>'admin.donvitinh.list','uses'=>'DonvitinhController@getList']);
         Route::get('them',['as'=>'admin.donvitinh.getAdd','uses'=>'DonvitinhController@getAdd']);
         Route::post('them',['as'=>'admin.donvitinh.postAdd','uses'=>'DonvitinhController@postAdd']);
@@ -128,7 +142,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
         Route::post('nhap-hang/{id}',['as'=>'admin.lohang.postNhaphang','uses'=>'LohangController@postNhaphang']);
     });
 
-    Route::group(['prefix' => 'nhacungcap'], function() {
+    Route::group(['prefix' => 'nhacungcap', 'middleware' => 'authAdmin'], function() {
     	Route::get('danhsach',['as'=>'admin.nhacungcap.list','uses'=>'NhacungcapController@getList']);
         Route::get('them',['as'=>'admin.nhacungcap.getAdd','uses'=>'NhacungcapController@getAdd']);
         Route::post('them',['as'=>'admin.nhacungcap.postAdd','uses'=>'NhacungcapController@postAdd']);
@@ -173,7 +187,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
         Route::post('ds-nguyen-lieu/{id}',['as'=>'admin.monngon.listMat','uses'=>'MonngonController@listMat']);
     });
 
-    Route::group(['prefix' => 'nhanvien'], function() {
+    Route::group(['prefix' => 'nhanvien', 'middleware' => 'authAdmin'], function() {
         Route::get('danhsach',['as'=>'admin.nhanvien.list','uses'=>'NhanvienController@getList']);
         Route::get('toCustomer/{id}',['as'=>'admin.nhanvien.toCustomer','uses'=>'NhanvienController@toCustomer']);
         Route::get('them',['as'=>'admin.nhanvien.getAdd','uses'=>'NhanvienController@getAdd']);
@@ -181,17 +195,6 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
         Route::get('xoa/{id}',['as'=>'admin.nhanvien.getDelete','uses'=>'NhanvienController@getDelete']);
         Route::get('sua/{id}',['as'=>'admin.nhanvien.getEdit','uses'=>'NhanvienController@getEdit']);
         Route::post('sua/{id}',['as'=>'admin.nhanvien.postEdit','uses'=>'NhanvienController@postEdit']);
-    });
-
-    Route::group(['prefix' => 'sanpham'], function() {
-        Route::get('themlai/{id}',['as'=>'admin.sanpham.getRestore','uses'=>'SanphamController@getRestore']);
-        Route::get('danhsach',['as'=>'admin.sanpham.list','uses'=>'SanphamController@getList']);
-        Route::get('them',['as'=>'admin.sanpham.getAdd','uses'=>'SanphamController@getAdd']);
-        Route::post('them',['as'=>'admin.sanpham.postAdd','uses'=>'SanphamController@postAdd']);
-        Route::get('xoa/{id}',['as'=>'admin.sanpham.getDelete','uses'=>'SanphamController@getDelete']);
-        Route::get('sua/{id}',['as'=>'admin.sanpham.getEdit','uses'=>'SanphamController@getEdit']);
-        Route::post('sua/{id}',['as'=>'admin.sanpham.postEdit','uses'=>'SanphamController@postEdit']);
-        Route::get('xoahinh/{id}',['as'=>'admin.sanpham.delImage','uses'=>'SanphamController@delImage']);
     });
 
     Route::group(['prefix' => 'khuyenmai'], function() {
@@ -225,7 +228,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
         Route::get('in-hoa-don/{id}',['as'=>'admin.donhang.pdf','uses'=>'DonhangController@pdf']);
     });
 
-    Route::group(['prefix' => 'thongke'], function() {
+    Route::group(['prefix' => 'thongke', 'middleware' => 'authAdmin'], function() {
         Route::get('tong-quan',['as'=>'admin.thongke.list','uses'=>'ThongkeController@getList']);
         Route::get('san-pham-nhap-vao',['as'=>'admin.thongke.nhapvao','uses'=>'ThongkeController@getNhapvao']);
         Route::get('san-pham-ban-ra',['as'=>'admin.thongke.banra','uses'=>'ThongkeController@getBanra']);

@@ -18,6 +18,7 @@ class CreateDonhangTable extends Migration
             $table->string('donhang_nguoi_nhan_email');
             $table->string('donhang_nguoi_nhan_sdt', 12);
             $table->string('donhang_nguoi_nhan_dia_chi', 200);
+            $table->string('md5');
             $table->longText('donhang_ghi_chu');
             $table->decimal('donhang_tong_tien',10,2);
             $table->integer('khachhang_id')->unsigned();

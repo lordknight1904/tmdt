@@ -10,6 +10,7 @@ use App\Binhluan;
 use App\Chitietdonhang;
 use App\Http\Requests\ThanhtoanRequest;
 use App\Http\Requests\BinhluanRequest;
+use soapclient; 
 class HomeController extends Controller
 {
     /**
@@ -91,34 +92,9 @@ class HomeController extends Controller
             ->paginate(15);
         return view('frontend.pages.group',compact('sanpham','nhom'));
     }
-    public function donhanguser($id){
-        // var_dump(
-        //     DB::table('donhang')
-        //         ->where('khachhang_id',$id)
-        //         ->join('chitietdonhang','chitietdonhang.donhang_id','=','donhang.id')
-        //         ->join('tinhtranghd','donhang.tinhtranghd_id','=','tinhtranghd.id')
-        //         ->join('sanpham','chitietdonhang.sanpham_id','=','sanpham.id')
-        //         ->join('size','chitietdonhang.size_id','=','size.id')
-        //         ->join('donvitinh','sanpham.donvitinh_id','=','donvitinh.id')
-        //         ->select(
-        //             'donhang.donhang_nguoi_nhan',
-        //             'donhang.donhang_nguoi_nhan_email',
-        //             'donhang.donhang_nguoi_nhan_sdt',
-        //             'donhang.donhang_nguoi_nhan_dia_chi',
-        //             'donhang.donhang_ghi_chu',
-        //             'donhang.donhang_tong_tien',
-        //             'tinhtranghd.tinhtranghd_ten',
-        //             'chitietdonhang.chitietdonhang_so_luong',
-        //             'sanpham.sanpham_ten',
-        //             'sanpham.sanpham_anh',
-        //             'size.size_ten',
-        //             'donvitinh.donvitinh_ten'
-        //             )
-        //         ->groupBy('donhang.id')
-        //         ->get()
-        //     );
+    public function thongtindonhang($id){
         $info = DB::table('donhang')
-                ->where('khachhang_id',$id)
+                ->where('donhang.id',$id)
                 ->join('chitietdonhang','chitietdonhang.donhang_id','=','donhang.id')
                 ->join('tinhtranghd','donhang.tinhtranghd_id','=','tinhtranghd.id')
                 ->join('sanpham','chitietdonhang.sanpham_id','=','sanpham.id')
@@ -135,12 +111,65 @@ class HomeController extends Controller
                     'tinhtranghd.tinhtranghd_ten',
                     'chitietdonhang.chitietdonhang_so_luong',
                     'sanpham.sanpham_ten',
+                    'size.size_ten',
+                    'donvitinh.donvitinh_ten'
+                    )
+                ->get();
+        $chitiet = DB::table('chitietdonhang')
+                ->where('chitietdonhang.donhang_id',$id)
+                ->join('sanpham','chitietdonhang.sanpham_id','=','sanpham.id')
+                ->join('size','chitietdonhang.size_id','=','size.id')
+                ->select(
+                    'sanpham.sanpham_ten',
+                    'size.size_ten',
+                    'chitietdonhang.chitietdonhang_so_luong',
+                    'sanpham.sanpham_anh',
+                    'sanpham.sanpham_gia'
+                    )
+                ->get();
+        return view('frontend.pages.thongtindonhang',compact('info','chitiet'));
+
+    }
+    public function huydonhang($id, $userId){
+        $donhang = DB::table('donhang')->where('id',$id)->first();
+        $oldStatus = $donhang->tinhtranghd_id;
+        if($oldStatus >= 1){
+            return redirect()->route('danhsachdonhang', [$userId])->with(['flash_level'=>'success','flash_message'=>'Bạn không thể hủy đơn hàng đã xác thực!!!']);
+        }else{
+            if($oldStatus <= 3 && $oldStatus >= 2)
+                DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => 4]);
+            if($oldStatus <= 7 && $oldStatus >= 5)
+                DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => 8]);
+            return redirect()->route('danhsachdonhang', [$userId]);
+        }
+    }
+    public function danhsachdonhang($id){
+        $info = DB::table('donhang')
+                ->where('khachhang_id',$id)
+                ->join('chitietdonhang','chitietdonhang.donhang_id','=','donhang.id')
+                ->join('tinhtranghd','donhang.tinhtranghd_id','=','tinhtranghd.id')
+                ->join('sanpham','chitietdonhang.sanpham_id','=','sanpham.id')
+                ->join('size','chitietdonhang.size_id','=','size.id')
+                ->join('donvitinh','sanpham.donvitinh_id','=','donvitinh.id')
+                ->select(
+                    'donhang.id',
+                    'donhang.donhang_nguoi_nhan',
+                    'donhang.donhang_nguoi_nhan_email',
+                    'donhang.donhang_nguoi_nhan_sdt',
+                    'donhang.donhang_nguoi_nhan_dia_chi',
+                    'donhang.donhang_ghi_chu',
+                    'donhang.donhang_tong_tien',
+                    'donhang.khachhang_id',
+                    'donhang.created_at',
+                    'tinhtranghd.tinhtranghd_ten',
+                    'chitietdonhang.chitietdonhang_so_luong',
+                    'sanpham.sanpham_ten',
                     'sanpham.sanpham_anh',
                     'size.size_ten',
                     'donvitinh.donvitinh_ten'
                     )
                 ->get();
-        return view('frontend.pages.xemdonhang',compact('info'));
+        return view('frontend.pages.xemdanhsachdonhang',compact('info'));
     }
     public function cates($url)
     {
@@ -330,6 +359,10 @@ class HomeController extends Controller
         }
         return view('frontend.pages.cart',compact('content','total','sizes'));
     }
+    public function updateCart($rowid, $qty){
+        Cart::update($rowid,$qty);
+        echo "oke";
+    }
 
     public function deleteProduct($id)
     {
@@ -362,15 +395,60 @@ class HomeController extends Controller
         }
         $total = Cart::total();
         $sizes = DB::table('size')->get();
+        $ppthanhtoans = DB::table('ppthanhtoan')->get();
+        foreach ($ppthanhtoans as $key => $val) {
+            $ppthanhtoan[] = ['id' => $val->id, 'name'=> $val->ppthanhtoan_ten];
+        }
         // echo "string";
         // print_r($total);
-        return view('frontend.pages.checkin',compact('content','total','sizes'));
+        return view('frontend.pages.checkin',compact('content','total','sizes','ppthanhtoan'));
+    }
+    public function getValid($md5){
+        $donhang = DB::table('donhang')->where([['md5',$md5],['tinhtranghd_id',1]])->update(['tinhtranghd_id' => 2]);
+        //$donhang = DB::table('donhang')->where('md5',$md5)->first();
+        $chitietdonhang = DB::table('chitietdonhang')->where('donhang_id','=',$donhang)->get();
+        foreach ($chitietdonhang as $ctdh) {
+            DB::table('lohang')->where('id',$ctdh->lohang_id)->decrement('lohang_so_luong_hien_tai', $ctdh->chitietdonhang_so_luong);
+        }
+        return view('frontend.pages.xacnhan');
     }
 
-    public function postCheckin(ThanhtoanRequest $request)
-    {
-        $content = Cart::content();
+    public function postCheckin(ThanhtoanRequest $request){
         $total = Cart::total();
+        if($request->txtKHPPThanhToan == 0){
+            echo "<script>
+              alert('Xin vui lòng chọn phương thức thanh toán');
+              window.location = '".url('/')."';</script>";
+            return ;
+        }
+        if($request->txtKHPPThanhToan == 2){
+        $client = new SoapClient("http://tuyetnhi.somee.com/thanhtoan.asmx?WSDL");
+        $arr=array('soTien'=>$total, 'soCSC'=>$request->txtKHCSC, 'soTK'=>$request->txtKHVisa);
+              $response=$client->thanhToan($arr)->thanhToanResult;
+              $result = json_decode(json_encode($response), TRUE); 
+               echo $result;
+               if($result == -1 ){
+                   echo "<script>
+                  alert('Không thể thanh toán' + $result);
+                  window.location = '".url('/')."';</script>";
+                    return;
+               }
+        }
+        $content = Cart::content();
+
+        foreach ($content as $item) {
+            $lohang =DB::table('lohang')->where([['sanpham_id',$item->id],['size_id','=',$item->size_id]])->get();
+            $soluonghangton = 0;
+            foreach ($lohang as $lh) {
+                $soluonghangton += $lh->lohang_so_luong_hien_tai;
+            }
+            if($soluonghangton == 0 ) { 
+                echo "<script>
+                  alert('Mặt hàng đã hết hàng');
+                  window.location = '".url('/')."';</script>";
+                return;
+            }
+        }
         $donhang = new Donhang;
         $donhang->donhang_nguoi_nhan = $request->txtNNName;
         $donhang->donhang_nguoi_nhan_email = $request->txtNNEmail;
@@ -379,18 +457,21 @@ class HomeController extends Controller
         $donhang->donhang_ghi_chu = $request->txtNNNote;
         $donhang->donhang_tong_tien = $total;
         $donhang->khachhang_id = $request->txtKHID;
-        $donhang->tinhtranghd_id = 1;
+        if($request->txtKHPPThanhToan == 1)
+            $donhang->tinhtranghd_id = 1;
+        if($request->txtKHPPThanhToan == 2)
+            $donhang->tinhtranghd_id = 6;
+        $donhang->md5 = md5( rand() . $donhang->khachhang_id);
         if ( !$donhang->save()){
             echo "<script>
-          alert('Failed');
+          alert('Đặt hàng thất bại');
           window.location = '".url('/')."';</script>";
           return;
         }
 
         foreach ($content as $item) {
-            //var_dump($item);
             $soluongmua = $item->qty;
-            $lohang = DB::table('lohang')->where([['sanpham_id',$item->id],['size_id','=',$item->size_id]])->get();
+            $lohang =DB::table('lohang')->where([['sanpham_id',$item->id],['size_id','=',$item->size_id]])->get();
             foreach ($lohang as $lh){
                 if($lh->lohang_so_luong_hien_tai < $soluongmua){
                     $soluongmua = $soluongmua - $lh->lohang_so_luong_hien_tai;
@@ -402,7 +483,10 @@ class HomeController extends Controller
                     $detail->chitietdonhang_thanh_tien = $item->price*$lh->lohang_so_luong_hien_tai;
                     $detail->lohang_id = $lh->id;
                     $detail->save();
-                    DB::table('lohang')->where('id',$lh->id)->decrement('lohang_so_luong_hien_tai', $lh->lohang_so_luong_hien_tai);
+                    if($request->txtKHPPThanhToan == 2){
+                        DB::table('lohang')->where('id',$detail->lohang_id)->increment('lohang_so_luong_da_ban', $detail->chitietdonhang_so_luong);
+                        DB::table('lohang')->where('id',$lh->id)->decrement('lohang_so_luong_hien_tai', $lh->lohang_so_luong_hien_tai);
+                    }
                 }else{
                     $detail = new Chitietdonhang;
                     $detail->sanpham_id = $item->id;
@@ -412,7 +496,10 @@ class HomeController extends Controller
                     $detail->chitietdonhang_thanh_tien = $item->price*$soluongmua;
                     $detail->lohang_id = $lh->id;
                     $detail->save();
-                    DB::table('lohang')->where('id',$lh->id)->decrement('lohang_so_luong_hien_tai', $soluongmua);
+                    if($request->txtKHPPThanhToan == 2){
+                        DB::table('lohang')->where('id',$detail->lohang_id)->increment('lohang_so_luong_da_ban', $detail->chitietdonhang_so_luong);
+                        DB::table('lohang')->where('id',$lh->id)->decrement('lohang_so_luong_hien_tai', $soluongmua);
+                    }
                     $soluongmua = 0;
                 }
                 if($soluongmua<=0) break;
@@ -429,24 +516,41 @@ class HomeController extends Controller
             'donhang_ghi_chu' => $request->txtNNNote,
             'donhang_tong_tien' => $total,
             'khachhang_id' => $request->txtKHID,
-            'khachhang_email'=>$kh->khachhang_email];
-        
-        Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
-            $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
-            $message->to($donhang['khachhang_email'], 'a');
-            $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
-        });
-
-        Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
-            $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
-            $message->to('lordknight1904@gmail.com', 'KHÁCH HÀNG');
-            $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
-        });
-
+            'khachhang_email'=>$kh->khachhang_email,
+            'md5' => $donhang->md5
+            ];
+        // send email
         Cart::destroy();
-        echo "<script>
-          alert('Bạn đã đặt mua sản phẩm thành công!');
-          window.location = '".url('/')."';</script>";
+        if($request->txtKHPPThanhToan == 1){
+            Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
+                $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
+                $message->to($donhang['khachhang_email'], 'a');
+                $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
+            });
+            Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
+                $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
+                $message->to('lordknight1904@gmail.com', 'KHÁCH HÀNG');
+                $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
+            });
+            echo "<script>
+              alert('Bạn đã đặt mua sản phẩm thành công! Xin hãy kiểm tra email để xác nhận đơn hàng!');
+              window.location = '".url('/')."';</script>";
+        }
+        if($request->txtKHPPThanhToan == 2){
+            Mail::send('auth.emails.hoadon-visa', $donhang, function ($message) use ($donhang) {
+                $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
+                $message->to($donhang['khachhang_email'], 'a');
+                $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
+            });
+            Mail::send('auth.emails.hoadon-visa', $donhang, function ($message) use ($donhang) {
+                $message->from('postmaster@sandbox571fe9a7698a44e59a231efc0cec0724.mailgun.org', 'ADMIN');
+                $message->to('lordknight1904@gmail.com', 'KHÁCH HÀNG');
+                $message->subject('Hóa đơn mua hàng tại Shop quần áo nhóm 10!!!');
+            });
+            echo "<script>
+              alert('Bạn mua sản phẩm thành công! Vui lòng đợi nhận hàng!');
+              window.location = '".url('/')."';</script>";
+        }
     }
 
     public function postComment(BinhluanRequest $request)

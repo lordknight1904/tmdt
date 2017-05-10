@@ -54,14 +54,15 @@ class AuthController extends Controller
     {
         $rules = [
             'name' =>'required|unique:users,name',
-            //'email' =>'required|unique:users,email|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})^',
-            'email' =>'required|unique:users,email|email',
+            'email' =>'required|unique:users,email|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})^',
+            // 'email' =>'required|unique:users,email|email',
             'password' => 'required|min:3|confirmed',
             'password_confirmation' =>'required|same:password',
             'visa'   =>'required|numeric|digits_between:9,9',
             'txtname' =>'required|unique:khachhang,khachhang_ten',
             'txtphone' =>'required',
-            'txtadr' =>'required'
+            'txtadr' =>'required',
+            'g-recaptcha-response' => 'required|recaptcha',
         ];
 
         $messages = [
@@ -75,7 +76,8 @@ class AuthController extends Controller
             'visa.max'  =>'Số tài khoản cần độ dài 9 số!',
             'visa.numeric'  =>'Số tài khoản phải là chữ số!',
             'password_confirmation.same' =>'Mật khẩu không trùng khớp!',
-            'password.confirmed' =>'Mật khẩu không trùng khớp!'
+            'password.confirmed' =>'Mật khẩu không trùng khớp!',
+            //'recaptcha' => 'Captcha sai!!!'
         ];
 
         return Validator::make($data,$rules,$messages);

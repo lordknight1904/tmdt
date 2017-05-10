@@ -37,10 +37,10 @@
                                         </thead>
                                         <tbody>
                                         <?php $count = 0; ?>
-                                        @foreach ($bannhieu as $item)
-                                        <?php 
-                                            $sp = DB::table('sanpham')->where('id',$item->sanpham_id)->first();
-                                            $count = $count +1;
+                                            @foreach ($bannhieu as $item)
+                                            <?php 
+                                                $sp = DB::table('sanpham')->where('id',$item->sanpham_id)->first();
+                                                $count = $count +1;
                                         ?>
                                             <tr>
                                                 <td>{!! $count !!}</td>

@@ -106,11 +106,9 @@
                         <li>
                             <a href="{!! URL::route('admin.donhang.list') !!}"><i class="fa fa-file-text"></i>Đơn đặt hàng</a>
                         </li>
-                        @if (Auth::user()->loainguoidung_id == 1)
                         <li>
                             <a href="{!! URL::route('admin.binhluan.list') !!}"><i class="fa fa-comments-o"></i> Bình luận khách hàng</a>
                         </li>
-                        @endif
                         <li>
                             <a href="{!! URL::route('admin.quangcao.list') !!}"><i class="fa-share-alt-square"></i>Quảng cáo</a>
                         </li>
@@ -121,7 +119,7 @@
                             <a href="{!! URL::route('admin.thongke.list') !!}"><i class="fa fa-cubes"></i>Kho hàng</a>
                         </li>
                         <li>
-                            <a href="{!! URL::route('admin.hotrokh.list') !!}"><i class="fa fa-tags"></i>Hỗ trợ khách hàng</a>
+                            <a href="http://my.vchat.vn" target="_blank"><i class="fa fa-tags"></i>Hỗ trợ khách hàng</a>
                         </li>
                     </ul>
                 </div>

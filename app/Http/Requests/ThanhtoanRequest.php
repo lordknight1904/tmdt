@@ -28,8 +28,9 @@ class ThanhtoanRequest extends Request
             'txtNNPhone' => 'required',
             'txtNNAddr'  => 'required',
             'txtNNEmail'  => 'required|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})^',
-            'txtKHvisa' => 'required',
-            'txtKHCSC' => 'required'
+            'txtKHPPThanhToan' => 'required',
+            'txtKHCSC' => 'required',
+            'txtKHVisa' => 'required'
         ];
     }
 

@@ -33,7 +33,7 @@
                         print_r($kh->khachhang_ten);
                     ?> 
                     </td>
-                    <td>{!! date("H:m:s d-m-Y", strtotime("$item->created_at")) !!}</td>
+                    <td>{!! $item->created_at !!}</td>
                     <td>{!! number_format("$item->donhang_tong_tien",0,",",".") !!} vnđ </td>
                     <td>
                     <?php  

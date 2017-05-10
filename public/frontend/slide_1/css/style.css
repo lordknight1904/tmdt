@@ -659,6 +659,8 @@ a:focus {
 /* Slideshow */
 .dn {
     display: none;
+    width: 100%;
+    height: 600px;
 }
 .flexslider {
     margin: 30px auto;

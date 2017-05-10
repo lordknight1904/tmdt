@@ -1,26 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">    
-  <title>Shop quần áo nhóm 10</title>
-  <!-- slide_1 -->
-  <link href="{{ url('public/frontend/slide_1/css/bootstrap.min.css') }} " rel="stylesheet">
-  <link href="{{ url('public/frontend/slide_1/css/nivo-slider.css') }}" rel="stylesheet">
-  <link href="{{ url('public/frontend/slide_1/css/animate.css') }}" rel="stylesheet">
-  <link href="{{ url('public/frontend/slide_1/css/owl.carousel.css') }}" rel="stylesheet">
-  <link href="{{ url('public/frontend/slide_1/css/style.css') }}" rel="stylesheet">
-  <link href="{{ url('public/frontend/slide_1/css/responsive.css') }}" rel="stylesheet">
 
-  <!-- chat css -->
-  <link href="{{ url('public/frontend/css/chat.css') }}" rel="stylesheet">
+<!--A Design by W3layouts 
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web bán quần áo nhóm 10</title>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <link href="{{ url('public/css/reset.css') }}" rel="stylesheet">    
+  <!-- Custom Theme files -->
+  <!-- Bootstrap -->
+  <link href="{{ URL::asset('public/frontend/css/bootstrap.css') }}" rel="stylesheet">   
+  <!-- SmartMenus jQuery Bootstrap Addon CSS -->
+  <link href="{{ URL::asset('public/frontend/css/jquery.smartmenus.bootstrap.css') }}" rel="stylesheet">
+
+  <!-- của template -->
+  <link href="{{ URL::asset('public/frontend/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+  <!-- <link href="public/frontend/menu/global.css" rel="stylesheet" type="text/css" media="all" /> -->
+  <!--//theme-style-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="Fashion Mania Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+  Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+  <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+  <script src="{{ URL::asset('public/frontend/template/js/simpleCart.min.js') }}"> </script>
+  <!-- <script src="public/frontend/template/js/jquery.min.js"></script> -->
+  <script src="{{ URL::asset('public/frontend/template/js/jquery.min.js') }}"></script>
+  <!--theme-style-->
+  <link href="{{ URL::asset('public/frontend/template/css/style.css" rel="stylesheet') }}" type="text/css" media="all" />  
+  <!-- style menu -->
+
+  <!-- hết của template -->
+
+
   <!-- Font awesome -->
   <link href="{{ url('public/frontend/css/font-awesome.css') }}" rel="stylesheet">
-  <!-- Bootstrap -->
-  <link href="{{ url('public/frontend/css/bootstrap.css') }}" rel="stylesheet">   
-  <!-- SmartMenus jQuery Bootstrap Addon CSS -->
-  <link href="{{ url('public/frontend/css/jquery.smartmenus.bootstrap.css') }}" rel="stylesheet">
+
   <!-- Product view slider -->
   <link rel="stylesheet" type="text/css" href="{{ url('public/frontend/css/jquery.simpleLens.css') }}">    
   <!-- slick slider -->
@@ -40,300 +61,194 @@
   <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <link href="{{ url('public/frontend/magiczoomplus/magiczoomplus.css') }}" rel="stylesheet">
-  <script src="{{ url('public/frontend/magiczoomplus/magiczoomplus.js') }}"></script>
-  
-  <!-- chat component -->
-</head>
-<body>      
-    <!-- SCROLL TOP BUTTON -->
-    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
-    <!-- END SCROLL TOP BUTTON -->
+  <script src="{{ url('public/frontend/magiczoomplus/magiczoomplus.js') }}"></script> 
+<!--   <link href="public/frontend/menu/style_menu.css" rel="stylesheet" type="text/css" media="all" /> -->
 
-    <header id="aa-header">
-      <!-- start header top  -->
-      <div class="aa-header-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="aa-header-top-area">
-                <!-- start header top left -->
-                <div class="aa-header-top-left">
-                  <!-- start language -->
 
-                  <div class="cellphone hidden-xs">
-                    <p>Thương mại điện tử</p>
-                  </div>
-                  <!-- / language -->
 
-                  <!-- start cellphone -->
-                  <div class="cellphone hidden-xs">
-                    <p><span class="fa fa-phone"></span>012-1918-7548</p>
-                  </div>
-                  <!-- / cellphone -->
-                </div>
-                <!-- / header top left -->
-                <div class="aa-header-top-right">
-                  <ul class="aa-head-top-nav-right">
-                    @if (Auth::check())
-                    <li class="hidden-xs"><strong>{{ Auth::user()->name }}</strong></li>
-                      @if (Auth::user()->loainguoidung_id != 2)
-                        <li class="hidden-xs"><a href="{{ url('/admin/bang-dieu-khien') }}">Bảng đk</a></li>
-                      @else
-                        <?php 
-                          $kh = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
-                          ?>
-                        <li class="hidden-xs"><a href="{{ url('/donhanguser',[$kh->id]) }}">Đơn hàng</a></li>
-                      @endif
-                      <li class="hidden-xs"><a href="{{ url('/logout') }}">Thoát</a></li>
-                    @else
-                    <li class="hidden-xs"><a href="{{ url('/register') }}">Đăng kí</a></li>
-                    <li class="hidden-xs"><a href="{{ url('/login') }}">Đăng nhập</a></li>
-                    @endif
-                  </ul>
-                </div>
+  <!-- menu_1/ -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+  <link href="{{ URL::asset('public/frontend/menu_1/css_1/bootstrap.css') }}" rel='stylesheet' type='text/css' />
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- Custom Theme files -->
+  <link href="{{ URL::asset('public/frontend/menu_1/css_1/style.css') }}" rel='stylesheet' type='text/css' />
+
+
+
+
+  <style> 
+    .divSanPham{
+      margin:15px 0px;
+    }
+    .fa{
+      color: #52D0C4;
+    }
+  </style> 
+  @yield("styles")
+
+
+<body>
+ <!-- SCROLL TOP BUTTON -->
+ <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+ <!-- END SCROLL TOP BUTTON -->
+ <header id="aa-header">
+  <!--   start header top   -->
+  <div class="aa-header-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-header-top-area" style="margin: 0px;">
+            <!-- start header top left -->
+            <div class="aa-header-top-left">
+              <!-- start language -->
+
+              <div class="cellphone hidden-xs">
+                <p>Thương mại điện tử</p>
               </div>
+              <!-- / language -->
+
+              <!-- start cellphone -->
+              <div class="cellphone hidden-xs">
+                <p><span class="fa fa-phone"></span>012-1918-7548</p>
+              </div>
+              <!-- / cellphone -->
+            </div>
+            <!-- / header top left -->
+            <div class="aa-header-top-right">
+              <ul class="aa-head-top-nav-right" style="margin: 0px;">
+                @if (Auth::check())
+                <li class="hidden-xs"><strong>{{ Auth::user()->name }}</strong></li>
+                @if (Auth::user()->loainguoidung_id != 2)
+                <li class="hidden-xs"><a href="{{ url('/admin/bang-dieu-khien') }}">Bảng đk</a></li>
+                @else
+                <?php 
+                $kh = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
+                ?>
+                <li class="hidden-xs"><a href="{{ url('/danhsachdonhang',[$kh->id]) }}">Đơn hàng</a></li>
+                @endif
+                <li class="hidden-xs"><a href="{{ url('/logout') }}">Thoát</a></li>
+                @else
+                <li class="hidden-xs"><a href="{{ url('/register') }}">Đăng kí</a></li>
+                <li class="hidden-xs"><a href="{{ url('/login') }}">Đăng nhập</a></li>
+                @endif
+              </ul>
             </div>
           </div>
         </div>
       </div>
-      <!-- / header top  -->
+    </div>
+    
+  </div>
+  <!-- / header top  -->
 
-      <div class="aa-header-bottom" >
-        <div class="container">
-          <div class="row" style="position: relative;">
-            <div class="col-md-12">
-              <div class="aa-header-bottom-area">
-                <!-- Support section -->
-                <!-- start header bottom  -->
-                <!-- logo  -->
-                <div class="aa-logo">
-                  <!-- Text based logo -->
-                  <a href="{!! URL('/') !!}">
-                    <span class="fa fa-shopping-cart"></span>
-                    <p> Shop Quần áo <strong>Nhóm 10</strong> <span>Good cloths - Good life</span></p>
-                  </a>
-                  <!-- img based logo -->
-                  <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
-                </div>
-                <!-- / logo  -->
-                <!-- cart box -->
-                <div class="aa-cartbox">
-                  <a class="aa-cart-link" href="{!! url('gio-hang') !!}">
-                    <span class="fa fa-shopping-basket"></span>
-                    <span class="aa-cart-title">GIỎ HÀNG</span>
-                    <span class="aa-cart-notify">
-                      <?php 
-                      $count = Cart::count(); 
-                      print_r($count);
-                      ?>
-                    </span>
-                  </a>
-                </div>
+  <div class="aa-header-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-header-bottom-area">
+            <!-- @include('frontend.blocks.marquee', ['mar_content' => 'Shop Quần Áo Nhóm 10 - Good Cloths - Good Life']) -->
+            <!-- Support section -->
+            <!-- start header bottom  -->
+            <!-- logo  -->
+            <div class="aa-logo ">
+              <!-- Text based logo -->
+              <a href="{!! URL('/') !!}">
+                <span class="fa fa-shopping-cart"></span>
+                <p> Shop Quần áo <strong>Nhóm 10</strong> <span>Good cloths - Good life</span></p>
+              </a>
+              <!-- img based logo -->
+              <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+            </div>
 
-                <!-- / cart box -->
-                <!-- search box -->
-                @include('frontend.blocks.search')
-                <!-- / search box -->     
-                
+
+            <div class="aa-cartbox" style="margin-top: 15px; height: 40px;">
+             <div  class="box_11">
+               <a class="aa-cart-link" href="{!! url('gio-hang') !!}">
+                <!-- <span class="fa fa-shopping-basket"></span> -->
+                <?php $total = Cart::total(); ?>
+                <div class="aa-cart-title" style="color: #fff;">Giỏ hàng: {!! number_format("$total",0,",",".") !!}  VNĐ  (<?php 
+                  $count = Cart::count(); 
+                  print_r($count);
+                  ?>) <img src="{!! url('public/images/bag.png') !!}" alt=""/> </div>
+
+                  <div class="clearfix"> </div>
+                </a>
               </div>
             </div>
 
+            <!-- / logo  -->
+            <!-- cart box -->
+
+            @include('frontend.blocks.search')
+            <!-- / cart box -->
+            <!-- search box -->
+
+            <!-- / search box -->     
+            
           </div>
+
         </div>
       </div>
-      <!-- / header bottom  -->
-    </header>
-    <section id="menu">
-      <div class="container">
-        <div class="row">  
-          <div class="menu-area">
-            <!-- Navbar -->
-            <div class="navbar navbar-default" role="navigation">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>          
-              </div>
-              <!-- Start menu -->
-              @include('frontend.blocks.menu')
-              <!-- End menu -->
-            </div>
-          </div>
-        </div>       
-      </div>
-    </section>
-    @yield('content')
-    <!-- / Content pages -->
+    </div>
+  </div>
 
-    <!-- / product category -->
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{ url('public/frontend/js/bootstrap.js') }}"></script>  
-    <!-- SmartMenus jQuery plugin -->
-    <script type="text/javascript" src="{{ url('public/frontend/js/jquery.smartmenus.js') }}"></script>
-    <!-- SmartMenus jQuery Bootstrap Addon -->
-    <script type="text/javascript" src="{{ url('public/frontend/js/jquery.smartmenus.bootstrap.js') }}"></script>  
-    <!-- To Slider JS -->
-    <script src="{{ url('public/frontend/js/sequence.js') }}"></script>
-    <script src="{{ url('public/frontend/js/sequence-theme.modern-slide-in.js') }}"></script>  
-    <!-- Product view slider -->
-    <script type="text/javascript" src="{{ url('public/frontend/js/jquery.simpleGallery.js') }}"></script>
-    <script type="text/javascript" src="{{ url('public/frontend/js/jquery.simpleLens.js') }}"></script>
-    <!-- slick slider -->
-    <script type="text/javascript" src="{{ url('public/frontend/js/slick.js') }}"></script>
-    <!-- Price picker slider -->
-    <script type="text/javascript" src="{{ url('public/frontend/js/nouislider.js') }}"></script>
-    <!-- Custom js -->
-    <script src="{{ url('public/frontend/js/custom.js') }}"></script> 
+<script lang="javascript">(function() {var pname = ( (document.title !='')? document.title : document.querySelector('h1').innerHTML );var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async=1; ga.src = '//live.vnpgroup.net/js/web_client_box.php?hash=6e6d70d0998864e9b0a17df813f9bbde&data=eyJzc29faWQiOjQ4MDQ4MzYsImhhc2giOiJmYjg1ZTRjYWMxOGRmMWI2NjFjZDcyZDU5Nzc0NDZmYSJ9&pname='+pname;var s = document.getElementsByTagName('script');s[0].parentNode.insertBefore(ga, s[0]);})();</script> 
+  <!-- / header bottom  -->
+</header>
 
-    <!-- My scripts -->
-    <script src="{{ url('public/frontend/js/myscript.js') }}"></script> 
-    
+<!-- / header section -->
+<!-- menu -->
 
-    <!-- slide_1 -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="{{ url('public/frontend/slide_1/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url('public/frontend/slide_1/js/jquery.nivo.slider.pack.js') }}"></script>
-    <script src="{{ url('public/frontend/slide_1/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ url('public/frontend/slide_1/js/main.js') }}"></script>
-    
-    @include('frontend.blocks.chat')
-    
-    <script type="text/javascript">
-      /* Main Slideshow */
-      $(window).load(function() {
-        $(document).off('mouseenter').on('mouseenter', '.pos-slideshow', function(e){
-          $('.ma-banner7-container .timethai').addClass('pos_hover');
-        });
-        $(document).off('mouseleave').on('mouseleave', '.pos-slideshow', function(e){
-          $('.ma-banner7-container .timethai').removeClass('pos_hover');
-        });
-      });
-      $(window).load(function() {
-        $('#ma-inivoslider-banner7').nivoSlider({
-          effect: 'random',
-          slices: 15,
-          boxCols: 8,
-          boxRows: 4,
-          animSpeed: 1000,
-          pauseTime: 6000,
-          startSlide: 0,
-          controlNav: false,
-          controlNavThumbs: false,
-          pauseOnHover: true,
-          manualAdvance: false,
-          prevText: 'Prev',
-          nextText: 'Next',
-          afterLoad: function(){
-          },     
-          beforeChange: function(){ 
-          }, 
-          afterChange: function(){ 
-          }
-        });
-      });
-      $(document).ready(function(){
-        /* timely-owl */
-        $("#timely-owl .owl").owlCarousel({
-          autoPlay : false,
-          items : 1,
-          itemsDesktop : [1199,1],
-          itemsDesktopSmall : [991,1],
-          itemsTablet: [767,2],
-          itemsMobile : [480,1],
-          slideSpeed : 1000,
-          paginationSpeed : 1000,
-          rewindSpeed : 1000,
-          navigation : true,
-          stopOnHover : true,
-          pagination : false,
-          scrollPerPage:true,
-        });
-        /* special-offer slider */
-        $("#special-offer .owl").owlCarousel({
-          autoPlay : false,
-          items : 1,
-          itemsDesktop : [1199,1],
-          itemsDesktopSmall : [991,1],
-          itemsTablet: [767,2],
-          itemsMobile : [480,1],
-          slideSpeed : 3000,
-          paginationSpeed : 3000,
-          rewindSpeed : 3000,
-          navigation : true,
-          stopOnHover : true,
-          pagination : false,
-          scrollPerPage:true,
-        });
-        /* latest-news slider */
-        $("#latest-news .owl").owlCarousel({
-          autoPlay : false,
-          items : 1,
-          itemsDesktop : [1199,1],
-          itemsDesktopSmall : [991,1],
-          itemsTablet: [767,2],
-          itemsMobile : [480,1],
-          slideSpeed : 1000,
-          paginationSpeed : 1000,
-          rewindSpeed : 1000,
-          navigation : true,
-          stopOnHover : true,
-          pagination : false,
-          scrollPerPage:true,
-        });
-        /* clients-say slider */
-        $("#clients-say .owl").owlCarousel({
-          autoPlay : false,
-          items : 1,
-          itemsDesktop : [1199,1],
-          itemsDesktopSmall : [991,1],
-          itemsTablet: [767,2],
-          itemsMobile : [480,1],
-          slideSpeed : 3000,
-          paginationSpeed : 3000,
-          rewindSpeed : 3000,
-          navigation : true,
-          stopOnHover : true,
-          pagination : false,
-          scrollPerPage:true,
-        });
-        /* featured-products slider */
-        $("#featured-products .owl").owlCarousel({
-          autoPlay : false,
-          items : 4,
-          itemsDesktop : [1199,3],
-          itemsDesktopSmall : [991,2],
-          itemsTablet: [767,2],
-          itemsMobile : [480,1],
-          slideSpeed : 3000,
-          paginationSpeed : 3000,
-          rewindSpeed : 3000,
-          navigation : true,
-          stopOnHover : true,
-          pagination : false,
-          scrollPerPage:true,
-        });
-        /* new-products slider */
-        $("#new-products .owl").owlCarousel({
-          autoPlay : false,
-          items : 4,
-          itemsDesktop : [1199,3],
-          itemsDesktopSmall : [991,2],
-          itemsTablet: [767,2],
-          itemsMobile : [480,1],
-          slideSpeed : 3000,
-          paginationSpeed : 3000,
-          rewindSpeed : 3000,
-          navigation : true,
-          stopOnHover : true,
-          pagination : false,
-          scrollPerPage:true,
-        });
-      });
-    </script>
-  </body>
-  </html>
+
+
+
+
+@yield("content")
+@include("frontend.blocks.footer")
+<!--   <script>$(document).ready(function(){$(".memenu").memenu();});</script> -->
+<!--//footer-->
+<!-- / Content pages -->
+
+<!-- / product category -->
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- start menu -->
+<link href="{{ URL::asset('public/frontend/template/css/memenu.css') }}" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="{{ URL::asset('public/frontend/template/js/memenu.js') }}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ URL::asset('public/frontend/js/bootstrap.js') }}"></script>  
+<!-- SmartMenus jQuery plugin -->
+<script type="text/javascript" src="{{ URL::asset('public/frontend/js/jquery.smartmenus.js') }}"></script>
+<!-- SmartMenus jQuery Bootstrap Addon -->
+<script type="text/javascript" src="{{ URL::asset('public/frontend/js/jquery.smartmenus.bootstrap.js') }}"></script>  
+<!-- To Slider JS -->
+<!-- <script src="{{ url('public/frontend/js/sequence.js') }}"></script>
+<script src="{{ url('public/frontend/js/sequence-theme.modern-slide-in.js') }}"></script>  --> 
+<!-- Product view slider -->
+<script type="text/javascript" src="{{ url('public/frontend/js/jquery.simpleGallery.js') }}"></script>
+<script type="text/javascript" src="{{ url('public/frontend/js/jquery.simpleLens.js') }}"></script>
+<!-- slick slider -->
+<script type="text/javascript" src="{{ url('public/frontend/js/slick.js') }}"></script>
+<!-- Price picker slider -->
+<script type="text/javascript" src="{{ url('public/frontend/js/nouislider.js') }}"></script>
+<!-- Custom js -->
+<!-- <script src="{{ url('public/frontend/js/custom.js') }}"></script>  -->
+
+<!-- My scripts -->
+<script src="{{ url('public/frontend/js/myscript.js') }}"></script> 
+@yield("scripts")
+
+
+<!-- menu_1 -->
+
+<!-- start menu -->
+<!--   <script type="text/javascript" src="{{ url('public/frontend/menu_1/js_1/jquery-1.11.1.min.js') }}"></script> -->
+<link href="{{ url('public/frontend/menu_1/css_1/megamenu.css') }}"  rel="stylesheet" type="text/css" media="all" />
+<script src="{{ URL::asset('public/frontend/menu_1/js_1/simpleCart.min.js') }}"> </script>
+<script type="text/javascript" src="{{ url('public/frontend/menu_1/js_1/megamenu.js') }}" ></script>
+<script>$(document).ready(function(){
+  $(".megamenu").megamenu();
+
+});</script>
+</body>
+</html>

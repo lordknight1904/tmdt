@@ -107,7 +107,7 @@
     }
 }
 @media (max-width: 991px) {
-    .header {
+    .header-1 {
         text-align: center;
     }
     .topbar-left,
@@ -134,7 +134,7 @@
     .support-client {
         margin-top: 0;
     }
-    .header-bottom {
+    .header-1-bottom {
         border-bottom: 0;
     }
     .banner-left .banner-content {
@@ -272,7 +272,7 @@
     .form-search input.input-text {
         width: 200px;
     }
-    .header-bottom .dropdown-menu {
+    .header-1-bottom .dropdown-menu {
         z-index: 1001;
     }
     .form-subscribe .btn {

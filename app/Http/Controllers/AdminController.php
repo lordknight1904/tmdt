@@ -18,7 +18,7 @@ class AdminController extends Controller
     	$sanpham = DB::table('sanpham')->count();
     	$binhluan = DB::table('binhluan')->where('binhluan_trang_thai',0)->get();
     	$bannhieu = DB::table('chitietdonhang')
-                ->where('donhang.tinhtranghd_id',4)
+                ->where('donhang.tinhtranghd_id',5)
                 ->join('donhang','donhang.id','=','chitietdonhang.donhang_id')
                 ->select(
                     'sanpham_id',
@@ -51,7 +51,6 @@ class AdminController extends Controller
                 ->orderBy('tien', 'desc')
                 ->take(10)
                 ->get(); 
-        // print_r($nhapnhieu);
     	return view('backend.dashboard',compact('donhang','binhluan','khachhang','sanpham','luotbinhluan','bannhieu','nhapnhieu','muanhieu'));
     }
 }

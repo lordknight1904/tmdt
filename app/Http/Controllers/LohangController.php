@@ -114,10 +114,19 @@ class LohangController extends Controller
     {
         $sanpham = DB::table('sanpham')->where('id',$id)->first();
         $vendors = DB::table('nhacungcap')->get();
+        if(sizeof($vendors)==0){
+            return redirect()->route('admin.sanpham.list')
+                    ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu chứa nhà cung cấp trống !!!']);
+        }
         foreach ($vendors as $key => $val) {
             $vendor[] = ['id' => $val->id, 'name'=> $val->nhacungcap_ten];
         }
+
         $sizes = DB::table('size')->get();
+        if(sizeof($sizes)==0){
+            return redirect()->route('admin.sanpham.list')
+                    ->with(['flash_level'=>'warning','flash_message'=>'Cơ sở dữ liệu kích cỡ trống !!!']);
+        }
         foreach ($sizes as $key => $val) {
             $size[] = ['id' => $val->id, 'name'=> $val->size_ten];
         }

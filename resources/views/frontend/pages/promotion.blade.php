@@ -1,11 +1,12 @@
 @extends('frontend.master')
 @section('content')
+@include('frontend.blocks.menu_1')
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
   @if (!is_null($khuyenmai))
    <img src="{!! asset('resources/upload/khuyenmai/'.$khuyenmai->khuyenmai_anh) !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
    @else
-   <img src="{!! url('public/images/promotionpanel.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
+   <img src="{!! url('public/images/sale.png') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
    @endif
    <div class="aa-catg-head-banner-area">
      <div class="container">
@@ -130,6 +131,6 @@
     </div>
   </section>
   <!-- Footer -->
-@include('frontend.blocks.footer')
+
 <!-- / Footer -->
 @stop

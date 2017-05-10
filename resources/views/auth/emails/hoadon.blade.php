@@ -1,5 +1,11 @@
 <b>Cảm ơn bạn đã mua hàng tại cửa hàng!</b>
 <br>
+<b>Xin hãy bấm vào link dưới đây để kích hoạt đơn hàng</b>
+<br>
+  <b>
+    <a href="{!! url('xacnhan',$md5) !!}">  testvhost/xacnhan/{!! $md5 !!}</a>
+  </b>
+<br>
 <b>Dưới đây là thông tin hóa đơn quý khách hàng vừa đặt mua</b>
 <br>
     <div class="row">

@@ -1,9 +1,6 @@
-<?php
-  // require_once('nusoap/nusoap.php');
-  // $client = new SoapClient("http://tuyetnhi.somee.com/thanhtoan.asmx?WSDL");
-?>
 @extends('frontend.master')
 @section('content')
+@include('frontend.blocks.menu_1')
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
    <img src="{!! url('public/images/cartpannel.jpg') !!}" alt="fashion img" style="width: 1920px; height: 300px;" >
@@ -26,12 +23,12 @@
      <div class="row">
        <div class="col-md-12">
         <div class="checkout-area">
-          <form id="form-checkin" action="{!! route('getThanhtoan') !!}" method="POST">
+          <form action="{!! route('getThanhtoan') !!}" method="POST">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
             <div class="row">
                   <div class="panel-body">
-                    <input type="submit" id="check-in-btn" onclick="submit_check_in()" value="Hoàn tất mua hàng" class="aa-browse-btn">
-                   <!--  <input id="submit-btn" value="Hoàn tất mua hàng" class="aa-browse-btn"> -->
+                       
+                    <input type="submit" value="Hoàn tất mua hàng" class="aa-browse-btn">
                   </div>
               <div class="col-md-8">
                 <div class="checkout-left">
@@ -48,6 +45,7 @@
                       <input type="hidden" name="" value="{!! Auth::user()->id !!}" />
                       <?php 
                         $khachhang = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
+                        // print_r($khachhang);
                       ?>
                       <input type="hidden" name="txtKHID" value="{!! $khachhang->id !!}" />
                       <div id="collapseThree" class="panel-collapse collapse">
@@ -101,18 +99,18 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
+                                <select onchange="checkPPTT()" id="input" name="txtKHPPThanhToan" class="form-control">
+                                  <option value="">--Chọn phương thức thanh toán--</option>
+                                  <?php Select_Function($ppthanhtoan); ?>
+                                </select>
+                              </div>  
+                              <div class="aa-checkout-single-bill">
                                 <h4>Số tài khoản</h4>
-                                <input type="text" name="txtKHvisa" value="{{ $user->visa }}" placeholder="Số tài khoản" /> 
-                                <div>
-                                    {!! $errors->first('txtKHvisa') !!}
-                                </div>
+                                <input type="text" id="visa" name="txtKHVisa" value="{{ $user->visa }}" placeholder="Số tài khoản" />
                               </div>  
                               <div class="aa-checkout-single-bill">
                                 <h4>CSC</h4>
-                                <input type="text" name="txtKHCSC" placeholder="CSC" /> 
-                                <div>
-                                    {!! $errors->first('txtKHCSC') !!}
-                                </div>
+                                <input type="text" id="csc" name="txtKHCSC" placeholder="CSC" />
                               </div>                             
                             </div>
                           </div>                              
@@ -204,7 +202,7 @@
                       @foreach ($content as $item)
                         <tr>
                           <td>{!! $item->name !!} <strong> x  {!! $item->qty !!}</strong></td>
-                          <td>{!! $sizes[$item->size_id-1]->size_ten !!}</td>
+                          <td>{!! $item->size_id !!}</td>
                           <td>{!! number_format($item->price*$item->qty,0,",",".") !!} vnđ</td>
                         </tr>
                       @endforeach
@@ -229,13 +227,6 @@
      </div>
    </div>
  </section>
- <script>
-  function submit_check_in(){
-    console.log("dashdoasdas");
-    document.getElementById("form-checkin").submit();
-  }
-
-</script>
  <!-- / Cart view section -->
  <!-- Footer -->
 @include('frontend.blocks.footer')
