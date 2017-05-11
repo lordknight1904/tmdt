@@ -26,7 +26,7 @@ class NhanvienAddRequest extends Request
         return [
             'txtNVName' =>'required',
             'txtNVID'   =>'required|unique:nhanvien,nhanvien_cmnd',
-            'txtNVPhone'=>'required|size:12',
+            'txtNVPhone'=>'required|numeric|digits_between:10,12',
             'txtNVDate' =>'required',
             'txtNVAddress'=>'required',
             'txtUsername'   =>'required|unique:users,name',
@@ -47,6 +47,9 @@ class NhanvienAddRequest extends Request
             'txtEmail.unique'  =>'<div><strong  style="color: red;">Dữ liệu này đã tồn tại!</strong></div>',
             'txtEmail.regex'  =>'<div><strong  style="color: red;">Email không đúng định dạng!</strong></div>',
             'txtRePass.same' =>'<div><strong  style="color: red;">Mật khẩu không trùng khớp!</strong></div>'
+            'numeric' => '<div><strong  style="color: red;">Số điện thoại phải gồm các chữ số!</strong></div>',
+            'txtNCCPhone.max'   => '<div><strong  style="color: red;">Số điện thoại vượt quá độ dài cho phép!</strong></div>',
+            'txtNCCPhone.min'   => '<div><strong  style="color: red;">Số điện thoại ngắn hơns độ dài cho phép!</strong></div>',
         ];
     }
 }

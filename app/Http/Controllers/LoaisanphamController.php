@@ -51,8 +51,17 @@ class LoaisanphamController extends Controller
 		return redirect()->route('admin.loaisanpham.list')->with(['flash_level'=>'success','flash_message'=>'Thêm loại sản phẩm thành công!!!']);
 	}
     public function getRestore($id){
+    	$loaisp = DB::table('loaisanpham')->where('id',$id)->first();
+    	$nhom = DB::table('nhom')->where('id',$loaisp->nhom_id)->first();
+    	if($nhom->nhom_da_xoa == 0){
         DB::table('loaisanpham')->where('id',$id)->update(['loaisanpham_da_xoa'=>0]);
-        return redirect()->route('admin.loaisanpham.list')->with(['flash_level'=>'success','flash_message'=>'Hồi phục loại sản phẩm thành công!!!']);
+	        return redirect()->route('admin.loaisanpham.list')->with(['flash_level'=>'success','flash_message'=>'Hồi phục loại sản phẩm thành công!!!']);
+	    }else{
+	    	echo "<script>
+	         alert('Loại thuộc nhóm sản phẩm đang vô hiệu!');
+	         window.location='".url('/admin/loaisanpham/danhsach')."'
+	        </script>";
+	    }
     }
 
 	public function getDelete($id)

@@ -19,13 +19,15 @@ class SanphamEditRequest extends Request
             'txtSPCate'  => 'required',
             'txtSPUnit'  => 'required',
             'txtSPIntro' => 'required',
+            'txtSPPrice' => 'required|numeric',
         ];
     }
 
     public function messages() {
         return [
             'required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
-            'txtSPSignt.size'   => '<div><strong  style="color: red;">Độ dài dữ liệu trường này là 5!</strong></div>'
+            'txtSPSignt.size'   => '<div><strong  style="color: red;">Độ dài dữ liệu trường này là 5!</strong></div>',
+            'numeric' => '<div><strong  style="color: red;">Giá bán phải gồm các chữ số!</strong></div>'
         ];
     }
 }

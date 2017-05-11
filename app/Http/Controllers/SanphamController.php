@@ -129,8 +129,18 @@ class SanphamController extends Controller
         return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Thêm sản phẩm thành công!!!']);
     }
     public function getRestore($id){
-        DB::table('sanpham')->where('id',$id)->update(['sanpham_da_xoa'=>0]);
-        return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Hồi phục sản phẩm thành công!!!']);
+        $sanpham = DB::table('sanpham')->where('id',$id)->first();
+        $loai = DB::table('loaisanpham')->where('id',$sanpham->loaisanpham_id)->first();
+
+        if($loai->loaisanpham_da_xoa == 0){
+            DB::table('sanpham')->where('id',$id)->update(['sanpham_da_xoa'=>0]);
+            return redirect()->route('admin.sanpham.list')->with(['flash_level'=>'success','flash_message'=>'Hồi phục sản phẩm thành công!!!']);
+        }else{
+            echo "<script>
+             alert('Sản phẩm thuộc loại sản phẩm đang vô hiệu!');
+             window.location='".url('/admin/sanpham/danhsach')."'
+            </script>";
+        }
     }
 
     public function getDelete($id)

@@ -25,7 +25,7 @@ class NhacungcapAddRequest extends Request
     {
         return [
             'txtNCCName'     => 'required|unique:nhacungcap,nhacungcap_ten',
-            'txtNCCPhone'    => 'required|max:12|min:10',
+            'txtNCCPhone'    => 'required|max:12|min:10|integer',
             'txtNCCAdress'   => 'required'
         ];
     }

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PPThanhToanSeeder::class);
         $this->call(SizesSeeder::class);
         $this->call(KhachHangTableSeeder::class);
+        $this->call(LoainguoidungTableSeeder::class);
     }
 }
 

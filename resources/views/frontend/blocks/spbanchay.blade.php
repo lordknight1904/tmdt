@@ -9,7 +9,7 @@
           ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
           ->join('chitietdonhang', 'sanpham.id', '=', 'chitietdonhang.sanpham_id')
           ->join('donhang', 'donhang.id', '=', 'chitietdonhang.donhang_id')
-          ->select(DB::raw('sum(lohang.lohang_so_luong_da_ban) as daban'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
+          ->select(DB::raw('sum(lohang.lohang_so_luong_da_ban) as daban'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','sanpham.sanpham_gia')
          ->groupBy('sanpham.id')
          ->orderBy('daban','desc')
          ->take(10)

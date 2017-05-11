@@ -61,6 +61,5 @@
   </section>
   <!-- / product category -->
   <!-- Footer -->
-@include('frontend.blocks.footer')
 <!-- / Footer -->
 @stop

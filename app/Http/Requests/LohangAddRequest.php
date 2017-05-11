@@ -17,7 +17,7 @@ class LohangAddRequest extends Request
             'txtLHSignt'  => 'required|unique:lohang,lohang_ky_hieu|size:5',
             'txtLHSize' => 'required|integer',
             'txtLHQuant'  => 'required|integer',
-            'txtLHBuyPrice'  => 'required',
+            'txtLHBuyPrice'  => 'required|integer',
         ];
     }
 

@@ -17,6 +17,7 @@ class CreateNhomTable extends Migration
             $table->string('nhom_ten',50);
             $table->string('nhom_url',100);
             $table->string('nhom_anh',100);
+            $table->integer('nhom_da_xoa');
             $table->longText('nhom_mo_ta')->nullable();
             $table->timestamps();
         });

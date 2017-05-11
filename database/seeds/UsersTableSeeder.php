@@ -16,36 +16,28 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => '$2y$10$0mEmfHfEvj4DT.FVn3HQ2.O0xRH5w70WvOxCRheq.0UyfqApMF5bW',
             'loainguoidung_id' => '1',
-            'visa' => '123456789',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'visa' => '123456789'
         ]);
         DB::table('users')->insert([
             'name' => 'nhan vien',
             'email' => 'nv@gmail.com',
             'password' => '$2y$10$0mEmfHfEvj4DT.FVn3HQ2.O0xRH5w70WvOxCRheq.0UyfqApMF5bW',
             'loainguoidung_id' => '3',
-            'visa' => '123456788',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'visa' => '123456788'
         ]);
         DB::table('users')->insert([
             'name' => 'user 1',
             'email' => 'user1@gmail.com',
             'password' => '$2y$10$0mEmfHfEvj4DT.FVn3HQ2.O0xRH5w70WvOxCRheq.0UyfqApMF5bW',
             'loainguoidung_id' => '2',
-            'visa' => '123456789',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'visa' => '123456789'
         ]);
         DB::table('users')->insert([
             'name' => 'user 2',
             'email' => 'user2@gmail.com',
             'password' => '$2y$10$0mEmfHfEvj4DT.FVn3HQ2.O0xRH5w70WvOxCRheq.0UyfqApMF5bW',
             'loainguoidung_id' => '2',
-            'visa' => '123456790',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'visa' => '123456790'
         ]);
     }
 }

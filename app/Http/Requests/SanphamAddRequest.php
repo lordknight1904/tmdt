@@ -25,7 +25,8 @@ class SanphamAddRequest extends Request
             'txtSPImage2' => 'required|mimes:jpeg,bmp,png|max:4000',
             'txtSPImage3' => 'required|mimes:jpeg,bmp,png|max:4000',
             'txtSPImage4' => 'required|mimes:jpeg,bmp,png|max:4000',
-            'txtSPImage5' => 'required|mimes:jpeg,bmp,png|max:4000'
+            'txtSPImage5' => 'required|mimes:jpeg,bmp,png|max:4000',
+            'txtSPPrice' => 'required|numeric',
         ];
     }
 
@@ -35,7 +36,8 @@ class SanphamAddRequest extends Request
             'unique'     => '<div><strong  style="color: red;">Dữ liệu này đã tồn tại!</strong></div>',
             'txtSPSignt.size'   => '<div><strong  style="color: red;">Độ dài dữ liệu trường này là 5!</strong></div>',
             'mimes' => '<div><strong  style="color: red;">Vui lòng chọn đúng file ảnh</strong></div>',
-            'max' => '<div><strong  style="color: red;">Vui lòng chọn file ảnh có kích thước không quá 2MB</strong></div>'
+            'max' => '<div><strong  style="color: red;">Vui lòng chọn file ảnh có kích thước không quá 2MB</strong></div>',
+            'numeric' => '<div><strong  style="color: red;">Giá bán phải gồm các chữ số!</strong></div>'
         ];
     }
 }

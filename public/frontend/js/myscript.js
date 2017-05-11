@@ -34,6 +34,11 @@ function selectt($id,$url){
 	console.log($(".aa-add-to-cart-btn").attr("href"));
 }
 function kiemTraKichThuoc(content){
+	console.log(content.length);
+	if(content.length == 0){
+		alert("Giỏ hàng rỗng");
+		return;
+	}
 	var select=document.getElementsByName ('txtLHSize');
 	var sizeArr = new Array(select.length);
 	var unselect = false;
@@ -42,10 +47,9 @@ function kiemTraKichThuoc(content){
 		if(select[i].value==='') unselect = true;
 	}
 	if(!unselect){
-		console.log(sizeArr);
 		window.location = "/thanh-toan/" + sizeArr;
 	}else{
-		alert("Please choose size!!!");
+		alert("Vui lòng chọn kích cỡ!!!");
 	}
 }
 function checkPPTT(){

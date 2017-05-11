@@ -53,9 +53,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $loaisp =  DB::table('loaisanpham')->get();
+        $loaisp =  DB::table('loaisanpham')->where('loaisanpham_da_xoa','=',0)->get();
         $sanpham = DB::table('sanpham')
-            ->where('sanpham_da_xoa',0)
+            ->where('sanpham_da_xoa','=',0)
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
             ->where('lohang_so_luong_hien_tai','>',0)
             ->select(
@@ -70,7 +70,6 @@ class HomeController extends Controller
                 ->groupBy('sanpham.id')
                 ->orderBy('id','DESC')
             ->paginate(12);
-        // print_r($loaisp);
         return view ('frontend.pages.home',compact('loaisp','sanpham'));
     }
     public function group($url)
@@ -138,9 +137,22 @@ class HomeController extends Controller
         }else{
             if($oldStatus <= 3 && $oldStatus >= 2)
                 DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => 4]);
-            if($oldStatus <= 7 && $oldStatus >= 5)
-                DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => 8]);
-            return redirect()->route('danhsachdonhang', [$userId]);
+            if($oldStatus <= 7 && $oldStatus >= 5){
+                $client = new SoapClient("http://tuyetnhi.somee.com/thanhtoan.asmx?WSDL");
+                $arr=array('soTien'=>$donhang->donhang_tong_tien, 'soTK'=>$donhang->donhang_visa);
+                $response=$client->hoanTien($arr)->hoanTienResult;
+                $result = json_decode(json_encode($response), TRUE);
+                if($result == -1 ){
+                    echo "<script>
+                    alert('Có vấn để trong việc hoàn tiền' + $result);
+                    window.location = '".url('/danhsachdonhang/'+$userId)."';</script>";
+                    return;
+                }else{
+                    DB::table('donhang')->where('id',$id)->update(['tinhtranghd_id' => 8]);
+                    return redirect()->route('danhsachdonhang', [$userId]);
+                }
+
+            }
         }
     }
     public function danhsachdonhang($id){
@@ -424,15 +436,14 @@ class HomeController extends Controller
         if($request->txtKHPPThanhToan == 2){
         $client = new SoapClient("http://tuyetnhi.somee.com/thanhtoan.asmx?WSDL");
         $arr=array('soTien'=>$total, 'soCSC'=>$request->txtKHCSC, 'soTK'=>$request->txtKHVisa);
-              $response=$client->thanhToan($arr)->thanhToanResult;
-              $result = json_decode(json_encode($response), TRUE); 
-               echo $result;
-               if($result == -1 ){
-                   echo "<script>
-                  alert('Không thể thanh toán' + $result);
-                  window.location = '".url('/')."';</script>";
-                    return;
-               }
+            $response=$client->thanhToan($arr)->thanhToanResult;
+            $result = json_decode(json_encode($response), TRUE); 
+            if($result == -1 ){
+                echo "<script>
+                alert('Không thể thanh toán' + $result);
+                window.location = '".url('/')."';</script>";
+                return;
+            }
         }
         $content = Cart::content();
 
@@ -457,10 +468,14 @@ class HomeController extends Controller
         $donhang->donhang_ghi_chu = $request->txtNNNote;
         $donhang->donhang_tong_tien = $total;
         $donhang->khachhang_id = $request->txtKHID;
-        if($request->txtKHPPThanhToan == 1)
+        if($request->txtKHPPThanhToan == 1){
             $donhang->tinhtranghd_id = 1;
-        if($request->txtKHPPThanhToan == 2)
+            $donhang->donhang_visa = "";
+        }
+        if($request->txtKHPPThanhToan == 2){
             $donhang->tinhtranghd_id = 6;
+            $donhang->donhang_visa = $request->txtKHVisa;
+        }
         $donhang->md5 = md5( rand() . $donhang->khachhang_id);
         if ( !$donhang->save()){
             echo "<script>

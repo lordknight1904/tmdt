@@ -117,19 +117,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="aa-header-top-right">
               <ul class="aa-head-top-nav-right" style="margin: 0px;">
                 @if (Auth::check())
-                <li class="hidden-xs"><strong>{{ Auth::user()->name }}</strong></li>
-                @if (Auth::user()->loainguoidung_id != 2)
-                <li class="hidden-xs"><a href="{{ url('/admin/bang-dieu-khien') }}">Bảng đk</a></li>
-                @else
-                <?php 
-                $kh = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
-                ?>
-                <li class="hidden-xs"><a href="{{ url('/danhsachdonhang',[$kh->id]) }}">Đơn hàng</a></li>
-                @endif
-                <li class="hidden-xs"><a href="{{ url('/logout') }}">Thoát</a></li>
-                @else
-                <li class="hidden-xs"><a href="{{ url('/register') }}">Đăng kí</a></li>
-                <li class="hidden-xs"><a href="{{ url('/login') }}">Đăng nhập</a></li>
+                  <li class="hidden-xs"><strong>{{ Auth::user()->name }}</strong></li>
+                  @if (Auth::user()->loainguoidung_id != 2)
+                    <li class="hidden-xs"><a href="{{ url('/admin/bang-dieu-khien') }}">Bảng đk</a></li>
+                    @else
+                    <?php 
+                    $kh = DB::table('khachhang')->where('user_id',Auth::user()->id)->first();
+                    ?>
+                    <li class="hidden-xs"><a href="{{ url('/danhsachdonhang',[$kh->id]) }}">Đơn hàng</a></li>
+                  @endif
+                  <li class="hidden-xs"><a href="{{ url('/logout') }}">Thoát</a></li>
+                  @else
+                    <li class="hidden-xs"><a href="{{ url('/register') }}">Đăng kí</a></li>
+                    <li class="hidden-xs"><a href="{{ url('/login') }}">Đăng nhập</a></li>
                 @endif
               </ul>
             </div>

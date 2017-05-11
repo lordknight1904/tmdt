@@ -13,11 +13,8 @@
           </div>
           <span class ="col-md-4 row" style=" margin-left: 2px;border: 1px solid #e4e4e4;"></span>
           <div class="col-md-4 top-footer1">
-            <h2>NHẬN TIN QUA EMAIL</h2>
-            <form>
-              <input type="text" value="" onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
-              <input type="submit" value="ĐĂNG KÍ">
-            </form>
+            <h2>CẦN HỖ TRỢ</h2>
+            <h2>CHAT TRỰC TUYẾN VỚI CHÚNG TÔI</h2>
           </div>
           
 

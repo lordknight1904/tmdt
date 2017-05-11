@@ -72,4 +72,22 @@ class NhomController extends Controller
     	return redirect()->route('admin.nhom.list')->with(['flash_level'=>'success','flash_message'=>'Cập nhật nhóm thực phẩm thành công!!!']);
     }
 
+    public function getRestore($id){
+        DB::table('nhom')->where('id',$id)->update(['nhom_da_xoa'=>0]);
+        return redirect()->route('admin.nhom.list')->with(['flash_level'=>'success','flash_message'=>'Hồi phục nhóm sản phẩm thành công!!!']);
+    }
+
+    public function getDelete($id)
+    {
+        $nhom = DB::table('nhom')->where('id',$id)->first();
+        DB::table('nhom')->where('id',$id)->update(['nhom_da_xoa'=>1]);
+        foreach ($nhom as $n) {
+            DB::table('loaisanpham')->where('nhom_id',$id)->update(['loaisanpham_da_xoa'=>1]);
+            $loaisanpham = DB::table('loaisanpham')->where('nhom_id',$nhom->id)->get();
+            foreach ($loaisanpham as $sp) {
+                DB::table('sanpham')->where('loaisanpham_id',$id)->update(['sanpham_da_xoa'=>1]);
+            }
+        }
+        return redirect()->route('admin.nhom.list')->with(['flash_level'=>'success','flash_message'=>'Xóa nhóm sản phẩm thành công!!!']);
+    }
 }
